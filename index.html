@@ -27,13 +27,14 @@
       theme: {
         extend: {
           colors: {
-            'creme-fundo': '#f9f7f4',
+            'creme-fundo': '#f5e2c5',   // Bege específico
             'texto': '#1c1c1c',
             'verde-musgo': '#8a9a5b',
-            'verde-profundo': '#2A331E',
-            'terracota-suave': '#c4a57b', // Cor padrão terracota
-            'terracota-news': '#D97757', // Cor específica da newsletter (ajustada da imagem)
-            'verde-btn': '#1F2919',      // Verde escuro específico do botão da newsletter
+            'verde-profundo': '#505916', // Verde específico
+            'terracota-suave': '#c4a57b',
+            'terracota-forte': '#d16a42',
+            'terracota-news': '#D97757',
+            'verde-btn': '#3E4512',
           },
           fontFamily: {
             'sans': ['Inter', 'sans-serif'],
@@ -46,7 +47,7 @@
           },
           boxShadow: {
             'soft': '0 10px 40px -10px rgba(0,0,0,0.05)',
-            'hover': '0 20px 40px -10px rgba(0,0,0,0.1)',
+            'hover': '0 20px 40px -10px rgba(80, 89, 22, 0.15)', 
           }
         },
       },
@@ -54,13 +55,13 @@
   </script>
 
   <style>
-    body { font-weight: 300; overflow-x: hidden; background-color: #f9f7f4; color: #1c1c1c; }
+    body { font-weight: 300; overflow-x: hidden; background-color: #f5e2c5; color: #1c1c1c; }
     
     h1, h2, h3, .font-serif { font-weight: 400 !important; letter-spacing: 0.03em; }
 
     ::-webkit-scrollbar { width: 6px; }
-    ::-webkit-scrollbar-track { background: #f9f7f4; }
-    ::-webkit-scrollbar-thumb { background: #2A331E; border-radius: 3px; }
+    ::-webkit-scrollbar-track { background: #f5e2c5; }
+    ::-webkit-scrollbar-thumb { background: #505916; border-radius: 3px; }
     ::-webkit-scrollbar-thumb:hover { background: #c4a57b; }
 
     /* Animação Reveal */
@@ -69,7 +70,7 @@
     
     /* Swiper Custom */
     .swiper-button-next, .swiper-button-prev {
-        color: #f9f7f4 !important; width: 3rem !important; height: 3rem !important;
+        color: #f5e2c5 !important; width: 3rem !important; height: 3rem !important;
         transition: all 0.3s ease; opacity: 0.7;
     }
     .swiper-button-next:hover, .swiper-button-prev:hover { opacity: 1; transform: scale(1.1); color: #c4a57b !important; }
@@ -79,7 +80,7 @@
     /* Drop Cap */
     .drop-cap { float: left; font-family: 'Chewy', cursive; font-size: 4.5rem; line-height: 0.8; padding-right: 12px; padding-top: 6px; color: #c4a57b; }
 
-    /* Botões Gerais */
+    /* Botões */
     .btn-editorial {
         background-color: #c4a57b;
         color: white;
@@ -93,40 +94,63 @@
         box-shadow: 0 4px 12px rgba(209, 106, 66, 0.2);
     }
 
-    /* Botão Produto (Ver na Loja) */
     .btn-shop {
         background-color: white;
-        color: #2A331E;
-        border: 1px solid #2A331E;
+        color: #505916;
+        border: 1px solid #505916;
         transition: all 0.3s ease;
     }
     .btn-shop:hover {
-        background-color: #2A331E;
+        background-color: #505916;
         color: white;
         transform: translateY(-2px);
-        box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+        box-shadow: 0 4px 10px rgba(80, 89, 22, 0.2);
     }
 
-    /* Input Newsletter Style */
-    .newsletter-input {
-        background: transparent;
+    /* Categoria Hero (Botão Transparente Circular) */
+    .badge-circular-transparent {
+        background: rgba(255, 255, 255, 0.1);
+        backdrop-filter: blur(4px);
         border: 1px solid rgba(255, 255, 255, 0.4);
+        border-radius: 9999px; /* Pílula perfeita */
+        padding: 0.5rem 1.5rem;
+        display: inline-block;
+        color: rgba(255, 255, 255, 0.95);
+        font-family: 'Roboto Mono', monospace;
+        font-size: 10px;
+        text-transform: uppercase;
+        letter-spacing: 0.2em;
+        transition: all 0.3s ease;
+    }
+    .badge-circular-transparent:hover {
+        background: rgba(255, 255, 255, 0.2);
+        border-color: rgba(255, 255, 255, 0.6);
+    }
+
+    /* Botão Circular Portfólio */
+    .btn-circular-project {
+        width: 60px;
+        height: 60px;
+        border-radius: 50%;
+        background: rgba(255, 255, 255, 0.95);
+        color: #505916;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+        cursor: pointer;
+    }
+    .btn-circular-project:hover {
+        transform: scale(1.1) rotate(90deg);
+        background: #c4a57b;
         color: white;
     }
-    .newsletter-input::placeholder {
-        color: rgba(255, 255, 255, 0.8);
-        text-align: center;
-    }
-    .newsletter-input:focus {
-        outline: none;
-        border-color: white;
-        background: rgba(255, 255, 255, 0.1);
-    }
 
-    /* Fundo com padrão geométrico sutil (Newsletter) */
-    .bg-pattern {
-        background-image: radial-gradient(rgba(255,255,255,0.1) 1px, transparent 1px);
-        background-size: 20px 20px;
+    /* Modal */
+    .modal-backdrop {
+        background-color: rgba(80, 89, 22, 0.9); /* Verde profundo denso */
+        backdrop-filter: blur(8px);
     }
   </style>
 </head>
@@ -135,13 +159,13 @@
 
   <!-- HEADER -->
   <div id="navbar-container" class="fixed top-0 left-0 w-full z-50 transition-transform duration-500 pt-4 px-4 md:pt-6 flex justify-center">
-    <header id="navbar" class="relative w-full max-w-7xl bg-white/5 backdrop-blur-md border border-white/10 rounded-full px-6 py-3 transition-all duration-300 shadow-sm">
+    <header id="navbar" class="relative w-full max-w-7xl bg-white/10 backdrop-blur-md border border-white/20 rounded-full px-6 py-3 transition-all duration-300 shadow-sm">
       <div class="flex justify-between items-center">
         <a href="#home" class="group flex items-center gap-3">
-          <span class="h-9 w-9 rounded-full bg-verde-profundo flex items-center justify-center text-creme-fundo group-hover:bg-terracota-suave transition-colors shadow-md">
-              <span class="font-serif pt-1 text-lg">S</span>
-          </span>
-          <span class="font-serif text-lg md:text-xl text-creme-fundo group-hover:text-terracota-suave transition-colors duration-300 hidden sm:block tracking-wide" id="logo-text">
+          <div class="relative overflow-hidden rounded-full w-10 h-10 shadow-md bg-creme-fundo flex-shrink-0 border border-white/20">
+              <img src="./assets/images/logo_syngred_sebinelli.png" alt="S" class="w-full h-full object-cover">
+          </div>
+          <span class="font-serif text-lg md:text-xl text-verde-profundo group-hover:text-terracota-suave transition-colors duration-300 hidden sm:block tracking-wide" id="logo-text">
             Syngred Sebinelli
           </span>
         </a>
@@ -150,7 +174,7 @@
                 <span>Loja Online</span>
                 <i data-lucide="arrow-up-right" width="12"></i>
             </a>
-            <button id="menu-btn" class="text-creme-fundo hover:text-terracota-suave transition-colors" aria-label="Menu">
+            <button id="menu-btn" class="text-verde-profundo hover:text-terracota-suave transition-colors" aria-label="Menu">
                 <i data-lucide="menu" width="24"></i>
             </button>
         </div>
@@ -165,7 +189,7 @@
     </button>
     <ul class="text-center space-y-6 mb-12">
       <li><a href="#home" class="menu-link font-serif text-4xl md:text-5xl text-verde-profundo hover:text-terracota-suave transition-all">Início</a></li>
-      <li><a href="#beneficios" class="menu-link font-serif text-4xl md:text-5xl text-verde-profundo hover:text-terracota-suave transition-all">Essência</a></li>
+      <li><a href="#beneficios" class="menu-link font-serif text-4xl md:text-5xl text-verde-profundo hover:text-terracota-suave transition-all">Minha Essência</a></li>
       <li><a href="#manifesto" class="menu-link font-serif text-4xl md:text-5xl text-verde-profundo hover:text-terracota-suave transition-all">Manifesto</a></li>
       <li><a href="#produtos" class="menu-link font-serif text-4xl md:text-5xl text-verde-profundo hover:text-terracota-suave transition-all">Coleção</a></li>
       <li><a href="#sobre" class="menu-link font-serif text-4xl md:text-5xl text-verde-profundo hover:text-terracota-suave transition-all">Portfólio</a></li>
@@ -190,15 +214,20 @@
       </div>
     </section>
 
-    <!-- 2. BENEFÍCIOS -->
+    <!-- 2. BENEFÍCIOS (Minha Essência) -->
     <section id="beneficios" class="bg-verde-profundo py-24 px-6 md:px-12 text-creme-fundo border-t border-white/5">
         <div class="max-w-7xl mx-auto reveal">
             <div class="text-center mb-20">
-                <h2 class="font-serif text-4xl md:text-5xl text-terracota-suave mb-4">Nossa Essência</h2>
-                <div class="w-12 h-[1px] bg-white/20 mx-auto mb-4"></div>
-                <p class="font-mono text-xs uppercase tracking-widest text-white/60">Três pilares que sustentam nossa criação</p>
+                <h2 class="font-serif text-4xl md:text-5xl text-terracota-suave mb-4">Minha Essência</h2>
+                <div class="w-12 h-[1px] bg-white/20 mx-auto mb-8"></div>
+                <p class="font-mono text-xs uppercase tracking-widest text-white/60 mb-8">Três pilares que sustentam minha criação</p>
+                
+                <!-- CTA Minha Essência -->
+                <a href="#sobre" class="inline-block btn-editorial text-white px-8 py-3 rounded-full font-mono text-xs uppercase tracking-widest shadow-md">
+                    Conheça meus processos
+                </a>
             </div>
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-12 md:gap-16 divide-y md:divide-y-0 md:divide-x divide-white/10" id="benefits-grid">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-12 md:gap-16 divide-y md:divide-y-0 md:divide-x divide-white/10 pt-12" id="benefits-grid">
                 <!-- JS Content -->
             </div>
         </div>
@@ -207,9 +236,9 @@
     <!-- 3. MANIFESTO -->
     <section id="manifesto" class="bg-creme-fundo py-24 md:py-32 px-6 md:px-12 text-center">
         <div class="max-w-4xl mx-auto reveal">
-            <span class="font-mono text-xs uppercase tracking-[0.3em] text-terracota-suave block mb-8">Auto-rebate</span>
+            <span class="font-mono text-xs uppercase tracking-[0.3em] text-terracota-suave block mb-8">Manifesto Autoral</span>
             <h2 class="font-serif text-3xl md:text-5xl text-verde-profundo leading-[1.3] mb-12 text-balance">
-                "Meu corpo não é água mansa, é rio quebra-mar. É vertigem de asfalto que desagua e flui."
+                "Meu corpo não é água mansa. É rio quebra-mar. É vertigem de asfalto. É a água que desagua e flui."
             </h2>
             <div class="space-y-8 font-serif text-xl md:text-2xl leading-snug text-texto/90 max-w-2xl mx-auto">
                 <p>
@@ -247,8 +276,15 @@
                 <div class="w-16 h-0.5 bg-terracota-suave mb-8"></div>
                 <div class="font-sans font-light text-base md:text-lg text-creme-fundo/80 space-y-6 leading-relaxed text-justify">
                     <p><span class="drop-cap">O</span> Brasil enfrenta um paradoxo: a fome convive com o desperdício. Toneladas de alimentos são descartadas enquanto a soberania alimentar fragiliza.</p>
-                    <p>Nesta coleção, propomos a alquimia: <strong>o resto vira rito</strong>. Cascas de cebola, caroços de abacate e urucum deixam de ser lixo para se tornarem pigmento vivo.</p>
+                    <p>Nesta coleção, proponho a alquimia: <strong>o resto vira rito</strong>. Cascas de cebola, caroços de abacate e urucum deixam de ser lixo para se tornarem pigmento vivo.</p>
                     <p>A moda se reconecta à terra. O que vestimos nutre o solo ao fim de seu ciclo. Nada se perde, tudo se transforma em memória e cor.</p>
+                    
+                    <!-- CTA Resto é Rito -->
+                    <div class="pt-6">
+                        <a href="#manifesto" class="inline-block btn-editorial text-white px-8 py-3 rounded-full font-mono text-xs uppercase tracking-widest shadow-md">
+                            Entenda o conceito
+                        </a>
+                    </div>
                 </div>
             </div>
             <div class="relative group order-1 lg:order-2">
@@ -261,7 +297,7 @@
         </div>
     </section>
 
-    <!-- 5. LOJA (Botão Visível e Animado) -->
+    <!-- 5. LOJA -->
     <section id="produtos" class="bg-white py-24 md:py-32 px-6 md:px-12">
         <div class="max-w-7xl mx-auto">
             <div class="flex flex-col md:flex-row justify-between items-end mb-20 gap-6 reveal">
@@ -281,7 +317,7 @@
         </div>
     </section>
 
-    <!-- 6. PORTFÓLIO -->
+    <!-- 6. PORTFÓLIO (Com Botões Circulares & Modal) -->
     <section id="projetos-grid" class="py-32 relative bg-fixed bg-cover bg-center" style="background-image: url('./assets/images/hero-1.jpg');">
         <div class="absolute inset-0 bg-verde-profundo/95"></div>
         <div class="container mx-auto px-6 relative z-10 max-w-6xl">
@@ -342,7 +378,7 @@
         </div>
     </section>
 
-    <!-- 8. RESPONSABILIDADE SOCIAL (Cards ODS Refeitos) -->
+    <!-- 8. IMPACTO -->
     <section id="impacto" class="bg-verde-profundo py-24 md:py-32 px-6 md:px-12 text-creme-fundo">
         <div class="max-w-7xl mx-auto reveal">
             <div class="text-center mb-20">
@@ -358,7 +394,7 @@
         </div>
     </section>
 
-    <!-- 9. NEWSLETTER (Réplica da Imagem) -->
+    <!-- 9. NEWSLETTER -->
     <section id="newsletter" class="bg-terracota-news py-24 px-6 relative overflow-hidden bg-pattern">
         <div class="max-w-3xl mx-auto text-center reveal relative z-10">
             <span class="font-sans text-[10px] uppercase tracking-[0.3em] text-white mb-6 block opacity-90">Fique por dentro</span>
@@ -391,11 +427,10 @@
         <div class="max-w-7xl mx-auto">
             <div class="grid grid-cols-1 md:grid-cols-4 gap-12 mb-20 text-center md:text-left">
                 
-                <!-- Logo & Nome Completo -->
+                <!-- Logo + Nome Completo -->
                 <div class="md:col-span-2 flex flex-col md:flex-row items-center md:items-start gap-6">
                     <div class="w-20 h-20 bg-white/5 rounded-full flex items-center justify-center overflow-hidden shadow-lg border border-white/10 flex-shrink-0">
-                        <img src="./assets/images/logo_syngred_sebinelli.png" alt="Logo" class="w-full h-full object-contain p-2" onerror="this.style.display='none'; this.nextElementSibling.style.display='block'">
-                        <span class="font-serif text-2xl hidden">S</span>
+                        <img src="./assets/images/logo_syngred_sebinelli.png" alt="Logo" class="w-full h-full object-cover">
                     </div>
                     <div>
                         <h2 class="font-serif text-4xl md:text-5xl tracking-wide mb-3">Syngred Sebinelli.</h2>
@@ -410,7 +445,7 @@
                     <h4 class="font-mono text-xs uppercase tracking-widest mb-6 opacity-50 text-terracota-suave">Explorar</h4>
                     <ul class="space-y-3 font-serif text-lg opacity-80">
                         <li><a href="#home" class="hover:text-terracota-suave transition-colors">Início</a></li>
-                        <li><a href="#beneficios" class="hover:text-terracota-suave transition-colors">Nossa Essência</a></li>
+                        <li><a href="#beneficios" class="hover:text-terracota-suave transition-colors">Minha Essência</a></li>
                         <li><a href="#produtos" class="hover:text-terracota-suave transition-colors">Coleção Rito</a></li>
                         <li><a href="#manifesto" class="hover:text-terracota-suave transition-colors">Manifesto</a></li>
                         <li><a href="#faq" class="hover:text-terracota-suave transition-colors">Dúvidas</a></li>
@@ -446,6 +481,37 @@
         </div>
     </footer>
 
+    <!-- MODAL PROJETO -->
+    <div id="project-modal" class="fixed inset-0 z-[100] hidden transition-opacity duration-500 opacity-0 modal-backdrop flex items-center justify-center p-4 sm:p-6">
+        <div class="bg-white w-full max-w-5xl max-h-[90vh] overflow-y-auto rounded-card shadow-2xl relative flex flex-col md:flex-row overflow-hidden transform scale-95 transition-transform duration-300" id="modal-content">
+            <button id="close-modal" class="absolute top-4 right-4 z-10 bg-white/80 p-2 rounded-full hover:bg-terracota-suave hover:text-white transition-colors shadow-sm">
+                <i data-lucide="x" width="24"></i>
+            </button>
+            
+            <!-- Imagem Modal -->
+            <div class="w-full md:w-1/2 h-64 md:h-auto">
+                <img id="modal-img" src="" alt="" class="w-full h-full object-cover">
+            </div>
+            
+            <!-- Conteúdo Modal -->
+            <div class="w-full md:w-1/2 p-8 md:p-16 flex flex-col justify-center bg-creme-fundo">
+                <span class="font-mono text-xs uppercase tracking-widest text-terracota-suave mb-4 block">Case Study</span>
+                <h3 id="modal-title" class="font-serif text-4xl md:text-5xl text-verde-profundo mb-6 leading-none"></h3>
+                <div class="w-16 h-[2px] bg-verde-musgo/20 mb-8"></div>
+                
+                <div class="prose prose-sm text-texto/80 mb-8">
+                    <p id="modal-desc" class="font-sans font-light text-base leading-relaxed"></p>
+                </div>
+
+                <div class="mt-auto pt-8 border-t border-verde-profundo/5">
+                    <button class="btn-editorial px-8 py-4 rounded-full font-mono text-xs uppercase tracking-widest text-white shadow-lg w-full md:w-auto flex items-center justify-center gap-2">
+                        Ver Case Completo <i data-lucide="arrow-right" width="14"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
   </main>
 
   <!-- SCRIPTS -->
@@ -456,7 +522,7 @@
                 image: "./assets/images/hero-1.jpg",
                 tag: "Coleção 2025",
                 title: "Tecer o Tempo.",
-                desc: "Onde a técnica ancestral do crochê encontra o design contemporâneo.",
+                desc: "Onde a técnica ancestral do crochê encontra o design contemporâneo. Peças que não apenas vestem, mas narram histórias de regeneração.",
                 btn: "Explorar Coleção",
                 link: "#produtos"
             },
@@ -464,8 +530,8 @@
                 image: "./assets/images/hero-2.jpg",
                 tag: "Processo",
                 title: "A Cor da Terra.",
-                desc: "Tingimento botânico extraído de resíduos. Cores vivas e livres de tóxicos.",
-                btn: "Nossa Essência",
+                desc: "Tingimento botânico extraído de resíduos. Urucum, cascas e raízes criam uma paleta viva, única e livre de tóxicos.",
+                btn: "Minha Essência",
                 link: "#beneficios"
             },
             {
@@ -499,38 +565,72 @@
         portfolio: [
             { 
                 title: "Adidas - SL72", 
-                desc: "Personalização do lançamento SL72 em colaboração com o Ateliê Tico-Tico no Fubá.", 
+                desc: "Personalização do lançamento SL72 em colaboração com o Ateliê Tico-Tico no Fubá. Um projeto que une a iconografia esportiva com a delicadeza manual, criando uma peça única que dialoga com a cultura urbana e o feito à mão.", 
                 img: "https://images.unsplash.com/photo-1542291026-7eec264c27ff?q=80&w=800" 
             },
             { 
                 title: "Tênis de Biomaterial", 
-                desc: "Desenvolvimento de tênis com Biomaterial de Celulose e resíduos de crochê.", 
+                desc: "Desenvolvimento de tênis com Biomaterial de Celulose e resíduos de crochê. Uma exploração profunda de texturas e possibilidades sustentáveis para o futuro do calçado, unindo inovação tecnológica e tradição artesanal.", 
                 img: "https://images.unsplash.com/photo-1600185365926-3a2ce3cdb9eb?q=80&w=800" 
             },
             { 
                 title: "Carol Bassi", 
-                desc: "Projeto de co-criação em homenagem ao estilista Conrado Segreto.", 
+                desc: "Projeto de co-criação em homenagem ao estilista Conrado Segreto. Reinterpretação de arquivos históricos com técnicas manuais contemporâneas, trazendo um novo olhar sobre o legado da moda brasileira.", 
                 img: "https://images.unsplash.com/photo-1489987707025-afc232f7ea0f?q=80&w=800" 
             }
         ],
         ods: [
-            // Layout Refeito: Área para logos
             { icon: "♻️", title: "Sustentabilidade", codes: "ODS 12 • ODS 13", logos: 2, text: "Zero waste e produção sob demanda." },
             { icon: "🌱", title: "Ética Animal", codes: "ODS 15", logos: 1, text: "Livre de crueldade e uso de biomateriais." },
             { icon: "✊", title: "Justiça Social", codes: "ODS 5 • ODS 10", logos: 2, text: "Remuneração digna e protagonismo feminino." },
             { icon: "🤝", title: "Comunidade", codes: "ODS 1 • ODS 8", logos: 2, text: "Fomento à economia local e capacitação." }
         ],
         faq: [
-            { q: "Todas as peças são feitas sob encomenda?", a: "Sim, a maioria das nossas peças é produzida sob demanda para evitar desperdício (Slow Fashion)." },
-            { q: "Como funciona o tingimento natural?", a: "Utilizamos pigmentos de fontes orgânicas como cascas de cebola e cúrcuma. Processo 100% artesanal." },
-            { q: "As peças podem ser lavadas em máquina?", a: "Recomendamos lavagem à mão com sabão neutro para preservar a cor e a fibra natural." },
-            { q: "Vocês fazem peças personalizadas?", a: "Sim! Entre em contato conosco para projetos especiais e peças sob medida." },
+            { q: "Todas as peças são feitas sob encomenda?", a: "Sim, a maioria das minhas peças é produzida sob demanda para evitar desperdício (Slow Fashion)." },
+            { q: "Como funciona o tingimento natural?", a: "Utilizo pigmentos de fontes orgânicas como cascas de cebola e cúrcuma. Processo 100% artesanal." },
+            { q: "As peças podem ser lavadas em máquina?", a: "Recomendo lavagem à mão com sabão neutro para preservar a cor e a fibra natural." },
+            { q: "Vocês fazem peças personalizadas?", a: "Sim! Entre em contato comigo para projetos especiais e peças sob medida." },
             { q: "Como faço para cuidar da minha peça?", a: "Seque à sombra, não use alvejantes e guarde peças de crochê dobradas." }
         ]
     };
 
+    // Função para abrir Modal com Animação
+    function openProjectModal(title, desc, img) {
+        const modal = document.getElementById('project-modal');
+        const modalContent = document.getElementById('modal-content');
+        
+        document.getElementById('modal-title').innerText = title;
+        document.getElementById('modal-desc').innerText = desc;
+        document.getElementById('modal-img').src = img;
+        
+        modal.classList.remove('hidden');
+        
+        // Timeout para permitir que a classe hidden seja removida antes da transição
+        setTimeout(() => {
+            modal.classList.remove('opacity-0');
+            modalContent.classList.remove('scale-95');
+            modalContent.classList.add('scale-100');
+        }, 10);
+        
+        document.body.style.overflow = 'hidden';
+    }
+
+    function closeProjectModal() {
+        const modal = document.getElementById('project-modal');
+        const modalContent = document.getElementById('modal-content');
+        
+        modal.classList.add('opacity-0');
+        modalContent.classList.remove('scale-100');
+        modalContent.classList.add('scale-95');
+        
+        setTimeout(() => {
+            modal.classList.add('hidden');
+        }, 300);
+        document.body.style.overflow = 'auto';
+    }
+
     function renderContent() {
-        // Hero (Mesma lógica V8)
+        // Hero
         const heroContainer = document.getElementById('hero-wrapper');
         SITE_CONTENT.hero.forEach(slide => {
             heroContainer.innerHTML += `
@@ -540,7 +640,7 @@
                         <div class="absolute inset-0 bg-gradient-to-t from-verde-profundo/90 via-transparent to-transparent"></div>
                         <div class="absolute bottom-0 left-0 w-full p-8 md:p-24 pb-32 md:pb-24 flex flex-col justify-end items-start">
                             <div class="max-w-3xl">
-                                <span class="inline-block py-1 px-3 badge-glass rounded-full text-white/90 font-mono text-[10px] uppercase tracking-widest mb-6">${slide.tag}</span>
+                                <span class="badge-circular-transparent mb-6">${slide.tag}</span>
                                 <h1 class="font-serif text-6xl md:text-8xl text-creme-fundo leading-[0.9] mb-6">${slide.title}</h1>
                                 <p class="font-sans text-creme-fundo/80 text-lg font-light max-w-lg mb-8 leading-relaxed">${slide.desc}</p>
                                 <a href="${slide.link}" class="group inline-flex items-center gap-3 btn-editorial text-white px-8 py-3 rounded-full font-mono text-xs uppercase tracking-widest shadow-lg">
@@ -565,10 +665,10 @@
                 </div>`;
         });
 
-        // Products (Botão Sempre Visível e Animado)
+        // Products
         const prodContainer = document.getElementById('products-grid');
         SITE_CONTENT.products.forEach(prod => {
-            const badge = prod.badge ? `<div class="absolute top-3 right-3 bg-white/90 backdrop-blur px-3 py-1 rounded-full text-[10px] font-mono uppercase tracking-widest text-verde-profundo border border-gray-100">${prod.badge}</div>` : '';
+            const badge = prod.badge ? `<div class="absolute top-3 right-3 badge-glass px-3 py-1 rounded-full text-[10px] font-mono uppercase tracking-widest text-verde-profundo border border-gray-100">${prod.badge}</div>` : '';
             prodContainer.innerHTML += `
                 <div class="group reveal product-card">
                     <div class="relative overflow-hidden rounded-suave aspect-[3/4] mb-6 bg-creme-fundo shadow-sm">
@@ -580,58 +680,63 @@
                         <p class="font-sans text-xs text-gray-500 uppercase tracking-wide text-gray-400">${prod.cat}</p>
                         <span class="font-mono text-sm text-verde-profundo">${prod.price}</span>
                     </div>
-                    <!-- Botão visível sem opacity-0 -->
-                    <a href="https://www.nuvemshop.com.br/" class="block w-full text-center btn-shop py-3 rounded-full shadow-sm font-mono text-[10px] uppercase tracking-widest">
+                    <a href="https://www.nuvemshop.com.br/" target="_blank" class="block w-full text-center btn-shop py-3 rounded-full shadow-sm hover:shadow-md transition-all transform hover:-translate-y-1">
                         Ver na Loja
                     </a>
                 </div>`;
         });
 
-        // Portfolio
+        // Portfolio (Com Modal e Botão Circular)
         const portContainer = document.getElementById('portfolio-grid');
         SITE_CONTENT.portfolio.forEach(item => {
+            // Escape special chars for onclick
+            const safeTitle = item.title.replace(/'/g, "\\'");
+            const safeDesc = item.desc.replace(/'/g, "\\'");
+            const safeImg = item.img;
+
             portContainer.innerHTML += `
-                <div class="reveal group bg-white/5 p-6 rounded-suave border border-white/10 hover:bg-white/10 transition-colors backdrop-blur-sm">
-                    <div class="overflow-hidden rounded-suave aspect-video mb-6 border border-white/5">
+                <div class="reveal group bg-white/5 p-6 rounded-suave border border-white/10 hover:bg-white/10 transition-colors backdrop-blur-sm cursor-pointer" onclick="openProjectModal('${safeTitle}', '${safeDesc}', '${safeImg}')">
+                    <div class="relative overflow-hidden rounded-suave aspect-video mb-6 border border-white/5">
                         <img src="${item.img}" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105 grayscale group-hover:grayscale-0">
+                        
+                        <!-- Botão Circular (+) -->
+                        <div class="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-500">
+                            <div class="btn-circular-project">
+                                <i data-lucide="plus" width="24"></i>
+                            </div>
+                        </div>
                     </div>
                     <h3 class="font-serif text-3xl text-creme-fundo">${item.title}</h3>
-                    <p class="font-sans text-sm text-creme-fundo/70 mt-2 leading-relaxed">${item.desc}</p>
+                    <p class="font-sans text-sm text-creme-fundo/70 mt-2 leading-relaxed line-clamp-2">${item.desc}</p>
                 </div>`;
         });
 
-        // ODS (Card Redesenhado para Logos)
+        // ODS
         const odsContainer = document.getElementById('ods-grid');
         SITE_CONTENT.ods.forEach(item => {
             let logosHTML = '';
             for(let i=0; i<item.logos; i++) {
-                // Placeholder Visual para Logo ODS
-                logosHTML += `
-                    <div class="w-16 h-16 border border-white/20 rounded-md flex items-center justify-center bg-white/5 text-[9px] font-mono text-white/40 text-center p-1 transition-colors hover:bg-white/10">
-                        Logo<br>ODS
-                    </div>
-                `;
+                logosHTML += `<div class="w-16 h-16 border border-white/20 rounded-md flex items-center justify-center bg-white/5 text-[9px] font-mono text-white/40 text-center p-1 transition-colors hover:bg-white/10">Logo<br>ODS</div>`;
             }
 
             odsContainer.innerHTML += `
-                <div class="bg-white/5 p-8 md:p-10 rounded-card border border-white/10 hover:bg-white/10 transition-colors shadow-lg relative overflow-hidden group flex flex-col h-full">
-                    <!-- Topo: Ícone e Título -->
-                    <div class="flex items-center gap-4 mb-6">
-                        <div class="w-12 h-12 bg-white/10 rounded-full flex items-center justify-center text-xl border border-white/5 shrink-0">
-                            ${item.icon}
+                <div class="bg-white/5 p-8 md:p-10 rounded-card border border-white/10 hover:bg-white/10 transition-colors shadow-lg relative overflow-hidden group flex flex-col justify-between h-full">
+                    <div>
+                        <div class="flex flex-col sm:flex-row justify-between items-start mb-6 gap-4">
+                            <div class="flex items-center gap-4">
+                                <div class="w-12 h-12 bg-white/10 rounded-full flex items-center justify-center text-xl border border-white/5">
+                                    ${item.icon}
+                                </div>
+                                <h3 class="font-serif text-3xl text-terracota-suave">${item.title}</h3>
+                            </div>
+                            <div class="flex gap-3">
+                                ${logosHTML}
+                            </div>
                         </div>
-                        <h3 class="font-serif text-3xl text-terracota-suave leading-none">${item.title}</h3>
+                        <p class="font-light text-sm leading-relaxed text-creme-fundo/80 mb-6">${item.text}</p>
                     </div>
-                    
-                    <!-- Descrição -->
-                    <p class="font-light text-sm leading-relaxed text-creme-fundo/80 mb-8 flex-grow">${item.text}</p>
-                    
-                    <!-- Rodapé do Card: Logos ODS -->
-                    <div class="border-t border-white/10 pt-6 mt-auto">
-                        <p class="font-mono text-[10px] opacity-50 tracking-widest mb-3 block">ALINHADO COM:</p>
-                        <div class="flex gap-3">
-                            ${logosHTML}
-                        </div>
+                    <div class="border-t border-white/10 pt-4 mt-auto">
+                        <p class="font-mono text-xs opacity-50 tracking-widest">${item.codes}</p>
                     </div>
                 </div>`;
         });
@@ -653,6 +758,12 @@
     document.addEventListener("DOMContentLoaded", () => {
       renderContent();
       lucide.createIcons();
+
+      // Modal Close Event
+      document.getElementById('close-modal').addEventListener('click', closeProjectModal);
+      document.getElementById('project-modal').addEventListener('click', (e) => {
+          if(e.target.id === 'project-modal') closeProjectModal();
+      });
 
       // Navbar Logic
       const navbar = document.getElementById('navbar');
