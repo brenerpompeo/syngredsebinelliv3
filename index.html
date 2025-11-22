@@ -1,0 +1,724 @@
+<!DOCTYPE html>
+<html lang="pt-br" class="scroll-smooth">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Syngred Sebinelli - Moda Autoral, Design Sustentável e Ativismo.">
+  <title>Syngred Sebinelli | Design como Rito</title>
+  
+  <!-- Fontes -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Chewy&family=Inter:wght@200;300;400;500&family=Roboto+Mono:wght@300&display=swap" rel="stylesheet">
+
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- Swiper.js -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+  <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+
+  <!-- Ícones -->
+  <script src="https://unpkg.com/lucide@latest"></script>
+
+  <!-- Configuração Tailwind -->
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            'creme-fundo': '#f9f7f4',
+            'texto': '#1c1c1c',
+            'verde-musgo': '#8a9a5b',
+            'verde-profundo': '#2A331E',
+            'terracota-suave': '#c4a57b', // Cor padrão terracota
+            'terracota-news': '#D97757', // Cor específica da newsletter (ajustada da imagem)
+            'verde-btn': '#1F2919',      // Verde escuro específico do botão da newsletter
+          },
+          fontFamily: {
+            'sans': ['Inter', 'sans-serif'],
+            'serif': ['Chewy', 'cursive'],
+            'mono': ['Roboto Mono', 'monospace'],
+          },
+          borderRadius: {
+            'suave': '0.5rem',
+            'card': '0.75rem',
+          },
+          boxShadow: {
+            'soft': '0 10px 40px -10px rgba(0,0,0,0.05)',
+            'hover': '0 20px 40px -10px rgba(0,0,0,0.1)',
+          }
+        },
+      },
+    };
+  </script>
+
+  <style>
+    body { font-weight: 300; overflow-x: hidden; background-color: #f9f7f4; color: #1c1c1c; }
+    
+    h1, h2, h3, .font-serif { font-weight: 400 !important; letter-spacing: 0.03em; }
+
+    ::-webkit-scrollbar { width: 6px; }
+    ::-webkit-scrollbar-track { background: #f9f7f4; }
+    ::-webkit-scrollbar-thumb { background: #2A331E; border-radius: 3px; }
+    ::-webkit-scrollbar-thumb:hover { background: #c4a57b; }
+
+    /* Animação Reveal */
+    .reveal { opacity: 0; transform: translateY(30px); transition: all 0.8s cubic-bezier(0.2, 1, 0.3, 1); }
+    .reveal.active { opacity: 1; transform: translateY(0); }
+    
+    /* Swiper Custom */
+    .swiper-button-next, .swiper-button-prev {
+        color: #f9f7f4 !important; width: 3rem !important; height: 3rem !important;
+        transition: all 0.3s ease; opacity: 0.7;
+    }
+    .swiper-button-next:hover, .swiper-button-prev:hover { opacity: 1; transform: scale(1.1); color: #c4a57b !important; }
+    .swiper-pagination-bullet { width: 24px !important; height: 3px !important; border-radius: 2px !important; background: rgba(255,255,255,0.5) !important; opacity: 1 !important; margin: 0 4px !important; transition: all 0.3s ease; }
+    .swiper-pagination-bullet-active { background: #c4a57b !important; width: 36px !important; }
+
+    /* Drop Cap */
+    .drop-cap { float: left; font-family: 'Chewy', cursive; font-size: 4.5rem; line-height: 0.8; padding-right: 12px; padding-top: 6px; color: #c4a57b; }
+
+    /* Botões Gerais */
+    .btn-editorial {
+        background-color: #c4a57b;
+        color: white;
+        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        border: 1px solid #c4a57b;
+    }
+    .btn-editorial:hover {
+        background-color: #d16a42;
+        border-color: #d16a42;
+        transform: translateY(-2px);
+        box-shadow: 0 4px 12px rgba(209, 106, 66, 0.2);
+    }
+
+    /* Botão Produto (Ver na Loja) */
+    .btn-shop {
+        background-color: white;
+        color: #2A331E;
+        border: 1px solid #2A331E;
+        transition: all 0.3s ease;
+    }
+    .btn-shop:hover {
+        background-color: #2A331E;
+        color: white;
+        transform: translateY(-2px);
+        box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    }
+
+    /* Input Newsletter Style */
+    .newsletter-input {
+        background: transparent;
+        border: 1px solid rgba(255, 255, 255, 0.4);
+        color: white;
+    }
+    .newsletter-input::placeholder {
+        color: rgba(255, 255, 255, 0.8);
+        text-align: center;
+    }
+    .newsletter-input:focus {
+        outline: none;
+        border-color: white;
+        background: rgba(255, 255, 255, 0.1);
+    }
+
+    /* Fundo com padrão geométrico sutil (Newsletter) */
+    .bg-pattern {
+        background-image: radial-gradient(rgba(255,255,255,0.1) 1px, transparent 1px);
+        background-size: 20px 20px;
+    }
+  </style>
+</head>
+
+<body class="antialiased selection:bg-verde-profundo selection:text-terracota-suave">
+
+  <!-- HEADER -->
+  <div id="navbar-container" class="fixed top-0 left-0 w-full z-50 transition-transform duration-500 pt-4 px-4 md:pt-6 flex justify-center">
+    <header id="navbar" class="relative w-full max-w-7xl bg-white/5 backdrop-blur-md border border-white/10 rounded-full px-6 py-3 transition-all duration-300 shadow-sm">
+      <div class="flex justify-between items-center">
+        <a href="#home" class="group flex items-center gap-3">
+          <span class="h-9 w-9 rounded-full bg-verde-profundo flex items-center justify-center text-creme-fundo group-hover:bg-terracota-suave transition-colors shadow-md">
+              <span class="font-serif pt-1 text-lg">S</span>
+          </span>
+          <span class="font-serif text-lg md:text-xl text-creme-fundo group-hover:text-terracota-suave transition-colors duration-300 hidden sm:block tracking-wide" id="logo-text">
+            Syngred Sebinelli
+          </span>
+        </a>
+        <div class="flex items-center gap-6">
+            <a href="https://www.nuvemshop.com.br/" target="_blank" class="hidden md:flex items-center gap-2 btn-editorial px-6 py-2 rounded-full font-mono text-[10px] uppercase tracking-widest text-white" id="nav-link">
+                <span>Loja Online</span>
+                <i data-lucide="arrow-up-right" width="12"></i>
+            </a>
+            <button id="menu-btn" class="text-creme-fundo hover:text-terracota-suave transition-colors" aria-label="Menu">
+                <i data-lucide="menu" width="24"></i>
+            </button>
+        </div>
+      </div>
+    </header>
+  </div>
+
+  <!-- MENU FULLSCREEN -->
+  <div id="menu-overlay" class="fixed inset-0 bg-creme-fundo z-[60] flex flex-col justify-center items-center opacity-0 pointer-events-none transition-all duration-500">
+    <button id="close-menu" class="absolute top-8 right-8 p-4 text-verde-profundo hover:rotate-90 transition-transform duration-500">
+       <i data-lucide="x" width="32"></i>
+    </button>
+    <ul class="text-center space-y-6 mb-12">
+      <li><a href="#home" class="menu-link font-serif text-4xl md:text-5xl text-verde-profundo hover:text-terracota-suave transition-all">Início</a></li>
+      <li><a href="#beneficios" class="menu-link font-serif text-4xl md:text-5xl text-verde-profundo hover:text-terracota-suave transition-all">Essência</a></li>
+      <li><a href="#manifesto" class="menu-link font-serif text-4xl md:text-5xl text-verde-profundo hover:text-terracota-suave transition-all">Manifesto</a></li>
+      <li><a href="#produtos" class="menu-link font-serif text-4xl md:text-5xl text-verde-profundo hover:text-terracota-suave transition-all">Coleção</a></li>
+      <li><a href="#sobre" class="menu-link font-serif text-4xl md:text-5xl text-verde-profundo hover:text-terracota-suave transition-all">Portfólio</a></li>
+    </ul>
+    <a href="https://www.nuvemshop.com.br/" target="_blank" class="btn-editorial px-8 py-3 rounded-full font-mono text-xs uppercase tracking-widest flex items-center gap-2 text-white shadow-lg">
+        <span>Acessar Loja Online</span>
+        <i data-lucide="shopping-bag" width="16"></i>
+    </a>
+  </div>
+
+  <main>
+
+    <!-- 1. HERO SECTION -->
+    <section id="home" class="relative h-[100svh] w-full overflow-hidden bg-verde-profundo">
+      <div class="swiper main-carousel h-full w-full">
+        <div class="swiper-wrapper" id="hero-wrapper">
+          <!-- Slides via JS -->
+        </div>
+        <div class="swiper-button-prev !hidden md:!flex"></div>
+        <div class="swiper-button-next !hidden md:!flex"></div>
+        <div class="swiper-pagination !bottom-6 md:!bottom-8"></div>
+      </div>
+    </section>
+
+    <!-- 2. BENEFÍCIOS -->
+    <section id="beneficios" class="bg-verde-profundo py-24 px-6 md:px-12 text-creme-fundo border-t border-white/5">
+        <div class="max-w-7xl mx-auto reveal">
+            <div class="text-center mb-20">
+                <h2 class="font-serif text-4xl md:text-5xl text-terracota-suave mb-4">Nossa Essência</h2>
+                <div class="w-12 h-[1px] bg-white/20 mx-auto mb-4"></div>
+                <p class="font-mono text-xs uppercase tracking-widest text-white/60">Três pilares que sustentam nossa criação</p>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-12 md:gap-16 divide-y md:divide-y-0 md:divide-x divide-white/10" id="benefits-grid">
+                <!-- JS Content -->
+            </div>
+        </div>
+    </section>
+
+    <!-- 3. MANIFESTO -->
+    <section id="manifesto" class="bg-creme-fundo py-24 md:py-32 px-6 md:px-12 text-center">
+        <div class="max-w-4xl mx-auto reveal">
+            <span class="font-mono text-xs uppercase tracking-[0.3em] text-terracota-suave block mb-8">Manifesto Autoral</span>
+            <h2 class="font-serif text-3xl md:text-5xl text-verde-profundo leading-[1.3] mb-12 text-balance">
+                "Meu corpo não é água mansa. É rio quebra-mar. É vertigem de asfalto. É a água que desagua e flui."
+            </h2>
+            <div class="space-y-8 font-serif text-xl md:text-2xl leading-snug text-texto/90 max-w-2xl mx-auto">
+                <p>
+                    É luz que atravessa a vidraça.<br>Sem pedir licença pra ser claro.<br>
+                    Luz que fura o teto. <span class="text-verde-musgo">Quando o giu da boca cala.</span>
+                </p>
+                <p>
+                    Minha criação é caos. É livre no verso torto. É o que eu não disse.
+                </p>
+                <p>
+                    É a escolha por ser. Não o por-do-sol, mas o <span class="text-terracota-suave">Sol-do-meio-dia</span>,
+                    que queima o couro que não cabe na moldura.
+                </p>
+                <p class="text-lg font-sans font-light opacity-80 mt-8 border-t border-verde-profundo/10 pt-8 inline-block w-full">
+                    Meu manifesto é sem métrica, fluidez brutal que cria a própria força de existir.
+                </p>
+                
+                <div class="mt-12">
+                    <a href="#sobre" class="btn-editorial px-8 py-3 rounded-full font-mono text-xs uppercase tracking-widest inline-block text-white shadow-lg">
+                        Conheça a Criadora
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 4. RESTO É RITO -->
+    <section id="resto-rito" class="bg-verde-profundo py-24 md:py-32 px-6 md:px-12 text-creme-fundo relative overflow-hidden">
+        <div class="absolute inset-0 bg-[url('https://www.transparenttextures.com/patterns/cubes.png')] opacity-[0.03]"></div>
+        <div class="max-w-6xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-16 md:gap-24 items-center reveal relative z-10">
+            <div class="order-2 lg:order-1">
+                <h2 class="font-serif text-5xl md:text-6xl leading-[0.9] mb-8">
+                    Resto é <br><span class="text-terracota-suave">Rito</span>.
+                </h2>
+                <div class="w-16 h-0.5 bg-terracota-suave mb-8"></div>
+                <div class="font-sans font-light text-base md:text-lg text-creme-fundo/80 space-y-6 leading-relaxed text-justify">
+                    <p><span class="drop-cap">O</span> Brasil enfrenta um paradoxo: a fome convive com o desperdício. Toneladas de alimentos são descartadas enquanto a soberania alimentar fragiliza.</p>
+                    <p>Nesta coleção, propomos a alquimia: <strong>o resto vira rito</strong>. Cascas de cebola, caroços de abacate e urucum deixam de ser lixo para se tornarem pigmento vivo.</p>
+                    <p>A moda se reconecta à terra. O que vestimos nutre o solo ao fim de seu ciclo. Nada se perde, tudo se transforma em memória e cor.</p>
+                </div>
+            </div>
+            <div class="relative group order-1 lg:order-2">
+                <div class="absolute -inset-4 bg-terracota-suave/10 rounded-full blur-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-1000"></div>
+                <div class="grid grid-cols-2 gap-6 relative z-10">
+                    <img src="./assets/images/resto-rito-1.jpg" alt="Processo de tingimento" class="w-full h-72 object-cover rounded-suave opacity-90 hover:opacity-100 transition-all duration-700 translate-y-8 shadow-xl border border-white/5">
+                    <img src="./assets/images/resto-rito-2.jpg" alt="Detalhe têxtil" class="w-full h-72 object-cover rounded-suave opacity-90 hover:opacity-100 transition-all duration-700 -translate-y-8 shadow-xl border border-white/5">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 5. LOJA (Botão Visível e Animado) -->
+    <section id="produtos" class="bg-white py-24 md:py-32 px-6 md:px-12">
+        <div class="max-w-7xl mx-auto">
+            <div class="flex flex-col md:flex-row justify-between items-end mb-20 gap-6 reveal">
+                <div>
+                    <span class="font-mono text-xs uppercase tracking-[0.2em] text-verde-musgo mb-2 block">Shop Online</span>
+                    <h2 class="font-serif text-4xl md:text-6xl text-verde-profundo leading-none">
+                        Coleção <span class="text-terracota-suave">Rito</span>
+                    </h2>
+                </div>
+                <a href="https://www.nuvemshop.com.br/" target="_blank" class="btn-editorial px-6 py-3 rounded-full font-mono text-xs uppercase tracking-widest text-white flex items-center gap-2 shadow-sm hover:shadow-md transition-all">
+                    Ver Todas as Peças <i data-lucide="arrow-right" width="14"></i>
+                </a>
+            </div>
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-10 md:gap-12" id="products-grid">
+                <!-- JS Content -->
+            </div>
+        </div>
+    </section>
+
+    <!-- 6. PORTFÓLIO -->
+    <section id="projetos-grid" class="py-32 relative bg-fixed bg-cover bg-center" style="background-image: url('./assets/images/hero-1.jpg');">
+        <div class="absolute inset-0 bg-verde-profundo/95"></div>
+        <div class="container mx-auto px-6 relative z-10 max-w-6xl">
+            <div class="text-center mb-20 reveal">
+                <span class="font-mono text-xs uppercase tracking-[0.2em] text-creme-fundo/60 mb-4 block">Portfolio</span>
+                <h2 class="font-serif text-4xl md:text-6xl text-creme-fundo mb-4">Colaborações</h2>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-12" id="portfolio-grid">
+                <!-- JS Content -->
+            </div>
+        </div>
+    </section>
+
+    <!-- 7. SYNGRED -->
+    <section id="sobre" class="bg-creme-fundo py-24 md:py-32 px-6 md:px-12">
+        <div class="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-16 items-start bg-white p-8 md:p-16 rounded-card shadow-soft hover:shadow-hover transition-shadow duration-500 reveal">
+            <div class="lg:col-span-5 text-center lg:text-left">
+                <div class="w-full aspect-[3/4] overflow-hidden rounded-card mb-8 shadow-lg border border-gray-100">
+                    <img src="./assets/images/hero-3.jpg" class="w-full h-full object-cover grayscale hover:grayscale-0 transition-all duration-1000" alt="Syngred Sebinelli">
+                </div>
+                <div class="flex justify-center lg:justify-start gap-6 text-verde-profundo">
+                    <a href="https://instagram.com" target="_blank" class="hover:text-terracota-suave transition-colors"><i data-lucide="instagram" width="20"></i></a>
+                    <a href="https://linkedin.com" target="_blank" class="hover:text-terracota-suave transition-colors"><i data-lucide="linkedin" width="20"></i></a>
+                    <a href="mailto:contato@syngred.com" class="hover:text-terracota-suave transition-colors"><i data-lucide="mail" width="20"></i></a>
+                </div>
+            </div>
+            <div class="lg:col-span-7 space-y-10">
+                <div>
+                    <span class="font-mono text-xs uppercase tracking-widest text-terracota-suave mb-2 block">A Designer</span>
+                    <h2 class="font-serif text-4xl md:text-6xl text-verde-profundo leading-tight">Syngred Sebinelli</h2>
+                </div>
+                <div class="font-sans text-gray-700 text-lg font-light leading-relaxed space-y-6 text-justify border-l-2 border-verde-musgo/20 pl-6">
+                    <p>Estudante de Design de Moda no Centro Universitário Belas Artes de São Paulo. Minha pesquisa se aprofunda nas manualidades têxteis e sustentabilidade.</p>
+                    <p>Como integrante do <strong>Comitê Racial Fashion Revolution (2025)</strong>, busco unir estética e ética, acreditando que o design é uma ferramenta poderosa para construir uma moda mais consciente.</p>
+                </div>
+                <div>
+                    <h4 class="font-serif text-2xl text-verde-profundo mb-6 border-b border-gray-100 pb-2">Competências</h4>
+                    <div class="grid grid-cols-1 sm:grid-cols-2 gap-8">
+                        <div>
+                            <span class="font-mono text-[10px] uppercase tracking-wide text-terracota-suave mb-3 block">Manual & Têxtil</span>
+                            <div class="flex flex-wrap gap-2">
+                                <span class="px-3 py-1 bg-creme-fundo text-texto text-xs rounded-full border border-gray-200">Crochê Avançado</span>
+                                <span class="px-3 py-1 bg-creme-fundo text-texto text-xs rounded-full border border-gray-200">Macramê</span>
+                                <span class="px-3 py-1 bg-creme-fundo text-texto text-xs rounded-full border border-gray-200">Tingimento Natural</span>
+                            </div>
+                        </div>
+                        <div>
+                            <span class="font-mono text-[10px] uppercase tracking-wide text-terracota-suave mb-3 block">Software</span>
+                            <div class="flex flex-wrap gap-2">
+                                <span class="px-3 py-1 bg-creme-fundo text-texto text-xs rounded-full border border-gray-200">Adobe Illustrator</span>
+                                <span class="px-3 py-1 bg-creme-fundo text-texto text-xs rounded-full border border-gray-200">Photoshop</span>
+                                <span class="px-3 py-1 bg-creme-fundo text-texto text-xs rounded-full border border-gray-200">InDesign</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 8. RESPONSABILIDADE SOCIAL (Cards ODS Refeitos) -->
+    <section id="impacto" class="bg-verde-profundo py-24 md:py-32 px-6 md:px-12 text-creme-fundo">
+        <div class="max-w-7xl mx-auto reveal">
+            <div class="text-center mb-20">
+                <span class="font-mono text-sm uppercase tracking-widest text-terracota-suave mb-4 block">Responsabilidade Social</span>
+                <h2 class="font-serif text-4xl md:text-6xl leading-tight mb-6">Impacto Global.</h2>
+                <p class="max-w-2xl mx-auto font-sans font-light text-lg text-creme-fundo/80">
+                    Compromisso real com os Objetivos de Desenvolvimento Sustentável da ONU.
+                </p>
+            </div>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12" id="ods-grid">
+                <!-- JS Content -->
+            </div>
+        </div>
+    </section>
+
+    <!-- 9. NEWSLETTER (Réplica da Imagem) -->
+    <section id="newsletter" class="bg-terracota-news py-24 px-6 relative overflow-hidden bg-pattern">
+        <div class="max-w-3xl mx-auto text-center reveal relative z-10">
+            <span class="font-sans text-[10px] uppercase tracking-[0.3em] text-white mb-6 block opacity-90">Fique por dentro</span>
+            <h2 class="font-serif text-6xl md:text-7xl text-white mb-4 italic">Receba Novidades</h2>
+            <p class="font-sans font-light text-white/90 mb-12 max-w-lg mx-auto leading-relaxed">
+                Inscreva-se na nossa newsletter e seja a primeira a saber sobre novos lançamentos, processos criativos e bastidores da moda sustentável.
+            </p>
+            <form class="flex flex-col gap-6 max-w-md mx-auto">
+                <input type="email" placeholder="seu@email.com" class="newsletter-input w-full rounded-full px-6 py-4 text-sm font-mono text-white text-center">
+                <button type="submit" class="w-full bg-verde-btn text-white px-8 py-4 rounded-full font-mono text-xs uppercase tracking-widest hover:opacity-90 transition-opacity shadow-lg">
+                    INSCREVER
+                </button>
+            </form>
+            <p class="text-[10px] text-white/60 mt-8 font-mono uppercase tracking-wide">Respeitamos sua privacidade. Sem spam, apenas conteúdo autêntico.</p>
+        </div>
+    </section>
+
+    <!-- 10. FAQ -->
+    <section id="faq" class="bg-white py-24 px-6 md:px-12">
+        <div class="max-w-3xl mx-auto reveal">
+            <h2 class="font-serif text-4xl text-verde-profundo text-center mb-16">Dúvidas Frequentes</h2>
+            <div class="space-y-4" id="faq-container">
+                <!-- JS Content -->
+            </div>
+        </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer class="bg-verde-profundo text-creme-fundo pt-24 pb-10 px-6 md:px-12 border-t border-white/10">
+        <div class="max-w-7xl mx-auto">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-12 mb-20 text-center md:text-left">
+                
+                <!-- Logo & Nome Completo -->
+                <div class="md:col-span-2 flex flex-col md:flex-row items-center md:items-start gap-6">
+                    <div class="w-20 h-20 bg-white/5 rounded-full flex items-center justify-center overflow-hidden shadow-lg border border-white/10 flex-shrink-0">
+                        <img src="./assets/images/logo_syngred_sebinelli_png.png" alt="Logo" class="w-full h-full object-contain p-2" onerror="this.style.display='none'; this.nextElementSibling.style.display='block'">
+                        <span class="font-serif text-2xl hidden">S</span>
+                    </div>
+                    <div>
+                        <h2 class="font-serif text-4xl md:text-5xl tracking-wide mb-3">Syngred Sebinelli.</h2>
+                        <p class="font-sans text-sm opacity-60 font-light max-w-xs mx-auto md:mx-0">
+                            Design como rito. Moda como manifesto.<br>
+                            São Paulo, Brasil.
+                        </p>
+                    </div>
+                </div>
+
+                <div>
+                    <h4 class="font-mono text-xs uppercase tracking-widest mb-6 opacity-50 text-terracota-suave">Explorar</h4>
+                    <ul class="space-y-3 font-serif text-lg opacity-80">
+                        <li><a href="#home" class="hover:text-terracota-suave transition-colors">Início</a></li>
+                        <li><a href="#beneficios" class="hover:text-terracota-suave transition-colors">Nossa Essência</a></li>
+                        <li><a href="#produtos" class="hover:text-terracota-suave transition-colors">Coleção Rito</a></li>
+                        <li><a href="#manifesto" class="hover:text-terracota-suave transition-colors">Manifesto</a></li>
+                        <li><a href="#faq" class="hover:text-terracota-suave transition-colors">Dúvidas</a></li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h4 class="font-mono text-xs uppercase tracking-widest mb-6 opacity-50 text-terracota-suave">Conectar</h4>
+                    <ul class="space-y-4 opacity-80 text-sm font-light">
+                        <li class="flex items-center justify-center md:justify-start gap-3">
+                            <i data-lucide="mail" width="16"></i> 
+                            <a href="mailto:contato@syngred.com" class="hover:text-terracota-suave transition-colors">contato@syngred.com</a>
+                        </li>
+                        <li class="flex items-center justify-center md:justify-start gap-3">
+                            <i data-lucide="instagram" width="16"></i> 
+                            <a href="https://instagram.com" target="_blank" class="hover:text-terracota-suave transition-colors">@syngred</a>
+                        </li>
+                        <li class="flex items-center justify-center md:justify-start gap-3">
+                            <i data-lucide="linkedin" width="16"></i> 
+                            <a href="https://linkedin.com" target="_blank" class="hover:text-terracota-suave transition-colors">LinkedIn</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="border-t border-white/10 pt-8 flex flex-col md:flex-row justify-between items-center gap-4 text-[10px] font-mono uppercase tracking-widest">
+                <p class="opacity-40">© 2025 Syngred Sebinelli - Todos os direitos reservados.</p>
+                <a href="https://brasilsustenta.com.br" target="_blank" class="flex items-center gap-2 opacity-60 hover:opacity-100 hover:text-terracota-suave transition-all group">
+                    <span>Desenvolvido por <strong>Brasil Sustenta</strong></span>
+                    <i data-lucide="external-link" width="10" class="group-hover:translate-x-0.5 transition-transform"></i>
+                </a>
+            </div>
+        </div>
+    </footer>
+
+  </main>
+
+  <!-- SCRIPTS -->
+  <script>
+    const SITE_CONTENT = {
+        hero: [
+            {
+                image: "./assets/images/hero-1.jpg",
+                tag: "Coleção 2025",
+                title: "Tecer o Tempo.",
+                desc: "Onde a técnica ancestral do crochê encontra o design contemporâneo.",
+                btn: "Explorar Coleção",
+                link: "#produtos"
+            },
+            {
+                image: "./assets/images/hero-2.jpg",
+                tag: "Processo",
+                title: "A Cor da Terra.",
+                desc: "Tingimento botânico extraído de resíduos. Cores vivas e livres de tóxicos.",
+                btn: "Nossa Essência",
+                link: "#beneficios"
+            },
+            {
+                image: "./assets/images/hero-3.jpg",
+                tag: "Conceito",
+                title: "Resto é Rito.",
+                desc: "O desperdício se torna matéria-prima de renascimento. Onde o que sobra vira arte.",
+                btn: "Ler Manifesto",
+                link: "#manifesto"
+            },
+            {
+                image: "./assets/images/hero-4.jpg",
+                tag: "Exclusividade",
+                title: "Vista sua Verdade.",
+                desc: "Edições limitadas e peças únicas. Moda como ato político e poético.",
+                btn: "Ir para Loja",
+                link: "#produtos"
+            }
+        ],
+        benefits: [
+            { icon: "hand-heart", title: "100% Artesanal", text: "Cada ponto é feito à mão, garantindo que nenhuma peça seja igual a outra." },
+            { icon: "leaf", title: "Eco-Consciente", text: "Tingimento botânico e biomateriais. Regeneramos o meio ambiente." },
+            { icon: "fingerprint", title: "Design com Alma", text: "Moda que une ativismo, poesia e arquitetura têxtil." }
+        ],
+        products: [
+            { name: "Vestido Terra", cat: "Algodão Orgânico", price: "R$ 420", img: "./assets/images/product-1.jpg", badge: "Novo" },
+            { name: "Bolsa Trama", cat: "Macramê", price: "R$ 280", img: "./assets/images/product-2.jpg", badge: "" },
+            { name: "Kimono Ocre", cat: "Linho Puro", price: "R$ 550", img: "./assets/images/product-3.jpg", badge: "" },
+            { name: "Top Raiz", cat: "Crochê", price: "R$ 180", img: "./assets/images/product-4.jpg", badge: "" }
+        ],
+        portfolio: [
+            { 
+                title: "Adidas - SL72", 
+                desc: "Personalização do lançamento SL72 em colaboração com o Ateliê Tico-Tico no Fubá.", 
+                img: "https://images.unsplash.com/photo-1542291026-7eec264c27ff?q=80&w=800" 
+            },
+            { 
+                title: "Tênis de Biomaterial", 
+                desc: "Desenvolvimento de tênis com Biomaterial de Celulose e resíduos de crochê.", 
+                img: "https://images.unsplash.com/photo-1600185365926-3a2ce3cdb9eb?q=80&w=800" 
+            },
+            { 
+                title: "Carol Bassi", 
+                desc: "Projeto de co-criação em homenagem ao estilista Conrado Segreto.", 
+                img: "https://images.unsplash.com/photo-1489987707025-afc232f7ea0f?q=80&w=800" 
+            }
+        ],
+        ods: [
+            // Layout Refeito: Área para logos
+            { icon: "♻️", title: "Sustentabilidade", codes: "ODS 12 • ODS 13", logos: 2, text: "Zero waste e produção sob demanda." },
+            { icon: "🌱", title: "Ética Animal", codes: "ODS 15", logos: 1, text: "Livre de crueldade e uso de biomateriais." },
+            { icon: "✊", title: "Justiça Social", codes: "ODS 5 • ODS 10", logos: 2, text: "Remuneração digna e protagonismo feminino." },
+            { icon: "🤝", title: "Comunidade", codes: "ODS 1 • ODS 8", logos: 2, text: "Fomento à economia local e capacitação." }
+        ],
+        faq: [
+            { q: "Todas as peças são feitas sob encomenda?", a: "Sim, a maioria das nossas peças é produzida sob demanda para evitar desperdício (Slow Fashion)." },
+            { q: "Como funciona o tingimento natural?", a: "Utilizamos pigmentos de fontes orgânicas como cascas de cebola e cúrcuma. Processo 100% artesanal." },
+            { q: "As peças podem ser lavadas em máquina?", a: "Recomendamos lavagem à mão com sabão neutro para preservar a cor e a fibra natural." },
+            { q: "Vocês fazem peças personalizadas?", a: "Sim! Entre em contato conosco para projetos especiais e peças sob medida." },
+            { q: "Como faço para cuidar da minha peça?", a: "Seque à sombra, não use alvejantes e guarde peças de crochê dobradas." }
+        ]
+    };
+
+    function renderContent() {
+        // Hero (Mesma lógica V8)
+        const heroContainer = document.getElementById('hero-wrapper');
+        SITE_CONTENT.hero.forEach(slide => {
+            heroContainer.innerHTML += `
+                <div class="swiper-slide relative">
+                    <div class="relative w-full h-full">
+                        <img src="${slide.image}" class="w-full h-full object-cover brightness-[0.7]" alt="${slide.title}">
+                        <div class="absolute inset-0 bg-gradient-to-t from-verde-profundo/90 via-transparent to-transparent"></div>
+                        <div class="absolute bottom-0 left-0 w-full p-8 md:p-24 pb-32 md:pb-24 flex flex-col justify-end items-start">
+                            <div class="max-w-3xl">
+                                <span class="inline-block py-1 px-3 badge-glass rounded-full text-white/90 font-mono text-[10px] uppercase tracking-widest mb-6">${slide.tag}</span>
+                                <h1 class="font-serif text-6xl md:text-8xl text-creme-fundo leading-[0.9] mb-6">${slide.title}</h1>
+                                <p class="font-sans text-creme-fundo/80 text-lg font-light max-w-lg mb-8 leading-relaxed">${slide.desc}</p>
+                                <a href="${slide.link}" class="group inline-flex items-center gap-3 btn-editorial text-white px-8 py-3 rounded-full font-mono text-xs uppercase tracking-widest shadow-lg">
+                                    ${slide.btn} <i data-lucide="arrow-right" width="16" class="group-hover:translate-x-1 transition-transform"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>`;
+        });
+
+        // Benefits
+        const benefitsContainer = document.getElementById('benefits-grid');
+        SITE_CONTENT.benefits.forEach(item => {
+            benefitsContainer.innerHTML += `
+                <div class="text-center px-4 pt-8 md:pt-0 group">
+                    <div class="w-16 h-16 mx-auto mb-6 text-terracota-suave group-hover:scale-110 transition-transform duration-500 bg-white/5 rounded-full flex items-center justify-center shadow-lg border border-white/10">
+                        <i data-lucide="${item.icon}" width="32" height="32"></i>
+                    </div>
+                    <h3 class="font-serif text-2xl mb-3 text-white">${item.title}</h3>
+                    <p class="font-sans text-sm font-light text-white/60 leading-relaxed max-w-xs mx-auto">${item.text}</p>
+                </div>`;
+        });
+
+        // Products (Botão Sempre Visível e Animado)
+        const prodContainer = document.getElementById('products-grid');
+        SITE_CONTENT.products.forEach(prod => {
+            const badge = prod.badge ? `<div class="absolute top-3 right-3 bg-white/90 backdrop-blur px-3 py-1 rounded-full text-[10px] font-mono uppercase tracking-widest text-verde-profundo border border-gray-100">${prod.badge}</div>` : '';
+            prodContainer.innerHTML += `
+                <div class="group reveal product-card">
+                    <div class="relative overflow-hidden rounded-suave aspect-[3/4] mb-6 bg-creme-fundo shadow-sm">
+                        <img src="${prod.img}" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105">
+                        ${badge}
+                    </div>
+                    <h3 class="font-serif text-2xl text-verde-profundo group-hover:text-terracota-suave transition-colors">${prod.name}</h3>
+                    <div class="flex justify-between items-center mt-2 border-t border-gray-100 pt-2 mb-6">
+                        <p class="font-sans text-xs text-gray-500 uppercase tracking-wide text-gray-400">${prod.cat}</p>
+                        <span class="font-mono text-sm text-verde-profundo">${prod.price}</span>
+                    </div>
+                    <!-- Botão visível sem opacity-0 -->
+                    <a href="https://www.nuvemshop.com.br/" class="block w-full text-center btn-shop py-3 rounded-full shadow-sm font-mono text-[10px] uppercase tracking-widest">
+                        Ver na Loja
+                    </a>
+                </div>`;
+        });
+
+        // Portfolio
+        const portContainer = document.getElementById('portfolio-grid');
+        SITE_CONTENT.portfolio.forEach(item => {
+            portContainer.innerHTML += `
+                <div class="reveal group bg-white/5 p-6 rounded-suave border border-white/10 hover:bg-white/10 transition-colors backdrop-blur-sm">
+                    <div class="overflow-hidden rounded-suave aspect-video mb-6 border border-white/5">
+                        <img src="${item.img}" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105 grayscale group-hover:grayscale-0">
+                    </div>
+                    <h3 class="font-serif text-3xl text-creme-fundo">${item.title}</h3>
+                    <p class="font-sans text-sm text-creme-fundo/70 mt-2 leading-relaxed">${item.desc}</p>
+                </div>`;
+        });
+
+        // ODS (Card Redesenhado para Logos)
+        const odsContainer = document.getElementById('ods-grid');
+        SITE_CONTENT.ods.forEach(item => {
+            let logosHTML = '';
+            for(let i=0; i<item.logos; i++) {
+                // Placeholder Visual para Logo ODS
+                logosHTML += `
+                    <div class="w-16 h-16 border border-white/20 rounded-md flex items-center justify-center bg-white/5 text-[9px] font-mono text-white/40 text-center p-1 transition-colors hover:bg-white/10">
+                        Logo<br>ODS
+                    </div>
+                `;
+            }
+
+            odsContainer.innerHTML += `
+                <div class="bg-white/5 p-8 md:p-10 rounded-card border border-white/10 hover:bg-white/10 transition-colors shadow-lg relative overflow-hidden group flex flex-col h-full">
+                    <!-- Topo: Ícone e Título -->
+                    <div class="flex items-center gap-4 mb-6">
+                        <div class="w-12 h-12 bg-white/10 rounded-full flex items-center justify-center text-xl border border-white/5 shrink-0">
+                            ${item.icon}
+                        </div>
+                        <h3 class="font-serif text-3xl text-terracota-suave leading-none">${item.title}</h3>
+                    </div>
+                    
+                    <!-- Descrição -->
+                    <p class="font-light text-sm leading-relaxed text-creme-fundo/80 mb-8 flex-grow">${item.text}</p>
+                    
+                    <!-- Rodapé do Card: Logos ODS -->
+                    <div class="border-t border-white/10 pt-6 mt-auto">
+                        <p class="font-mono text-[10px] opacity-50 tracking-widest mb-3 block">ALINHADO COM:</p>
+                        <div class="flex gap-3">
+                            ${logosHTML}
+                        </div>
+                    </div>
+                </div>`;
+        });
+
+        // FAQ
+        const faqContainer = document.getElementById('faq-container');
+        SITE_CONTENT.faq.forEach(item => {
+            faqContainer.innerHTML += `
+                <details class="group bg-creme-fundo rounded-suave p-6 cursor-pointer border border-transparent hover:border-terracota-suave/20 transition-all open:shadow-soft open:bg-white">
+                    <summary class="flex justify-between items-center font-serif text-xl text-verde-profundo">
+                        <span>${item.q}</span>
+                        <span class="transition-transform duration-300 group-open:rotate-180 text-terracota-suave"><i data-lucide="chevron-down" width="20"></i></span>
+                    </summary>
+                    <p class="text-gray-600 mt-4 font-light text-sm leading-relaxed border-t border-gray-200 pt-4 animate-fadeIn">${item.a}</p>
+                </details>`;
+        });
+    }
+
+    document.addEventListener("DOMContentLoaded", () => {
+      renderContent();
+      lucide.createIcons();
+
+      // Navbar Logic
+      const navbar = document.getElementById('navbar');
+      const logoText = document.getElementById('logo-text');
+      const navLink = document.getElementById('nav-link');
+      const menuBtn = document.querySelector('#menu-btn');
+
+      window.addEventListener("scroll", () => {
+        if (window.scrollY > 50) {
+           navbar.classList.remove('bg-white/5', 'border-white/10');
+           navbar.classList.add('bg-white/90', 'border-verde-musgo/10', 'shadow-md');
+           logoText.classList.replace('text-creme-fundo', 'text-verde-profundo');
+           menuBtn.classList.replace('text-creme-fundo', 'text-verde-profundo');
+        } else {
+           navbar.classList.add('bg-white/5', 'border-white/10');
+           navbar.classList.remove('bg-white/90', 'border-verde-musgo/10', 'shadow-md');
+           logoText.classList.replace('text-verde-profundo', 'text-creme-fundo');
+           menuBtn.classList.replace('text-verde-profundo', 'text-creme-fundo');
+        }
+      });
+
+      // Menu Mobile
+      const openBtn = document.getElementById('menu-btn');
+      const closeBtn = document.getElementById('close-menu');
+      const overlay = document.getElementById('menu-overlay');
+      const links = document.querySelectorAll('.menu-link');
+
+      function toggleMenu(show) {
+          if (show) {
+              overlay.classList.remove('pointer-events-none');
+              overlay.classList.remove('opacity-0');
+              document.body.style.overflow = 'hidden';
+          } else {
+              overlay.classList.add('opacity-0');
+              overlay.classList.add('pointer-events-none');
+              document.body.style.overflow = 'auto';
+          }
+      }
+      openBtn.addEventListener('click', () => toggleMenu(true));
+      closeBtn.addEventListener('click', () => toggleMenu(false));
+      links.forEach(link => link.addEventListener('click', () => toggleMenu(false)));
+
+      // Swiper
+      const swiper = new Swiper('.main-carousel', {
+          loop: true,
+          effect: 'fade',
+          fadeEffect: { crossFade: true },
+          speed: 1500,
+          observer: true,
+          observeParents: true,
+          autoplay: { delay: 6000, disableOnInteraction: false },
+          pagination: { el: '.swiper-pagination', clickable: true },
+          navigation: { nextEl: '.swiper-button-next', prevEl: '.swiper-button-prev' },
+      });
+
+      // Scroll Reveal
+      const observer = new IntersectionObserver((entries) => {
+          entries.forEach(entry => {
+              if (entry.isIntersecting) {
+                  entry.target.classList.add('active');
+                  observer.unobserve(entry.target);
+              }
+          });
+      }, { threshold: 0.15 });
+      document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+    });
+  </script>
+</body>
+</html>
