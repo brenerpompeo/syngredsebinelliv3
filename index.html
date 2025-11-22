@@ -48,6 +48,20 @@
           boxShadow: {
             'soft': '0 10px 40px -10px rgba(0,0,0,0.05)',
             'hover': '0 20px 40px -10px rgba(80, 89, 22, 0.15)', 
+          },
+          animation: {
+            'fade-in': 'fadeIn 1s ease-out',
+            'slide-up': 'slideUp 0.8s cubic-bezier(0.2, 1, 0.3, 1)',
+          },
+          keyframes: {
+            fadeIn: {
+              '0%': { opacity: '0' },
+              '100%': { opacity: '1' },
+            },
+            slideUp: {
+              '0%': { transform: 'translateY(20px)', opacity: '0' },
+              '100%': { transform: 'translateY(0)', opacity: '1' },
+            },
           }
         },
       },
@@ -152,6 +166,114 @@
         background-color: rgba(80, 89, 22, 0.9); /* Verde profundo denso */
         backdrop-filter: blur(8px);
     }
+
+    /* Custom Scrollbar for Modals */
+    .modal-content::-webkit-scrollbar { width: 4px; }
+    .modal-content::-webkit-scrollbar-track { background: #f5e2c5; }
+    .modal-content::-webkit-scrollbar-thumb { background: #505916; border-radius: 2px; }
+
+    /* WhatsApp Button */
+    .whatsapp-float {
+      position: fixed;
+      bottom: 40px;
+      right: 40px;
+      z-index: 90;
+      animation: pulse 2s infinite;
+      transition: all 0.3s ease;
+    }
+
+    .whatsapp-float:hover {
+      transform: scale(1.1);
+    }
+
+    @keyframes pulse {
+      0% { transform: scale(1); }
+      50% { transform: scale(1.05); }
+      100% { transform: scale(1); }
+    }
+
+    .whatsapp-float img {
+      width: 60px;
+      height: 60px;
+      border-radius: 50%;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    }
+
+    /* Tooltip */
+    .whatsapp-float::after {
+      content: "Fale conosco no WhatsApp";
+      position: absolute;
+      bottom: 100%;
+      right: 0;
+      margin-bottom: 10px;
+      background: #505916;
+      color: white;
+      padding: 8px 12px;
+      border-radius: 6px;
+      font-size: 12px;
+      white-space: nowrap;
+      opacity: 0;
+      transition: opacity 0.3s ease;
+      pointer-events: none;
+    }
+
+    .whatsapp-float:hover::after {
+      opacity: 1;
+    }
+
+    /* Responsive WhatsApp */
+    @media (max-width: 768px) {
+      .whatsapp-float {
+        bottom: 20px;
+        right: 20px;
+      }
+      .whatsapp-float img {
+        width: 50px;
+        height: 50px;
+      }
+    }
+
+    /* Footer Links */
+    .footer-link {
+      transition: color 0.3s ease;
+    }
+    .footer-link:hover {
+      color: #c4a57b;
+    }
+
+    /* Responsive Footer */
+    @media (max-width: 768px) {
+      footer .grid {
+        grid-template-columns: 1fr;
+        text-align: center;
+      }
+      footer .md\:flex-row {
+        flex-direction: column;
+        gap: 2rem;
+      }
+    }
+
+    /* Enhanced Transitions and Premium Feel */
+    section {
+      transition: opacity 0.5s ease, transform 0.5s ease;
+    }
+
+    .premium-shadow {
+      box-shadow: 0 10px 30px rgba(80, 89, 22, 0.1);
+    }
+
+    @media (max-width: 640px) {
+      h1, h2 {
+        font-size: 2.5rem !important;
+      }
+      .grid-cols-3 {
+        grid-template-columns: 1fr !important;
+      }
+      .grid-cols-4 {
+        grid-template-columns: 1fr 1fr !important;
+      }
+    }
+
   </style>
 </head>
 
@@ -473,6 +595,11 @@
 
             <div class="border-t border-white/10 pt-8 flex flex-col md:flex-row justify-between items-center gap-4 text-[10px] font-mono uppercase tracking-widest">
                 <p class="opacity-40">© 2025 Syngred Sebinelli - Todos os direitos reservados.</p>
+                <div class="flex gap-4 opacity-60">
+                    <a href="#" onclick="openPrivacyModal()" class="footer-link hover:text-terracota-suave transition-all">Política de Privacidade</a>
+                    <span class="opacity-40">|</span>
+                    <a href="#" onclick="openTermsModal()" class="footer-link hover:text-terracota-suave transition-all">Termos de Uso</a>
+                </div>
                 <a href="https://brasilsustenta.com.br" target="_blank" class="flex items-center gap-2 opacity-60 hover:opacity-100 hover:text-terracota-suave transition-all group">
                     <span>Desenvolvido por <strong>Brasil Sustenta</strong></span>
                     <i data-lucide="external-link" width="10" class="group-hover:translate-x-0.5 transition-transform"></i>
@@ -511,6 +638,81 @@
             </div>
         </div>
     </div>
+
+    <!-- MODAL PRIVACIDADE -->
+    <div id="privacy-modal" class="fixed inset-0 z-[100] hidden transition-opacity duration-500 opacity-0 modal-backdrop flex items-center justify-center p-4 sm:p-6">
+        <div class="bg-white w-full max-w-3xl max-h-[90vh] overflow-y-auto rounded-card shadow-2xl relative flex flex-col overflow-hidden transform scale-95 transition-transform duration-300 modal-content">
+            <button onclick="closePrivacyModal()" class="absolute top-4 right-4 z-10 bg-white/80 p-2 rounded-full hover:bg-terracota-suave hover:text-white transition-colors shadow-sm">
+                <i data-lucide="x" width="24"></i>
+            </button>
+            
+            <!-- Conteúdo Modal -->
+            <div class="p-8 md:p-16 flex flex-col justify-center bg-creme-fundo">
+                <span class="font-mono text-xs uppercase tracking-widest text-terracota-suave mb-4 block">Legal</span>
+                <h3 class="font-serif text-4xl md:text-5xl text-verde-profundo mb-6 leading-none">Política de Privacidade</h3>
+                <div class="w-16 h-[2px] bg-verde-musgo/20 mb-8"></div>
+                
+                <div class="prose prose-sm text-texto/80 mb-8 font-sans font-light text-base leading-relaxed space-y-4">
+                    <p>Esta Política de Privacidade descreve como Syngred Sebinelli coleta, usa e protege suas informações pessoais em conformidade com a Lei Geral de Proteção de Dados Pessoais (LGPD - Lei nº 13.709/2018).</p>
+                    <h4 class="text-xl font-serif">Coleta de Dados</h4>
+                    <p>Coletamos dados pessoais como nome, e-mail e endereço quando você se inscreve na newsletter, realiza compras ou entra em contato conosco. Usamos cookies para melhorar a experiência do usuário.</p>
+                    <h4 class="text-xl font-serif">Uso dos Dados</h4>
+                    <p>Seus dados são usados para processar pedidos, enviar atualizações e melhorar nossos serviços. Não compartilhamos dados com terceiros sem consentimento, exceto para fins legais ou operacionais (ex.: entrega de produtos).</p>
+                    <h4 class="text-xl font-serif">Direitos do Usuário</h4>
+                    <p>Você tem direito a acessar, corrigir, deletar ou revogar o consentimento para o uso de seus dados. Entre em contato via contato@syngred.com para exercer esses direitos.</p>
+                    <h4 class="text-xl font-serif">Segurança</h4>
+                    <p>Implementamos medidas de segurança como criptografia e firewalls para proteger seus dados contra acesso não autorizado.</p>
+                    <p>Esta política pode ser atualizada. Última atualização: 22/11/2025.</p>
+                </div>
+
+                <div class="mt-auto pt-8 border-t border-verde-profundo/5">
+                    <button onclick="closePrivacyModal()" class="btn-editorial px-8 py-4 rounded-full font-mono text-xs uppercase tracking-widest text-white shadow-lg w-full md:w-auto">
+                        Entendi
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- MODAL TERMOS DE USO -->
+    <div id="terms-modal" class="fixed inset-0 z-[100] hidden transition-opacity duration-500 opacity-0 modal-backdrop flex items-center justify-center p-4 sm:p-6">
+        <div class="bg-white w-full max-w-3xl max-h-[90vh] overflow-y-auto rounded-card shadow-2xl relative flex flex-col overflow-hidden transform scale-95 transition-transform duration-300 modal-content">
+            <button onclick="closeTermsModal()" class="absolute top-4 right-4 z-10 bg-white/80 p-2 rounded-full hover:bg-terracota-suave hover:text-white transition-colors shadow-sm">
+                <i data-lucide="x" width="24"></i>
+            </button>
+            
+            <!-- Conteúdo Modal -->
+            <div class="p-8 md:p-16 flex flex-col justify-center bg-creme-fundo">
+                <span class="font-mono text-xs uppercase tracking-widest text-terracota-suave mb-4 block">Legal</span>
+                <h3 class="font-serif text-4xl md:text-5xl text-verde-profundo mb-6 leading-none">Termos de Uso</h3>
+                <div class="w-16 h-[2px] bg-verde-musgo/20 mb-8"></div>
+                
+                <div class="prose prose-sm text-texto/80 mb-8 font-sans font-light text-base leading-relaxed space-y-4">
+                    <p>Ao acessar ou usar este site, você concorda com estes Termos de Uso.</p>
+                    <h4 class="text-xl font-serif">Regras de Uso</h4>
+                    <p>O conteúdo do site é para uso pessoal e não comercial. Não copie ou distribua sem permissão.</p>
+                    <h4 class="text-xl font-serif">Propriedade Intelectual</h4>
+                    <p>Todos os designs, imagens e textos são propriedade de Syngred Sebinelli. Direitos reservados.</p>
+                    <h4 class="text-xl font-serif">Compras e Devoluções</h4>
+                    <p>Compras são processadas via Nuvemshop. Devoluções em até 7 dias para produtos sem uso. Frete de devolução por conta do cliente.</p>
+                    <h4 class="text-xl font-serif">Limitações</h4>
+                    <p>Não nos responsabilizamos por danos indiretos ou perda de dados. O site é fornecido "como está".</p>
+                    <p>Estes termos podem ser atualizados. Última atualização: 22/11/2025.</p>
+                </div>
+
+                <div class="mt-auto pt-8 border-t border-verde-profundo/5">
+                    <button onclick="closeTermsModal()" class="btn-editorial px-8 py-4 rounded-full font-mono text-xs uppercase tracking-widest text-white shadow-lg w-full md:w-auto">
+                        Entendi
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- BOTÃO WHATSAPP -->
+    <a href="https://wa.me/5519999999999?text=Olá!%20Gostaria%20de%20saber%20mais%20sobre%20a%20Coleção%20Rito" target="_blank" class="whatsapp-float">
+      <img src="https://pngimg.com/d/whatsapp_PNG95150.png" alt="WhatsApp">
+    </a>
 
   </main>
 
@@ -580,7 +782,7 @@
             }
         ],
         ods: [
-            { icon: "♻️", title: "Sustentabilidade", codes: "ODS 12 • ODS 13", logos: 2, text: "Zero waste e produção sob demanda." },
+            { icon: "♻️", title: "Sustentabilidade", codes: "ODS 12 • ODS 13", logos: 2, text: "Zero Waste e produção sob demanda." },
             { icon: "🌱", title: "Ética Animal", codes: "ODS 15", logos: 1, text: "Livre de crueldade e uso de biomateriais." },
             { icon: "✊", title: "Justiça Social", codes: "ODS 5 • ODS 10", logos: 2, text: "Remuneração digna e protagonismo feminino." },
             { icon: "🤝", title: "Comunidade", codes: "ODS 1 • ODS 8", logos: 2, text: "Fomento à economia local e capacitação." }
@@ -618,6 +820,62 @@
     function closeProjectModal() {
         const modal = document.getElementById('project-modal');
         const modalContent = document.getElementById('modal-content');
+        
+        modal.classList.add('opacity-0');
+        modalContent.classList.remove('scale-100');
+        modalContent.classList.add('scale-95');
+        
+        setTimeout(() => {
+            modal.classList.add('hidden');
+        }, 300);
+        document.body.style.overflow = 'auto';
+    }
+
+    // Funções para Modal Privacidade
+    function openPrivacyModal() {
+        const modal = document.getElementById('privacy-modal');
+        const modalContent = modal.querySelector('.modal-content');
+        
+        modal.classList.remove('hidden');
+        setTimeout(() => {
+            modal.classList.remove('opacity-0');
+            modalContent.classList.remove('scale-95');
+            modalContent.classList.add('scale-100');
+        }, 10);
+        document.body.style.overflow = 'hidden';
+    }
+
+    function closePrivacyModal() {
+        const modal = document.getElementById('privacy-modal');
+        const modalContent = modal.querySelector('.modal-content');
+        
+        modal.classList.add('opacity-0');
+        modalContent.classList.remove('scale-100');
+        modalContent.classList.add('scale-95');
+        
+        setTimeout(() => {
+            modal.classList.add('hidden');
+        }, 300);
+        document.body.style.overflow = 'auto';
+    }
+
+    // Funções para Modal Termos
+    function openTermsModal() {
+        const modal = document.getElementById('terms-modal');
+        const modalContent = modal.querySelector('.modal-content');
+        
+        modal.classList.remove('hidden');
+        setTimeout(() => {
+            modal.classList.remove('opacity-0');
+            modalContent.classList.remove('scale-95');
+            modalContent.classList.add('scale-100');
+        }, 10);
+        document.body.style.overflow = 'hidden';
+    }
+
+    function closeTermsModal() {
+        const modal = document.getElementById('terms-modal');
+        const modalContent = modal.querySelector('.modal-content');
         
         modal.classList.add('opacity-0');
         modalContent.classList.remove('scale-100');
@@ -759,10 +1017,29 @@
       renderContent();
       lucide.createIcons();
 
-      // Modal Close Event
+      // Modal Project Close Event
       document.getElementById('close-modal').addEventListener('click', closeProjectModal);
       document.getElementById('project-modal').addEventListener('click', (e) => {
           if(e.target.id === 'project-modal') closeProjectModal();
+      });
+
+      // Modal Privacy Close Events
+      document.getElementById('privacy-modal').addEventListener('click', (e) => {
+          if(e.target.id === 'privacy-modal') closePrivacyModal();
+      });
+
+      // Modal Terms Close Events
+      document.getElementById('terms-modal').addEventListener('click', (e) => {
+          if(e.target.id === 'terms-modal') closeTermsModal();
+      });
+
+      // Close Modals with ESC Key
+      document.addEventListener('keydown', (e) => {
+          if (e.key === 'Escape') {
+              closeProjectModal();
+              closePrivacyModal();
+              closeTermsModal();
+          }
       });
 
       // Navbar Logic
