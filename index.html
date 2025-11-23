@@ -69,6 +69,13 @@
         -webkit-font-smoothing: antialiased;
     }
 
+    /* Trava de Scroll (Lógica Tim Maia) */
+    body.menu-open {
+        overflow: hidden !important;
+        height: 100vh;
+        touch-action: none; /* Evita scroll no mobile */
+    }
+
     /* Noise Texture */
     .noise-overlay {
         position: fixed; top: 0; left: 0; width: 100%; height: 100%;
@@ -196,10 +203,30 @@
     /* WhatsApp */
     .whatsapp-float { position: fixed; bottom: 32px; right: 32px; z-index: 90; transition: transform 0.3s ease; }
     .whatsapp-float:hover { transform: scale(1.1); }
+
+    /* Animação do Menu Staggered */
+    .menu-link {
+        opacity: 0;
+        transform: translateY(20px);
+        transition: opacity 0.5s ease, transform 0.5s ease;
+    }
+    #menu-overlay.active .menu-link {
+        opacity: 1;
+        transform: translateY(0);
+    }
+    /* Delays escalonados para efeito cascata */
+    #menu-overlay.active .menu-link:nth-child(1) { transition-delay: 0.1s; }
+    #menu-overlay.active .menu-link:nth-child(2) { transition-delay: 0.2s; }
+    #menu-overlay.active .menu-link:nth-child(3) { transition-delay: 0.3s; }
+    #menu-overlay.active .menu-link:nth-child(4) { transition-delay: 0.4s; }
+    #menu-overlay.active .menu-link:nth-child(5) { transition-delay: 0.5s; }
+    #menu-overlay.active .menu-link:nth-child(6) { transition-delay: 0.6s; }
+    #menu-overlay.active .menu-link:nth-child(7) { transition-delay: 0.7s; }
+
   </style>
 </head>
 
-<body class="antialiased relative">
+<body class="antialiased relative transition-colors duration-300">
   <div class="noise-overlay"></div>
 
   <!-- HEADER -->
@@ -220,7 +247,7 @@
                 <span>Loja Online</span>
                 <i data-lucide="arrow-up-right" width="12"></i>
             </a>
-            <button id="menu-btn" class="text-creme-fundo hover:text-terracota-suave transition-colors p-1" aria-label="Menu">
+            <button id="menu-btn" class="text-creme-fundo hover:text-terracota-suave transition-colors p-1 focus:outline-none" aria-label="Abrir Menu" aria-expanded="false">
                 <i data-lucide="menu" width="24"></i>
             </button>
         </div>
@@ -228,31 +255,61 @@
     </header>
   </div>
 
-  <!-- MENU FULLSCREEN (Revisado) -->
-  <div id="menu-overlay" class="fixed inset-0 bg-verde-profundo z-[60] flex flex-col justify-center items-center opacity-0 pointer-events-none transition-all duration-500 overflow-y-auto">
-    <div class="w-full min-h-full flex flex-col justify-center items-center py-12 relative">
-        <button id="close-menu" class="absolute top-8 right-8 p-4 text-creme-fundo hover:rotate-90 transition-transform duration-500 hover:text-terracota-suave z-50">
-            <i data-lucide="x" width="40"></i>
-        </button>
-        <nav class="w-full max-w-md px-6">
-        <ul class="text-center space-y-6 md:space-y-8 mb-10">
-            <li><a href="#home" class="menu-link font-serif text-4xl md:text-6xl text-creme-fundo/90 hover:text-terracota-suave transition-all inline-block">Início</a></li>
-            <li><a href="#beneficios" class="menu-link font-serif text-4xl md:text-6xl text-creme-fundo/90 hover:text-terracota-suave transition-all inline-block">Essência</a></li>
-            <li><a href="#manifesto" class="menu-link font-serif text-4xl md:text-6xl text-creme-fundo/90 hover:text-terracota-suave transition-all inline-block">Manifesto</a></li>
-            <li><a href="#resto-rito" class="menu-link font-serif text-4xl md:text-6xl text-creme-fundo/90 hover:text-terracota-suave transition-all inline-block">Conceito</a></li>
-            <li><a href="#produtos" class="menu-link font-serif text-4xl md:text-6xl text-creme-fundo/90 hover:text-terracota-suave transition-all inline-block">Coleção</a></li>
-            <li><a href="#social" class="menu-link font-serif text-4xl md:text-6xl text-creme-fundo/90 hover:text-terracota-suave transition-all inline-block">Responsabilidade</a></li>
-            <li><a href="#portfolio" class="menu-link font-serif text-4xl md:text-6xl text-creme-fundo/90 hover:text-terracota-suave transition-all inline-block">Portfólio</a></li>
-        </ul>
+  <!-- MENU FULLSCREEN (REESTRUTURADO) -->
+  <div id="menu-overlay" class="fixed inset-0 bg-verde-profundo/95 backdrop-blur-xl z-[100] flex flex-col opacity-0 pointer-events-none transition-opacity duration-500 overflow-y-auto overflow-x-hidden">
+    <!-- Wrapper interno com Flex Column e Justify Between para distribuir topo, conteúdo e rodapé -->
+    <div class="w-full min-h-full flex flex-col justify-between py-6 px-6 relative">
         
-        <!-- CTA no Menu Aberto -->
-        <div class="flex flex-col items-center gap-6 border-t border-white/10 pt-8 mt-4">
-            <p class="font-sans text-creme-fundo/60 text-sm uppercase tracking-widest">Exclusividade & Arte</p>
-            <a href="https://www.nuvemshop.com.br/" target="_blank" class="btn-primary !bg-creme-fundo !text-verde-profundo hover:!bg-terracota-suave hover:!text-white w-full shadow-xl text-lg py-4">
-                Ver Loja Online
-            </a>
+        <!-- 1. HEADER DO MENU (Logo + Lettering + Fechar) -->
+        <div class="w-full flex justify-between items-center shrink-0 menu-link" style="transition-delay: 0s;">
+            <div class="flex items-center gap-3 opacity-90">
+                <div class="relative overflow-hidden rounded-full w-10 h-10 shadow-md bg-creme-fundo flex-shrink-0 border border-white/20">
+                    <img src="./assets/images/logo_syngred_sebinelli.png" alt="S" class="w-full h-full object-cover">
+                </div>
+                <span class="font-serif text-lg md:text-xl text-creme-fundo tracking-wide">
+                    Syngred Sebinelli
+                </span>
+            </div>
+            
+            <button id="close-menu" class="p-2 text-creme-fundo hover:rotate-90 transition-transform duration-500 hover:text-terracota-suave bg-white/5 rounded-full backdrop-blur-sm border border-white/10" aria-label="Fechar Menu">
+                <i data-lucide="x" width="24"></i>
+            </button>
         </div>
+        
+        <!-- 2. NAVEGAÇÃO CENTRALIZADA -->
+        <nav class="w-full flex flex-col items-center justify-center flex-grow py-8">
+            <!-- Links Principais (Sem Conceito e Essência) -->
+            <div id="menu-list" class="flex flex-col text-center space-y-4 sm:space-y-6 mb-10">
+                <a href="#home" class="menu-link font-serif text-4xl sm:text-5xl md:text-6xl lg:text-7xl text-creme-fundo/90 hover:text-terracota-suave transition-colors">Início</a>
+                <a href="#manifesto" class="menu-link font-serif text-4xl sm:text-5xl md:text-6xl lg:text-7xl text-creme-fundo/90 hover:text-terracota-suave transition-colors">Manifesto</a>
+                <a href="#produtos" class="menu-link font-serif text-4xl sm:text-5xl md:text-6xl lg:text-7xl text-creme-fundo/90 hover:text-terracota-suave transition-colors">Coleção</a>
+                <a href="#social" class="menu-link font-serif text-4xl sm:text-5xl md:text-6xl lg:text-7xl text-creme-fundo/90 hover:text-terracota-suave transition-colors">Responsabilidade</a>
+                <a href="#portfolio" class="menu-link font-serif text-4xl sm:text-5xl md:text-6xl lg:text-7xl text-creme-fundo/90 hover:text-terracota-suave transition-colors">Portfólio</a>
+            </div>
+        
+            <!-- CTA Loja -->
+            <div class="menu-link w-full max-w-xs text-center" style="transition-delay: 0.5s;">
+                <p class="font-sans text-creme-fundo/60 text-xs uppercase tracking-widest mb-4">Exclusividade & Arte</p>
+                <a href="https://www.nuvemshop.com.br/" target="_blank" class="btn-primary !bg-creme-fundo !text-verde-profundo hover:!bg-terracota-suave hover:!text-white w-full shadow-xl text-sm sm:text-base py-3 sm:py-4 flex items-center justify-center gap-2">
+                    Ver Loja Online <i data-lucide="arrow-up-right" width="16"></i>
+                </a>
+            </div>
         </nav>
+
+        <!-- 3. FOOTER DO MENU -->
+        <div class="w-full border-t border-white/10 pt-6 flex flex-col items-center gap-4 shrink-0 menu-link" style="transition-delay: 0.6s;">
+            <div class="flex gap-6 text-creme-fundo/70">
+                <a href="mailto:contato@syngred.com" class="hover:text-white transition-colors hover:scale-110"><i data-lucide="mail" width="20"></i></a>
+                <a href="https://instagram.com" target="_blank" class="hover:text-white transition-colors hover:scale-110"><i data-lucide="instagram" width="20"></i></a>
+                <a href="https://linkedin.com" target="_blank" class="hover:text-white transition-colors hover:scale-110"><i data-lucide="linkedin" width="20"></i></a>
+            </div>
+            <div class="flex flex-col sm:flex-row items-center gap-2 sm:gap-4 text-[10px] font-mono uppercase tracking-widest text-creme-fundo/40">
+                <p>© 2025 Syngred Sebinelli</p>
+                <span class="hidden sm:block">•</span>
+                <a href="https://brasilsustenta.com.br" target="_blank" class="hover:text-white transition-colors">Dev by Brasil Sustenta</a>
+            </div>
+        </div>
+
     </div>
   </div>
 
@@ -416,7 +473,7 @@
                             "Não existe beleza na moda se ela custa a dignidade de quem faz ou a saúde de onde vivemos."
                         </h4>
                     </div>
-                     <div class="shrink-0">
+                      <div class="shrink-0">
                         <a href="#manifesto" class="btn-primary border-terracota-suave !bg-terracota-suave !text-white hover:!bg-terracota-forte hover:!border-terracota-forte">
                             Ler Manifesto
                         </a>
@@ -773,7 +830,7 @@
             document.body.style.overflow = 'auto';
         });
 
-        // Navbar
+        // Navbar & Scroll Logic (Refined)
         const navbar = document.getElementById('navbar');
         const logoText = document.getElementById('logo-text');
         const menuBtn = document.getElementById('menu-btn');
@@ -798,7 +855,7 @@
             }
         });
 
-        // Menu Fullscreen
+        // Menu Fullscreen Logic (REFINED with Stagger)
         const menuOverlay = document.getElementById('menu-overlay');
         const openMenu = document.getElementById('menu-btn');
         const closeMenu = document.getElementById('close-menu');
@@ -807,10 +864,14 @@
         function toggleMenu(show) {
             if(show) {
                 menuOverlay.classList.remove('pointer-events-none', 'opacity-0');
-                document.body.style.overflow = 'hidden';
+                menuOverlay.classList.add('active'); // Trigger CSS Stagger
+                document.body.classList.add('menu-open'); // Lock Body
+                openMenu.setAttribute('aria-expanded', 'true');
             } else {
+                menuOverlay.classList.remove('active');
                 menuOverlay.classList.add('opacity-0', 'pointer-events-none');
-                document.body.style.overflow = 'auto';
+                document.body.classList.remove('menu-open'); // Unlock Body
+                openMenu.setAttribute('aria-expanded', 'false');
             }
         }
 
