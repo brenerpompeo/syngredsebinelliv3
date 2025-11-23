@@ -200,9 +200,6 @@
 
     .drop-cap { float: left; font-family: 'Chewy', cursive; font-size: 5rem; line-height: 0.75; padding-right: 16px; padding-top: 4px; color: #c4a57b; }
 
-    .benefit-card { position: relative; overflow: hidden; transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1); }
-    .benefit-card:hover { transform: translateY(-8px); }
-    
     .reveal { opacity: 0; transform: translateY(30px); transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1); }
     .reveal.active { opacity: 1; transform: translateY(0); }
 
@@ -225,7 +222,15 @@
     #menu-overlay.active .menu-link:nth-child(7) { transition-delay: 0.7s; }
 
     .portfolio-card { position: relative; overflow: hidden; border-radius: 1rem; transition: all 0.5s ease; }
-    .portfolio-overlay { background: linear-gradient(to top, rgba(80, 89, 22, 0.9), transparent); }
+    
+    /* OVERLAY PADRÃO PARA CARDS DE IMAGEM (Gradiente Suave) */
+    .image-card-overlay {
+        background: linear-gradient(to top, rgba(80, 89, 22, 0.95) 0%, rgba(80, 89, 22, 0.3) 50%, transparent 100%);
+    }
+    .portfolio-overlay {
+        background: linear-gradient(to top, rgba(80, 89, 22, 0.9), transparent);
+    }
+    
     .portfolio-card:hover img { transform: scale(1.05); }
 
     .btn-circular-project {
@@ -235,7 +240,7 @@
     }
     .portfolio-card:hover .btn-circular-project, .group:hover .btn-circular-project { transform: scale(1.1) rotate(90deg); background: #c4a57b; color: white; }
 
-    /* Roadmap Styles atualizados para fundo Escuro */
+    /* Roadmap Styles */
     .roadmap-line {
         position: absolute; left: 1.5rem; top: 0; bottom: 0; width: 2px; background: rgba(245, 226, 197, 0.2); z-index: 0;
     }
@@ -389,7 +394,7 @@
       </div>
     </section>
 
-    <!-- 2. PILARES DA MARCA (CREME) -->
+    <!-- 2. PILARES DA MARCA (COM IMAGENS NÍTIDAS E OVERLAY SUAVE) -->
     <section id="beneficios" class="bg-creme-fundo py-24 md:py-32 px-6 md:px-12 relative">
         <div class="max-w-7xl mx-auto">
             <div class="flex flex-col md:flex-row justify-between items-center md:items-end mb-20 reveal text-center md:text-left">
@@ -528,7 +533,7 @@
         </div>
     </section>
 
-    <!-- 7. RESPONSABILIDADE SOCIAL (VERDE PROFUNDO) -->
+    <!-- 7. RESPONSABILIDADE SOCIAL (COM IMAGENS NÍTIDAS E OVERLAY SUAVE) -->
     <section id="social" class="bg-verde-profundo py-24 md:py-32 px-6 md:px-12 relative overflow-hidden text-creme-fundo border-t border-white/5">
         <div class="max-w-7xl mx-auto relative z-10">
             <div class="mb-16 md:mb-24 text-center reveal">
@@ -747,13 +752,12 @@
             { image: "./assets/images/hero-3.jpg", tag: "Conceito", title: "Resto é Rito.", desc: "O desperdício se torna matéria-prima de renascimento. Onde o que sobra vira arte.", btn: "Manifesto", link: "#manifesto" },
             { image: "./assets/images/hero-4.jpg", tag: "Autoral", title: "Vista Verdade.", desc: "Edições limitadas e peças únicas. Moda como ato político e poético.", btn: "Shop", link: "#produtos" }
         ],
-        // Pilares da Marca (Substituindo Benefits)
+        // Pilares da Marca (Atualizado com imagens e nova estrutura no render)
         benefits: [
-            { icon: "orbit", title: "Afrofuturismo", text: "Reconectando tecnologias ancestrais com futuros possíveis. Uma estética que celebra a diáspora e projeta novos mundos." },
-            { icon: "megaphone", title: "Ativismo", text: "Moda é ato político. Nossas tramas denunciam, educam e financiam a luta antirracista e ambiental." },
-            { icon: "leaf", title: "100% Vegana", text: "Cruelty-free por essência. Não utilizamos nada de origem animal, priorizando biomateriais e o respeito à vida." }
+            { icon: "orbit", title: "Afrofuturismo", text: "Reconectando tecnologias ancestrais com futuros possíveis. Uma estética que celebra a diáspora e projeta novos mundos.", img: "https://images.unsplash.com/photo-1534528741775-53994a69daeb?q=80&w=1000" },
+            { icon: "megaphone", title: "Ativismo", text: "Moda é ato político. Nossas tramas denunciam, educam e financiam a luta antirracista e ambiental.", img: "https://images.unsplash.com/photo-1573497019940-1c28c88b4f3e?q=80&w=1000" },
+            { icon: "leaf", title: "100% Vegana", text: "Cruelty-free por essência. Não utilizamos nada de origem animal, priorizando biomateriais e o respeito à vida.", img: "https://images.unsplash.com/photo-1518531933037-91b2f5f229cc?q=80&w=1000" }
         ],
-        // Roadmap (Timeline - Adaptado para fundo escuro)
         roadmap: [
             { icon: "trash-2", title: "Coleta de Resíduos", text: "Cascas de cebola, caroços e sobras orgânicas são resgatados de feiras e cozinhas locais." },
             { icon: "flask-conical", title: "Extração do Pigmento", text: "Através de fervura lenta e alquimia natural, extraímos cores vivas sem químicos tóxicos." },
@@ -761,7 +765,6 @@
             { icon: "edit-3", title: "Trama & Crochê", text: "Cada peça é tecida manualmente, ponto a ponto, respeitando o tempo do fazer." }, 
             { icon: "shirt", title: "Produto Final", text: "Uma obra de arte vestível, carregada de história, regeneração e propósito." }
         ],
-        // Produtos Expandidos
         products: [
             { name: "Vestido Terra", cat: "Tingimento Natural", price: "R$ 420", img: "./assets/images/product-1.jpg", badge: "Novo" },
             { name: "Bolsa Trama", cat: "Upcycling", price: "R$ 280", img: "./assets/images/product-2.jpg", badge: "" },
@@ -772,34 +775,39 @@
             { name: "Jaqueta Retalho", cat: "Upcycling", price: "R$ 680", img: "https://images.unsplash.com/photo-1551028919-ac66c5f8d6b0?q=80&w=800", badge: "Única" },
             { name: "Lenço Urucum", cat: "Tingimento Natural", price: "R$ 90", img: "https://images.unsplash.com/photo-1584030134653-d22802e497d3?q=80&w=800", badge: "" }
         ],
+        // ODS (Atualizado com imagens e nova estrutura no render)
         ods: [
             { 
                 icon: "users", 
                 title: "Equidade Racial", 
                 codes: "ODS 5 • ODS 10 • ODS 18", 
                 logos: 3, 
-                text: "Atuação ativa no <strong>Comitê Racial Fashion Revolution</strong>. Descolonizando a moda e abrindo espaços de poder para criadores negros e indígenas." 
+                text: "Atuação ativa no <strong>Comitê Racial Fashion Revolution</strong>. Descolonizando a moda e abrindo espaços de poder para criadores negros e indígenas.",
+                img: "https://images.unsplash.com/photo-1531384441138-2736e62e0919?q=80&w=1000"
             },
             { 
                 icon: "recycle", 
                 title: "Circularidade", 
                 codes: "ODS 12 • ODS 13", 
                 logos: 2, 
-                text: "Lógica de <strong>lixo zero</strong>. Resíduos têxteis e alimentares (cascas, caroços) viram pigmentos e novos materiais. O que sobra, nutre a terra." 
+                text: "Lógica de <strong>lixo zero</strong>. Resíduos têxteis e alimentares (cascas, caroços) viram pigmentos e novos materiais. O que sobra, nutre a terra.",
+                img: "https://images.unsplash.com/photo-1532996122724-e3c354a0b15b?q=80&w=1000"
             },
             { 
                 icon: "heart-handshake", 
                 title: "Comércio Justo", 
                 codes: "ODS 1 • ODS 8", 
                 logos: 2, 
-                text: "Economia regenerativa. Remuneração ética e fomento à autonomia financeira de mulheres artesãs e costureiras locais." 
+                text: "Economia regenerativa. Remuneração ética e fomento à autonomia financeira de mulheres artesãs e costureiras locais.",
+                img: "https://images.unsplash.com/photo-1606857521015-7f9fcf423740?q=80&w=1000"
             },
             { 
                 icon: "sprout", 
                 title: "Ética Viva", 
                 codes: "ODS 15", 
                 logos: 1, 
-                text: "Respeito a toda forma de vida. Uso exclusivo de materiais livres de crueldade animal e de baixo impacto ambiental." 
+                text: "Respeito a toda forma de vida. Uso exclusivo de materiais livres de crueldade animal e de baixo impacto ambiental.",
+                img: "https://images.unsplash.com/photo-1441974231531-c6227db76b6e?q=80&w=1000"
             }
         ],
         portfolio: [
@@ -839,19 +847,27 @@
                 </div>`;
         });
 
-        // Pilares da Marca (Benefits)
+        // Pilares da Marca (Benefits - COM IMAGEM DE FUNDO E OVERLAY MAIS LEVE)
         const benefitsContainer = document.getElementById('benefits-grid');
         SITE_CONTENT.benefits.forEach(item => {
             benefitsContainer.innerHTML += `
-                <div class="benefit-card bg-verde-profundo p-8 rounded-card shadow-card-float flex flex-col justify-between min-h-[320px] group cursor-default">
-                    <div>
-                        <div class="w-12 h-12 rounded-full bg-black/10 flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-500">
-                            <i data-lucide="${item.icon}" class="text-creme-fundo opacity-90" width="24"></i>
+                <div class="benefit-card relative overflow-hidden rounded-card h-[360px] group cursor-default">
+                    <!-- Imagem de Fundo -->
+                    <img src="${item.img}" class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110">
+                    <!-- Overlay Gradiente Suave -->
+                    <div class="absolute inset-0 image-card-overlay transition-all duration-500 group-hover:opacity-90"></div>
+                    
+                    <!-- Conteúdo (Textos e Ícone) -->
+                    <div class="relative z-10 p-8 flex flex-col justify-between h-full">
+                        <div>
+                            <div class="w-12 h-12 rounded-full bg-white/10 backdrop-blur-md flex items-center justify-center mb-6 border border-white/20 shadow-lg">
+                                <i data-lucide="${item.icon}" class="text-white" width="24"></i>
+                            </div>
+                            <h3 class="font-serif text-3xl text-white mb-4 drop-shadow-md">${item.title}</h3>
+                            <p class="font-sans text-sm text-white/90 leading-relaxed drop-shadow-sm font-medium">${item.text}</p>
                         </div>
-                        <h3 class="font-serif text-3xl text-creme-fundo mb-4">${item.title}</h3>
-                        <p class="font-sans text-sm text-creme-fundo/80 opacity-90 leading-relaxed">${item.text}</p>
+                        <div class="w-full h-px bg-white/30 mt-8"></div>
                     </div>
-                    <div class="w-full h-px bg-creme-fundo opacity-20 mt-8"></div>
                 </div>`;
         });
 
@@ -919,32 +935,40 @@
             });
         });
 
-         // ODS Grid
+         // ODS Grid (COM IMAGEM DE FUNDO E EFEITO P&B -> Colorido)
         const odsContainer = document.getElementById('ods-grid');
         SITE_CONTENT.ods.forEach(item => {
             let logosHTML = '';
             for(let i=0; i<item.logos; i++) {
-                logosHTML += `<div class="w-12 h-12 border border-white/20 rounded-md flex items-center justify-center bg-white/5 text-[8px] font-mono text-white/40 text-center p-1 flex-shrink-0">Logo<br>ODS</div>`;
+                logosHTML += `<div class="w-12 h-12 border border-white/30 rounded-md flex items-center justify-center bg-white/10 text-[8px] font-mono text-white/80 text-center p-1 flex-shrink-0 backdrop-blur-sm shadow-sm">Logo<br>ODS</div>`;
             }
 
             odsContainer.innerHTML += `
-                <div class="bg-white/5 p-8 md:p-10 rounded-card border border-white/10 hover:bg-white/10 transition-colors shadow-lg relative overflow-hidden group flex flex-col justify-between h-full reveal text-center md:text-left">
-                    <div>
-                        <div class="flex flex-col sm:flex-row justify-between items-center md:items-start mb-6 gap-4">
-                            <div class="flex items-center gap-4 flex-shrink-0">
-                                <div class="w-12 h-12 bg-white/10 rounded-full flex items-center justify-center text-xl border border-white/5 text-terracota-suave flex-shrink-0">
-                                    <i data-lucide="${item.icon}" width="24"></i>
+                <div class="relative overflow-hidden rounded-card h-full group hover:shadow-xl transition-all reveal">
+                    <!-- Imagem de Fundo (Grayscale -> Colorido no Hover) -->
+                    <img src="${item.img}" class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-110 grayscale group-hover:grayscale-0">
+                    <!-- Overlay Gradiente Suave -->
+                    <div class="absolute inset-0 image-card-overlay transition-all duration-500"></div>
+
+                    <!-- Conteúdo -->
+                    <div class="relative z-10 p-8 md:p-10 flex flex-col justify-between h-full text-center md:text-left">
+                        <div>
+                            <div class="flex flex-col sm:flex-row justify-between items-center md:items-start mb-6 gap-4">
+                                <div class="flex items-center gap-4 flex-shrink-0">
+                                    <div class="w-12 h-12 bg-white/10 rounded-full flex items-center justify-center text-xl border border-white/20 text-white flex-shrink-0 backdrop-blur-md shadow-md">
+                                        <i data-lucide="${item.icon}" width="24"></i>
+                                    </div>
+                                    <h3 class="font-serif text-3xl text-white drop-shadow-md">${item.title}</h3>
                                 </div>
-                                <h3 class="font-serif text-3xl text-terracota-suave">${item.title}</h3>
+                                <div class="flex gap-3 flex-wrap justify-center md:justify-end">
+                                    ${logosHTML}
+                                </div>
                             </div>
-                            <div class="flex gap-3 flex-wrap justify-center md:justify-end">
-                                ${logosHTML}
-                            </div>
+                            <p class="font-sans text-sm leading-relaxed text-white/90 mb-6 drop-shadow-sm font-medium">${item.text}</p>
                         </div>
-                        <p class="font-light text-sm leading-relaxed text-creme-fundo/80 mb-6">${item.text}</p>
-                    </div>
-                    <div class="border-t border-white/10 pt-4 mt-auto">
-                        <p class="font-mono text-xs opacity-50 tracking-widest">${item.codes}</p>
+                        <div class="border-t border-white/20 pt-4 mt-auto">
+                            <p class="font-mono text-xs opacity-70 tracking-widest text-white">${item.codes}</p>
+                        </div>
                     </div>
                 </div>`;
         });
