@@ -104,6 +104,44 @@
         box-shadow: 0 10px 20px -5px rgba(196, 165, 123, 0.4);
     }
 
+    /* Botão Produto (Verde Fundo / Creme Texto) */
+    .btn-product-card {
+        background-color: #505916; /* Verde Profundo */
+        color: #f5e2c5; /* Creme Fundo */
+        border: 1px solid #505916;
+        transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+        display: block; width: 100%; text-align: center; padding: 0.75rem;
+        border-radius: 9999px;
+        font-family: 'Roboto Mono', monospace; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.1em;
+    }
+    .btn-product-card:hover {
+        background-color: #f5e2c5;
+        color: #505916;
+        border-color: #505916;
+        transform: translateY(-2px);
+        box-shadow: 0 10px 20px -5px rgba(80, 89, 22, 0.2);
+    }
+
+    /* Botão Circular do Portfólio */
+    .btn-circular-project {
+        width: 64px;
+        height: 64px;
+        border-radius: 50%;
+        background: rgba(245, 226, 197, 0.95); /* Creme */
+        color: #505916;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        box-shadow: 0 4px 20px rgba(0,0,0,0.2);
+        cursor: pointer;
+    }
+    .portfolio-item:hover .btn-circular-project {
+        transform: scale(1.1) rotate(90deg);
+        background: #c4a57b;
+        color: white;
+    }
+
     /* Botão Header (Lógica de cor) */
     .btn-header-shop { transition: all 0.4s ease; }
     .header-transparent .btn-header-shop { background-color: white; color: #505916; border: 1px solid white; }
@@ -119,15 +157,6 @@
     .btn-editorial:hover {
         background-color: #d16a42; border-color: #d16a42; transform: translateY(-2px); box-shadow: 0 10px 20px -5px rgba(209, 106, 66, 0.3);
     }
-
-    /* Botão Outline (Secundário) */
-    .btn-outline {
-        display: block; width: 100%; text-align: center; padding: 0.75rem;
-        border-radius: 9999px; border: 1px solid #505916; color: #505916;
-        font-family: 'Roboto Mono', monospace; font-size: 0.7rem; uppercase; letter-spacing: 0.1em;
-        transition: all 0.3s ease;
-    }
-    .btn-outline:hover { background-color: #505916; color: #f5e2c5; }
 
     /* Drop Cap */
     .drop-cap { float: left; font-family: 'Chewy', cursive; font-size: 5rem; line-height: 0.75; padding-right: 16px; padding-top: 4px; color: #c4a57b; }
@@ -160,11 +189,6 @@
     .benefit-card { position: relative; overflow: hidden; transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1); }
     .benefit-card:hover { transform: translateY(-8px); }
     
-    /* Portfolio Refinement */
-    .portfolio-item { transition: all 0.5s ease; }
-    .portfolio-item:hover .portfolio-overlay { opacity: 1; }
-    .portfolio-item:hover img { transform: scale(1.05); filter: grayscale(0); }
-
     /* Reveal */
     .reveal { opacity: 0; transform: translateY(30px); transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1); }
     .reveal.active { opacity: 1; transform: translateY(0); }
@@ -204,41 +228,44 @@
     </header>
   </div>
 
-  <!-- MENU FULLSCREEN (Com CTA) -->
-  <div id="menu-overlay" class="fixed inset-0 bg-verde-profundo z-[60] flex flex-col justify-center items-center opacity-0 pointer-events-none transition-all duration-500">
-    <button id="close-menu" class="absolute top-8 right-8 p-4 text-creme-fundo hover:rotate-90 transition-transform duration-500 hover:text-terracota-suave">
-       <i data-lucide="x" width="40"></i>
-    </button>
-    <nav class="w-full max-w-md px-6">
-      <ul class="text-center space-y-6 mb-10">
-        <li><a href="#home" class="menu-link font-serif text-5xl md:text-6xl text-creme-fundo/90 hover:text-terracota-suave transition-all inline-block">Início</a></li>
-        <li><a href="#beneficios" class="menu-link font-serif text-5xl md:text-6xl text-creme-fundo/90 hover:text-terracota-suave transition-all inline-block">Essência</a></li>
-        <li><a href="#manifesto" class="menu-link font-serif text-5xl md:text-6xl text-creme-fundo/90 hover:text-terracota-suave transition-all inline-block">Manifesto</a></li>
-        <li><a href="#produtos" class="menu-link font-serif text-5xl md:text-6xl text-creme-fundo/90 hover:text-terracota-suave transition-all inline-block">Coleção</a></li>
-        <li><a href="#sobre" class="menu-link font-serif text-5xl md:text-6xl text-creme-fundo/90 hover:text-terracota-suave transition-all inline-block">Portfólio</a></li>
-      </ul>
-      <div class="flex flex-col items-center gap-6 border-t border-white/10 pt-8">
-          <p class="font-sans text-creme-fundo/60 text-sm">Explore a coleção completa</p>
-          <a href="https://www.nuvemshop.com.br/" target="_blank" class="btn-primary !bg-creme-fundo !text-verde-profundo hover:!bg-terracota-suave hover:!text-white w-full shadow-xl">
-              Acessar Loja Online
-          </a>
-      </div>
-    </nav>
+  <!-- MENU FULLSCREEN (Revisado) -->
+  <div id="menu-overlay" class="fixed inset-0 bg-verde-profundo z-[60] flex flex-col justify-center items-center opacity-0 pointer-events-none transition-all duration-500 overflow-y-auto">
+    <div class="w-full min-h-full flex flex-col justify-center items-center py-12 relative">
+        <button id="close-menu" class="absolute top-8 right-8 p-4 text-creme-fundo hover:rotate-90 transition-transform duration-500 hover:text-terracota-suave z-50">
+            <i data-lucide="x" width="40"></i>
+        </button>
+        <nav class="w-full max-w-md px-6">
+        <ul class="text-center space-y-6 md:space-y-8 mb-10">
+            <li><a href="#home" class="menu-link font-serif text-4xl md:text-6xl text-creme-fundo/90 hover:text-terracota-suave transition-all inline-block">Início</a></li>
+            <li><a href="#beneficios" class="menu-link font-serif text-4xl md:text-6xl text-creme-fundo/90 hover:text-terracota-suave transition-all inline-block">Essência</a></li>
+            <li><a href="#manifesto" class="menu-link font-serif text-4xl md:text-6xl text-creme-fundo/90 hover:text-terracota-suave transition-all inline-block">Manifesto</a></li>
+            <li><a href="#resto-rito" class="menu-link font-serif text-4xl md:text-6xl text-creme-fundo/90 hover:text-terracota-suave transition-all inline-block">Conceito</a></li>
+            <li><a href="#produtos" class="menu-link font-serif text-4xl md:text-6xl text-creme-fundo/90 hover:text-terracota-suave transition-all inline-block">Coleção</a></li>
+            <li><a href="#social" class="menu-link font-serif text-4xl md:text-6xl text-creme-fundo/90 hover:text-terracota-suave transition-all inline-block">Responsabilidade</a></li>
+            <li><a href="#portfolio" class="menu-link font-serif text-4xl md:text-6xl text-creme-fundo/90 hover:text-terracota-suave transition-all inline-block">Portfólio</a></li>
+        </ul>
+        
+        <!-- CTA no Menu Aberto -->
+        <div class="flex flex-col items-center gap-6 border-t border-white/10 pt-8 mt-4">
+            <p class="font-sans text-creme-fundo/60 text-sm uppercase tracking-widest">Exclusividade & Arte</p>
+            <a href="https://www.nuvemshop.com.br/" target="_blank" class="btn-primary !bg-creme-fundo !text-verde-profundo hover:!bg-terracota-suave hover:!text-white w-full shadow-xl text-lg py-4">
+                Ver Loja Online
+            </a>
+        </div>
+        </nav>
+    </div>
   </div>
 
   <main>
-    <!-- 1. HERO SECTION (Bullets + Setas Circulares) -->
+    <!-- 1. HERO SECTION -->
     <section id="home" class="relative h-[100svh] w-full overflow-hidden bg-verde-profundo">
       <div class="swiper main-carousel h-full w-full">
         <div class="swiper-wrapper" id="hero-wrapper">
           <!-- Slides via JS -->
         </div>
         
-        <!-- Custom Nav & Pagination -->
         <div class="custom-swiper-nav hidden md:flex">
-            <!-- Container para os Bullets -->
             <div class="swiper-pagination-custom" id="swiper-pagination-el"></div>
-            
             <div class="swiper-nav-btn swiper-button-prev-custom"><i data-lucide="arrow-left" width="20"></i></div>
             <div class="swiper-nav-btn swiper-button-next-custom"><i data-lucide="arrow-right" width="20"></i></div>
         </div>
@@ -264,7 +291,7 @@
         </div>
     </section>
 
-    <!-- 3. MANIFESTO (Poema Completo) -->
+    <!-- 3. MANIFESTO -->
     <section id="manifesto" class="bg-verde-profundo py-32 px-6 text-center text-creme-fundo relative overflow-hidden">
         <div class="absolute inset-0 opacity-10 bg-[url('https://www.transparenttextures.com/patterns/cubes.png')]"></div>
         <div class="max-w-4xl mx-auto reveal relative z-10">
@@ -272,32 +299,25 @@
             
             <div class="space-y-10 font-serif text-2xl md:text-4xl leading-relaxed">
                 <p>"Meu corpo não é água mansa.<br>É rio quebra-mar.<br>É vertigem de asfalto.<br>É a água que desagua e flui."</p>
-                
                 <div class="w-24 h-px bg-white/20 mx-auto"></div>
-                
                 <p class="text-xl md:text-3xl opacity-90">
                     É luz que atravessa a vidraça.<br>
                     Sem pedir licença pra ser claro.<br>
                     Luz que fura o teto. <span class="text-terracota-suave italic">Quando o giu da boca cala.</span>
                 </p>
-
                 <p class="text-xl md:text-3xl opacity-90">
                     Minha criação é caos.<br>É livre no verso torto.<br>É o que eu não disse.
                 </p>
-
                 <p class="text-2xl md:text-4xl text-terracota-suave">
                     É a escolha por ser.<br>Não o por-do-sol, mas o Sol-do-meio-dia,<br>
                     que queima o couro que não cabe na moldura.
                 </p>
-                
                 <div class="w-full h-px bg-white/10 mt-12 mb-12"></div>
-                
                 <p class="text-lg font-sans font-light opacity-80">
                     Meu manifesto é sem métrica, fluidez brutal que cria a própria força de existir.
                 </p>
             </div>
 
-            <!-- Botão Primary para Conheça a Criadora -->
             <div class="mt-16">
                 <a href="#sobre" class="btn-primary border-creme-fundo !bg-transparent !text-creme-fundo hover:!bg-creme-fundo hover:!text-verde-profundo hover:!border-creme-fundo">
                     Conheça a Criadora
@@ -306,7 +326,7 @@
         </div>
     </section>
 
-    <!-- 4. RESTO É RITO (Restaurada) -->
+    <!-- 4. RESTO É RITO -->
     <section id="resto-rito" class="bg-verde-profundo py-24 md:py-40 px-6 md:px-12 text-creme-fundo relative overflow-hidden border-t border-white/5">
         <div class="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-16 md:gap-32 items-center reveal relative z-10">
             <div class="order-2 lg:order-1">
@@ -320,14 +340,20 @@
                     <p>Nesta coleção, proponho a alquimia: <strong>o resto vira rito</strong>. Cascas de cebola, caroços de abacate e urucum deixam de ser lixo para se tornarem pigmento vivo.</p>
                     <p>A moda se reconecta à terra. O que vestimos nutre o solo ao fim de seu ciclo. Nada se perde, tudo se transforma em memória e cor.</p>
                 </div>
+                
+                <div class="pt-8">
+                    <a href="#manifesto" class="btn-editorial text-white px-8 py-3 rounded-full font-mono text-xs uppercase tracking-widest shadow-md">
+                        Entenda o Conceito
+                    </a>
+                </div>
             </div>
             <div class="relative group order-1 lg:order-2">
                 <div class="absolute -inset-8 bg-terracota-suave/20 rounded-full blur-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-1000"></div>
                 <div class="grid grid-cols-2 gap-6 relative z-10">
                     <div class="translate-y-12 transition-transform duration-1000 group-hover:translate-y-8">
-                         <div class="rounded-suave shadow-2xl border border-white/5 overflow-hidden">
-                            <img src="./assets/images/resto-rito-1.jpg" alt="Processo de tingimento" class="w-full h-80 object-cover opacity-90 hover:opacity-100 transition-opacity duration-500">
-                         </div>
+                          <div class="rounded-suave shadow-2xl border border-white/5 overflow-hidden">
+                             <img src="./assets/images/resto-rito-1.jpg" alt="Processo de tingimento" class="w-full h-80 object-cover opacity-90 hover:opacity-100 transition-opacity duration-500">
+                          </div>
                     </div>
                     <div class="-translate-y-4 transition-transform duration-1000 group-hover:-translate-y-8">
                         <div class="rounded-suave shadow-2xl border border-white/5 overflow-hidden">
@@ -339,7 +365,7 @@
         </div>
     </section>
 
-    <!-- 5. LOJA (Botões Visíveis & Layout Original) -->
+    <!-- 5. LOJA (MOVIDA PARA CÁ) -->
     <section id="produtos" class="bg-white py-24 md:py-32 px-6 md:px-12">
         <div class="max-w-7xl mx-auto">
             <div class="text-center mb-24 reveal">
@@ -348,7 +374,7 @@
             </div>
             
             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-x-8 gap-y-16" id="products-grid">
-                <!-- JS Content -->
+                <!-- JS Content Populated -->
             </div>
             
             <div class="text-center mt-20">
@@ -359,22 +385,62 @@
         </div>
     </section>
 
-    <!-- 6. PORTFÓLIO (Refinado) -->
-    <section id="portfolio" class="py-32 bg-creme-fundo px-6 md:px-12 border-t border-verde-profundo/5">
-        <div class="max-w-7xl mx-auto">
+    <!-- 6. RESPONSABILIDADE SOCIAL & ODS (HÍBRIDA) -->
+    <section id="social" class="bg-verde-profundo py-24 md:py-32 px-6 md:px-12 relative overflow-hidden text-creme-fundo border-t border-white/5">
+        <div class="max-w-7xl mx-auto relative z-10">
+            <!-- Header -->
+            <div class="mb-16 md:mb-24 text-center reveal">
+                <span class="font-mono text-xs uppercase tracking-[0.2em] text-terracota-suave mb-3 block">Compromisso Global</span>
+                <h2 class="font-serif text-5xl md:text-7xl leading-tight">
+                    Responsabilidade <br>
+                    <span class="text-terracota-suave italic">Social & Racial</span>
+                </h2>
+                <p class="max-w-2xl mx-auto font-sans font-light text-lg text-creme-fundo/80 mt-6">
+                    Design alinhado com os Objetivos de Desenvolvimento Sustentável da ONU e a luta por equidade racial.
+                </p>
+            </div>
+    
+            <!-- ODS Grid -->
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-8 md:gap-12" id="ods-grid">
+                <!-- JS Content -->
+            </div>
+    
+            <!-- Banner Quote -->
+            <div class="mt-20 p-8 md:p-12 bg-white/5 rounded-card relative overflow-hidden reveal border border-white/10 backdrop-blur-sm">
+                 <div class="absolute top-0 right-0 opacity-5">
+                    <i data-lucide="quote" width="120" height="120"></i>
+                </div>
+                <div class="relative z-10 flex flex-col md:flex-row items-center gap-8">
+                    <div class="flex-1">
+                        <h4 class="font-serif text-2xl md:text-3xl leading-relaxed">
+                            "Não existe beleza na moda se ela custa a dignidade de quem faz ou a saúde de onde vivemos."
+                        </h4>
+                    </div>
+                     <div class="shrink-0">
+                        <a href="#manifesto" class="btn-primary border-terracota-suave !bg-terracota-suave !text-white hover:!bg-terracota-forte hover:!border-terracota-forte">
+                            Ler Manifesto
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- 7. PORTFÓLIO PREMIUM -->
+    <section id="portfolio" class="py-32 bg-fixed bg-cover bg-center relative" style="background-image: url('./assets/images/hero-1.jpg');">
+        <div class="absolute inset-0 bg-verde-profundo/95"></div>
+        <div class="max-w-7xl mx-auto px-6 md:px-12 relative z-10">
             <div class="flex flex-col md:flex-row justify-between items-end mb-20 reveal">
-                <h2 class="font-serif text-5xl md:text-7xl text-verde-profundo">Colaborações</h2>
+                <h2 class="font-serif text-5xl md:text-7xl text-creme-fundo">Colaborações</h2>
                 <span class="font-mono text-xs uppercase tracking-widest text-terracota-suave mb-2">Projetos Selecionados</span>
             </div>
-            
-            <!-- Masonry-like Layout -->
             <div class="grid grid-cols-1 md:grid-cols-3 gap-8 md:gap-12" id="portfolio-grid">
                 <!-- JS Content -->
             </div>
         </div>
     </section>
 
-    <!-- 7. BIO SYNGRED (Restaurada) -->
+    <!-- 8. BIO SYNGRED -->
     <section id="sobre" class="bg-white py-24 md:py-32 px-6 md:px-12">
         <div class="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-16 items-center reveal">
             <div class="lg:col-span-5 text-center lg:text-left">
@@ -422,7 +488,7 @@
         </div>
     </section>
 
-    <!-- 8. NEWSLETTER (Restaurada) -->
+    <!-- 9. NEWSLETTER -->
     <section id="newsletter" class="bg-terracota-news py-24 px-6 relative overflow-hidden">
         <div class="max-w-3xl mx-auto text-center reveal relative z-10">
             <span class="font-sans text-[10px] uppercase tracking-[0.3em] text-white mb-6 block opacity-90">Fique por dentro</span>
@@ -440,11 +506,10 @@
         </div>
     </section>
 
-    <!-- 9. FOOTER (Restaurado) -->
+    <!-- 10. FOOTER -->
     <footer class="bg-verde-profundo text-creme-fundo pt-24 pb-10 px-6 md:px-12 border-t border-white/10">
         <div class="max-w-7xl mx-auto">
             <div class="grid grid-cols-1 md:grid-cols-4 gap-12 mb-20 text-center md:text-left">
-                <!-- Logo -->
                 <div class="md:col-span-2 flex flex-col md:flex-row items-center md:items-start gap-6">
                     <div class="w-20 h-20 bg-white/5 rounded-full flex items-center justify-center overflow-hidden shadow-lg border border-white/10 flex-shrink-0">
                         <img src="./assets/images/logo_syngred_sebinelli.png" alt="Logo Syngred" class="w-full h-full object-cover">
@@ -456,17 +521,16 @@
                         </p>
                     </div>
                 </div>
-                <!-- Links -->
                 <div>
                     <h4 class="font-mono text-xs uppercase tracking-widest mb-6 opacity-50 text-terracota-suave">Explorar</h4>
                     <ul class="space-y-3 font-serif text-lg opacity-80">
                         <li><a href="#home" class="hover:text-terracota-suave transition-colors">Início</a></li>
                         <li><a href="#beneficios" class="hover:text-terracota-suave transition-colors">Minha Essência</a></li>
+                        <li><a href="#resto-rito" class="hover:text-terracota-suave transition-colors">Conceito</a></li>
                         <li><a href="#produtos" class="hover:text-terracota-suave transition-colors">Coleção Rito</a></li>
-                        <li><a href="#manifesto" class="hover:text-terracota-suave transition-colors">Manifesto</a></li>
+                        <li><a href="#social" class="hover:text-terracota-suave transition-colors">Responsabilidade</a></li>
                     </ul>
                 </div>
-                <!-- Contato -->
                 <div>
                     <h4 class="font-mono text-xs uppercase tracking-widest mb-6 opacity-50 text-terracota-suave">Conectar</h4>
                     <ul class="space-y-4 opacity-80 text-sm font-light">
@@ -487,7 +551,7 @@
         </div>
     </footer>
 
-    <!-- WHATSAPP -->
+    <!-- WHATSAPP & MODAL (Mantidos) -->
     <a href="https://wa.me/5519999999999" target="_blank" class="whatsapp-float group">
         <div class="w-14 h-14 bg-[#25D366] rounded-full flex items-center justify-center shadow-lg text-white relative overflow-hidden">
             <div class="absolute inset-0 bg-white/20 rounded-full animate-ping opacity-75"></div>
@@ -495,7 +559,6 @@
         </div>
     </a>
 
-    <!-- MODAL PROJETO -->
     <div id="project-modal" class="fixed inset-0 z-[100] hidden transition-opacity duration-500 opacity-0 bg-black/80 backdrop-blur-sm flex items-center justify-center p-4">
         <div class="bg-creme-fundo w-full max-w-5xl max-h-[90vh] overflow-y-auto rounded-card shadow-2xl relative flex flex-col md:flex-row overflow-hidden" id="modal-content">
             <button id="close-modal" class="absolute top-4 right-4 z-10 bg-white/80 p-2 rounded-full hover:bg-terracota-suave hover:text-white transition-colors shadow-sm">
@@ -535,6 +598,36 @@
             { name: "Bolsa Trama", cat: "Macramê", price: "R$ 280", img: "./assets/images/product-2.jpg", badge: "" },
             { name: "Kimono Ocre", cat: "Linho Puro", price: "R$ 550", img: "./assets/images/product-3.jpg", badge: "" },
             { name: "Top Raiz", cat: "Crochê Manual", price: "R$ 180", img: "./assets/images/product-4.jpg", badge: "" }
+        ],
+        ods: [
+            { 
+                icon: "✊", 
+                title: "Equidade Racial", 
+                codes: "ODS 5 • ODS 10 • ODS 18", 
+                logos: 3, 
+                text: "Atuação ativa no <strong>Comitê Racial Fashion Revolution</strong>. Descolonizando a moda e abrindo espaços de poder para criadores negros e indígenas." 
+            },
+            { 
+                icon: "♻️", 
+                title: "Circularidade", 
+                codes: "ODS 12 • ODS 13", 
+                logos: 2, 
+                text: "Lógica de <strong>lixo zero</strong>. Resíduos têxteis e alimentares (cascas, caroços) viram pigmentos e novos materiais. O que sobra, nutre a terra." 
+            },
+            { 
+                icon: "🤝", 
+                title: "Comércio Justo", 
+                codes: "ODS 1 • ODS 8", 
+                logos: 2, 
+                text: "Economia regenerativa. Remuneração ética e fomento à autonomia financeira de mulheres artesãs e costureiras locais." 
+            },
+            { 
+                icon: "🌱", 
+                title: "Ética Viva", 
+                codes: "ODS 15", 
+                logos: 1, 
+                text: "Respeito a toda forma de vida. Uso exclusivo de materiais livres de crueldade animal e de baixo impacto ambiental." 
+            }
         ],
         portfolio: [
             { title: "Adidas - SL72", desc: "Colaboração com Ateliê Tico-Tico. Customização manual unindo o urbano e o artesanal. Um projeto que reescreve a narrativa do sportwear.", img: "https://images.unsplash.com/photo-1542291026-7eec264c27ff?q=80&w=800" },
@@ -582,7 +675,7 @@
                 </div>`;
         });
 
-        // Products - EXATAMENTE COMO ORIGINAL
+        // Products
         const prodContainer = document.getElementById('products-grid');
         SITE_CONTENT.products.forEach(prod => {
             const badge = prod.badge ? `<div class="absolute top-3 right-3 bg-white/90 backdrop-blur px-3 py-1 rounded-full text-[10px] font-mono uppercase tracking-widest text-verde-profundo shadow-sm border border-gray-100">${prod.badge}</div>` : '';
@@ -597,13 +690,43 @@
                         <p class="font-sans text-xs text-gray-500 uppercase tracking-wide text-gray-400">${prod.cat}</p>
                         <span class="font-mono text-sm text-verde-profundo font-bold">${prod.price}</span>
                     </div>
-                    <a href="https://www.nuvemshop.com.br/" target="_blank" class="mt-auto block w-full text-center btn-shop py-3 rounded-full shadow-sm hover:shadow-md transition-all transform hover:-translate-y-1 font-mono text-xs uppercase tracking-widest">
+                    <a href="https://www.nuvemshop.com.br/" target="_blank" class="mt-auto btn-product-card">
                         Ver na Loja
                     </a>
                 </div>`;
         });
 
-        // Portfolio - Layout Masonry Refinado
+         // ODS Grid (Merged Content)
+        const odsContainer = document.getElementById('ods-grid');
+        SITE_CONTENT.ods.forEach(item => {
+            let logosHTML = '';
+            for(let i=0; i<item.logos; i++) {
+                logosHTML += `<div class="w-12 h-12 border border-white/20 rounded-md flex items-center justify-center bg-white/5 text-[8px] font-mono text-white/40 text-center p-1">Logo<br>ODS</div>`;
+            }
+
+            odsContainer.innerHTML += `
+                <div class="bg-white/5 p-8 md:p-10 rounded-card border border-white/10 hover:bg-white/10 transition-colors shadow-lg relative overflow-hidden group flex flex-col justify-between h-full reveal">
+                    <div>
+                        <div class="flex flex-col sm:flex-row justify-between items-start mb-6 gap-4">
+                            <div class="flex items-center gap-4">
+                                <div class="w-12 h-12 bg-white/10 rounded-full flex items-center justify-center text-xl border border-white/5">
+                                    ${item.icon}
+                                </div>
+                                <h3 class="font-serif text-3xl text-terracota-suave">${item.title}</h3>
+                            </div>
+                            <div class="flex gap-3">
+                                ${logosHTML}
+                            </div>
+                        </div>
+                        <p class="font-light text-sm leading-relaxed text-creme-fundo/80 mb-6">${item.text}</p>
+                    </div>
+                    <div class="border-t border-white/10 pt-4 mt-auto">
+                        <p class="font-mono text-xs opacity-50 tracking-widest">${item.codes}</p>
+                    </div>
+                </div>`;
+        });
+
+        // Portfolio
         const portContainer = document.getElementById('portfolio-grid');
         SITE_CONTENT.portfolio.forEach((item, index) => {
             const safeTitle = item.title.replace(/'/g, "\\'");
@@ -611,18 +734,18 @@
             const safeImg = item.img;
 
             portContainer.innerHTML += `
-                <div class="portfolio-item reveal group bg-white p-6 rounded-card shadow-soft hover:shadow-xl cursor-pointer border border-gray-100 flex flex-col" onclick="openProjectModal('${safeTitle}', '${safeDesc}', '${safeImg}')">
-                    <div class="relative overflow-hidden rounded-suave aspect-[4/3] mb-6">
+                <div class="portfolio-item reveal group bg-white/5 backdrop-blur-sm p-6 rounded-card shadow-soft hover:shadow-xl cursor-pointer border border-white/10 flex flex-col" onclick="openProjectModal('${safeTitle}', '${safeDesc}', '${safeImg}')">
+                    <div class="relative overflow-hidden rounded-suave aspect-[4/3] mb-6 border border-white/5">
                         <img src="${item.img}" class="w-full h-full object-cover grayscale group-hover:grayscale-0 transition-all duration-700">
-                        <div class="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-500 bg-black/10 portfolio-overlay">
-                            <div class="w-14 h-14 rounded-full bg-white flex items-center justify-center text-verde-profundo shadow-lg transform scale-75 group-hover:scale-100 transition-transform">
+                        <div class="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-500">
+                             <div class="btn-circular-project">
                                 <i data-lucide="plus" width="24"></i>
                             </div>
                         </div>
                     </div>
                     <div class="mt-auto">
-                        <h3 class="font-serif text-3xl text-verde-profundo group-hover:text-terracota-suave transition-colors">${item.title}</h3>
-                        <p class="font-sans text-sm text-gray-500 mt-3 leading-relaxed line-clamp-3">${item.desc}</p>
+                        <h3 class="font-serif text-3xl text-creme-fundo group-hover:text-terracota-suave transition-colors">${item.title}</h3>
+                        <p class="font-sans text-sm text-creme-fundo/70 mt-3 leading-relaxed line-clamp-3">${item.desc}</p>
                     </div>
                 </div>`;
         });
@@ -632,7 +755,6 @@
         renderContent();
         lucide.createIcons();
 
-        // Modal Logic
         const modal = document.getElementById('project-modal');
         const closeModal = document.getElementById('close-modal');
         
@@ -651,7 +773,7 @@
             document.body.style.overflow = 'auto';
         });
 
-        // Header Logic
+        // Navbar
         const navbar = document.getElementById('navbar');
         const logoText = document.getElementById('logo-text');
         const menuBtn = document.getElementById('menu-btn');
@@ -676,7 +798,7 @@
             }
         });
 
-        // Menu Toggle
+        // Menu Fullscreen
         const menuOverlay = document.getElementById('menu-overlay');
         const openMenu = document.getElementById('menu-btn');
         const closeMenu = document.getElementById('close-menu');
@@ -696,14 +818,14 @@
         closeMenu.onclick = () => toggleMenu(false);
         menuLinks.forEach(l => l.onclick = () => toggleMenu(false));
 
-        // Swiper with Bullets
+        // Swiper
         new Swiper('.main-carousel', {
             loop: true,
             effect: 'fade',
             fadeEffect: { crossFade: true },
             speed: 1600,
             autoplay: { delay: 6000, disableOnInteraction: false },
-            pagination: { el: '#swiper-pagination-el', clickable: true }, // Usando o novo container
+            pagination: { el: '#swiper-pagination-el', clickable: true },
             navigation: { 
                 nextEl: '.swiper-button-next-custom', 
                 prevEl: '.swiper-button-prev-custom' 
@@ -719,7 +841,6 @@
                 }
             });
         }, { threshold: 0.1 });
-        
         document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
     });
   </script>
