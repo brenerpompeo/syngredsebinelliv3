@@ -61,7 +61,7 @@
           keyframes: {
             marquee: {
               '0%': { transform: 'translateX(0)' },
-              '100%': { transform: 'translateX(-50%)' }, // Move apenas metade (o conteúdo duplicado)
+              '100%': { transform: 'translateX(-50%)' },
             },
             fadeIn: {
                 '0%': { opacity: '0', transform: 'translateY(10px)' },
@@ -81,29 +81,26 @@
         background-color: #f5e2c5; 
         color: #1c1c1c; 
         -webkit-font-smoothing: antialiased;
-        padding-top: 2rem; /* Espaço para o Sticky Banner */
+        padding-top: 2rem;
     }
 
-    /* Trava de Scroll */
     body.menu-open {
         overflow: hidden !important;
         height: 100vh;
         touch-action: none; 
     }
 
-    /* Noise Texture */
     .noise-overlay {
         position: fixed; top: 0; left: 0; width: 100%; height: 100%;
         pointer-events: none; z-index: 9999; opacity: 0.04;
         background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)'/%3E%3C/svg%3E");
     }
 
-    /* Custom Scrollbar */
     ::-webkit-scrollbar { width: 6px; }
     ::-webkit-scrollbar-track { background: #f5e2c5; }
     ::-webkit-scrollbar-thumb { background: #505916; border-radius: 10px; }
 
-    /* Badge Universal (Categorias) */
+    /* Badge Universal */
     .badge-pill {
         display: inline-block;
         padding: 0.5rem 1.5rem;
@@ -116,12 +113,11 @@
         margin-bottom: 1.5rem;
         transition: all 0.3s ease;
     }
-    /* Variações de Badge */
     .badge-light { color: #f5e2c5; border-color: rgba(245, 226, 197, 0.4); }
     .badge-dark { color: #505916; border-color: rgba(80, 89, 22, 0.4); }
     .badge-terra { color: #c4a57b; border-color: rgba(196, 165, 123, 0.4); }
 
-    /* Botão Primário */
+    /* Botões */
     .btn-primary {
         display: inline-flex; align-items: center; justify-content: center; gap: 0.5rem;
         padding: 1rem 2.5rem;
@@ -145,14 +141,12 @@
         box-shadow: 0 10px 20px -5px rgba(196, 165, 123, 0.4);
     }
 
-    /* Botão Header (RESTAURADO) */
     .btn-header-shop { transition: all 0.4s ease; }
     .header-transparent .btn-header-shop { background-color: white; color: #505916; border: 1px solid white; }
     .header-transparent .btn-header-shop:hover { background-color: #c4a57b; color: white; border-color: #c4a57b; }
     .header-scrolled .btn-header-shop { background-color: #505916; color: #f5e2c5; border: 1px solid #505916; }
     .header-scrolled .btn-header-shop:hover { background-color: #c4a57b; border-color: #c4a57b; color: white; }
 
-    /* Botão Produto */
     .btn-product-card {
         background-color: #505916; 
         color: #f5e2c5; 
@@ -170,7 +164,6 @@
         box-shadow: 0 10px 20px -5px rgba(80, 89, 22, 0.2);
     }
 
-    /* Botão Editorial (Outline) */
     .btn-editorial {
         background-color: transparent; 
         color: currentColor; 
@@ -189,7 +182,6 @@
         box-shadow: 0 10px 20px -5px rgba(209, 106, 66, 0.3);
     }
 
-    /* Swiper Custom Nav (RESTAURADO) */
     .custom-swiper-nav {
         position: absolute; bottom: 3rem; right: 3rem; z-index: 20;
         display: flex; gap: 1rem; align-items: center;
@@ -202,34 +194,26 @@
     }
     .swiper-nav-btn:hover { background: #f5e2c5; color: #505916; border-color: #f5e2c5; transform: scale(1.1); }
     
-    .swiper-pagination-custom {
-        display: flex; gap: 8px; margin-right: 1.5rem;
-    }
-    .swiper-pagination-bullet {
-        width: 8px; height: 8px; background: rgba(255,255,255,0.4); opacity: 1; border-radius: 4px; transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-    }
-    .swiper-pagination-bullet-active {
-        width: 32px; background: #c4a57b;
-    }
+    .swiper-pagination-custom { display: flex; gap: 8px; margin-right: 1.5rem; }
+    .swiper-pagination-bullet { width: 8px; height: 8px; background: rgba(255,255,255,0.4); opacity: 1; border-radius: 4px; transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1); }
+    .swiper-pagination-bullet-active { width: 32px; background: #c4a57b; }
 
-    /* Drop Cap */
     .drop-cap { float: left; font-family: 'Chewy', cursive; font-size: 5rem; line-height: 0.75; padding-right: 16px; padding-top: 4px; color: #c4a57b; }
 
-    /* Reveal */
+    .benefit-card { position: relative; overflow: hidden; transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1); }
+    .benefit-card:hover { transform: translateY(-8px); }
+    
     .reveal { opacity: 0; transform: translateY(30px); transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1); }
     .reveal.active { opacity: 1; transform: translateY(0); }
 
-    /* FAQ Details Animation */
     details > summary { list-style: none; }
     details > summary::-webkit-details-marker { display: none; }
     details[open] summary ~ * { animation: sweep .5s ease-in-out; }
     @keyframes sweep { 0% {opacity: 0; transform: translateY(-10px)} 100% {opacity: 1; transform: translateY(0)} }
 
-    /* WhatsApp */
     .whatsapp-float { position: fixed; bottom: 32px; right: 32px; z-index: 90; transition: transform 0.3s ease; }
     .whatsapp-float:hover { transform: scale(1.1); }
 
-    /* Menu Stagger */
     .menu-link { opacity: 0; transform: translateY(20px); transition: opacity 0.5s ease, transform 0.5s ease; }
     #menu-overlay.active .menu-link { opacity: 1; transform: translateY(0); }
     #menu-overlay.active .menu-link:nth-child(1) { transition-delay: 0.1s; }
@@ -240,67 +224,43 @@
     #menu-overlay.active .menu-link:nth-child(6) { transition-delay: 0.6s; }
     #menu-overlay.active .menu-link:nth-child(7) { transition-delay: 0.7s; }
 
-    /* Portfolio Redesign */
-    .portfolio-card {
-        position: relative; overflow: hidden; border-radius: 1rem;
-        transition: all 0.5s ease;
-    }
-    .portfolio-overlay {
-        background: linear-gradient(to top, rgba(80, 89, 22, 0.9), transparent);
-    }
+    .portfolio-card { position: relative; overflow: hidden; border-radius: 1rem; transition: all 0.5s ease; }
+    .portfolio-overlay { background: linear-gradient(to top, rgba(80, 89, 22, 0.9), transparent); }
     .portfolio-card:hover img { transform: scale(1.05); }
 
-    /* Botão Circular do Portfólio */
     .btn-circular-project {
-        width: 64px;
-        height: 64px;
-        border-radius: 50%;
-        background: rgba(245, 226, 197, 0.95); /* Creme */
-        color: #505916;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-        box-shadow: 0 4px 20px rgba(0,0,0,0.2);
-        cursor: pointer;
+        width: 64px; height: 64px; border-radius: 50%; background: rgba(245, 226, 197, 0.95); color: #505916;
+        display: flex; align-items: center; justify-content: center;
+        transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275); box-shadow: 0 4px 20px rgba(0,0,0,0.2); cursor: pointer;
     }
-    .portfolio-card:hover .btn-circular-project, .group:hover .btn-circular-project {
-        transform: scale(1.1) rotate(90deg);
-        background: #c4a57b;
-        color: white;
-    }
+    .portfolio-card:hover .btn-circular-project, .group:hover .btn-circular-project { transform: scale(1.1) rotate(90deg); background: #c4a57b; color: white; }
 
-    /* Roadmap Styles (CORRIGIDO: CORES E ÍCONES) */
+    /* Roadmap Styles atualizados para fundo Escuro */
     .roadmap-line {
-        position: absolute; left: 1.5rem; top: 0; bottom: 0; width: 2px; background: rgba(80, 89, 22, 0.2); z-index: 0;
+        position: absolute; left: 1.5rem; top: 0; bottom: 0; width: 2px; background: rgba(245, 226, 197, 0.2); z-index: 0;
     }
     .roadmap-step { position: relative; padding-left: 4.5rem; margin-bottom: 2.5rem; z-index: 1; }
     .roadmap-step:last-child { margin-bottom: 0; }
     .roadmap-marker {
         position: absolute; left: 0; top: 0; width: 3rem; height: 3rem;
-        border-radius: 50%; background: #ffffff; border: 2px solid #505916; /* Fundo branco para contraste */
+        border-radius: 50%; background: #f5e2c5; border: 2px solid transparent; 
         display: flex; align-items: center; justify-content: center;
         z-index: 10; color: #505916; transition: all 0.3s ease;
     }
     .roadmap-step:hover .roadmap-marker {
-        background: #505916; color: #ffffff; transform: scale(1.1);
+        background: #c4a57b; color: #fff; transform: scale(1.1);
     }
 
-    /* Collection Tabs */
     .tab-btn {
         border: 1px solid #505916; padding: 0.5rem 1.5rem; border-radius: 9999px;
         font-family: 'Roboto Mono', monospace; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.1em;
         transition: all 0.3s ease; color: #505916; background: transparent; cursor: pointer;
     }
-    .tab-btn.active, .tab-btn:hover {
-        background: #505916; color: #f5e2c5;
-    }
+    .tab-btn.active, .tab-btn:hover { background: #505916; color: #f5e2c5; }
 
-    /* FAB (Atendimento Humano) */
     .fab-container {
         position: fixed; bottom: 2rem; right: 2rem; z-index: 50;
-        display: flex; align-items: center; gap: 0.75rem;
-        flex-direction: row-reverse; /* Texto à esquerda do botão */
+        display: flex; align-items: center; gap: 0.75rem; flex-direction: row-reverse;
     }
     .fab-btn {
         width: 3.5rem; height: 3.5rem; background: #25D366; color: white;
@@ -315,7 +275,6 @@
         pointer-events: none; white-space: nowrap;
     }
     .fab-container:hover .fab-label { opacity: 1; transform: translateX(0); }
-
   </style>
 </head>
 
@@ -332,8 +291,6 @@
   <div id="navbar-container" class="fixed top-0 left-0 w-full z-50 transition-all duration-500 pt-14 px-3 sm:px-4 flex justify-center pointer-events-none">
     <header id="navbar" class="pointer-events-auto relative w-full max-w-7xl bg-white/5 backdrop-blur-md border border-white/10 rounded-full px-3 py-2 sm:px-6 sm:py-3 transition-all duration-500 shadow-sm header-transparent">
       <div class="flex justify-between items-center">
-        
-        <!-- Lado Esquerdo: Logo + Lettering -->
         <a href="#home" class="group flex items-center gap-2 sm:gap-3">
           <div class="relative overflow-hidden rounded-full w-8 h-8 sm:w-10 sm:h-10 shadow-md bg-creme-fundo flex-shrink-0 border border-white/20">
               <img src="./assets/images/logo_syngred_sebinelli.png" alt="S" class="w-full h-full object-cover">
@@ -342,19 +299,15 @@
             Syngred Sebinelli
           </span>
         </a>
-
-        <!-- Lado Direito: Loja + Menu -->
         <div class="flex items-center gap-2 sm:gap-6">
             <a href="https://www.nuvemshop.com.br/" target="_blank" class="flex items-center gap-1 sm:gap-2 btn-primary !py-1.5 !px-3 sm:!py-2 sm:!px-5 text-[8px] sm:text-[10px] btn-header-shop border-none shadow-md whitespace-nowrap">
                 <span>Loja Online</span>
                 <i data-lucide="arrow-up-right" class="w-2.5 h-2.5 sm:w-3 sm:h-3"></i>
             </a>
-            
             <button id="menu-btn" class="text-creme-fundo hover:text-terracota-suave transition-colors p-1 focus:outline-none" aria-label="Abrir Menu" aria-expanded="false">
                 <i data-lucide="menu" class="w-5 h-5 sm:w-6 sm:h-6"></i>
             </button>
         </div>
-
       </div>
     </header>
   </div>
@@ -381,7 +334,8 @@
                 <a href="#home" class="menu-link font-serif text-4xl sm:text-5xl md:text-6xl lg:text-7xl text-creme-fundo/90 hover:text-terracota-suave transition-colors">Início</a>
                 <a href="#beneficios" class="menu-link font-serif text-4xl sm:text-5xl md:text-6xl lg:text-7xl text-creme-fundo/90 hover:text-terracota-suave transition-colors">Pilares da Marca</a>
                 <a href="#manifesto" class="menu-link font-serif text-4xl sm:text-5xl md:text-6xl lg:text-7xl text-creme-fundo/90 hover:text-terracota-suave transition-colors">Manifesto</a>
-                <a href="#resto-rito" class="menu-link font-serif text-4xl sm:text-5xl md:text-6xl lg:text-7xl text-creme-fundo/90 hover:text-terracota-suave transition-colors">Ciclo do Rito</a>
+                <a href="#resto-rito" class="menu-link font-serif text-4xl sm:text-5xl md:text-6xl lg:text-7xl text-creme-fundo/90 hover:text-terracota-suave transition-colors">Conceito</a>
+                <a href="#ciclo-rito" class="menu-link font-serif text-4xl sm:text-5xl md:text-6xl lg:text-7xl text-creme-fundo/90 hover:text-terracota-suave transition-colors">Ciclo do Rito</a>
                 <a href="#produtos" class="menu-link font-serif text-4xl sm:text-5xl md:text-6xl lg:text-7xl text-creme-fundo/90 hover:text-terracota-suave transition-colors">Coleção</a>
                 <a href="#social" class="menu-link font-serif text-4xl sm:text-5xl md:text-6xl lg:text-7xl text-creme-fundo/90 hover:text-terracota-suave transition-colors">Responsabilidade</a>
                 <a href="#portfolio" class="menu-link font-serif text-4xl sm:text-5xl md:text-6xl lg:text-7xl text-creme-fundo/90 hover:text-terracota-suave transition-colors">Portfólio</a>
@@ -411,7 +365,7 @@
   </div>
 
   <main>
-    <!-- MARQUEE INFINITO (CORRIGIDO: SEM SOBREPOSIÇÃO) -->
+    <!-- MARQUEE INFINITO -->
     <div class="relative flex overflow-x-hidden bg-verde-profundo text-terracota-suave border-b border-white/5 py-2 w-full">
         <div class="animate-marquee whitespace-nowrap font-mono text-xs tracking-[0.2em] uppercase flex">
             <span class="mx-4">Vegana</span>•<span class="mx-4">Ativista</span>•<span class="mx-4">Afrofuturista</span>•<span class="mx-4">Autoral</span>•<span class="mx-4">Slow Fashion</span>•
@@ -421,14 +375,12 @@
         </div>
     </div>
 
-    <!-- 1. HERO SECTION (NAVEGAÇÃO RESTAURADA) -->
+    <!-- 1. HERO SECTION (VERDE PROFUNDO) -->
     <section id="home" class="relative h-[calc(100svh-4rem)] w-full overflow-hidden bg-verde-profundo">
       <div class="swiper main-carousel h-full w-full">
         <div class="swiper-wrapper" id="hero-wrapper">
           <!-- Slides via JS -->
         </div>
-        
-        <!-- Controles Customizados Restaurados -->
         <div class="custom-swiper-nav hidden md:flex">
             <div class="swiper-pagination-custom" id="swiper-pagination-el"></div>
             <div class="swiper-nav-btn swiper-button-prev-custom"><i data-lucide="arrow-left" width="20"></i></div>
@@ -437,7 +389,7 @@
       </div>
     </section>
 
-    <!-- 2. PILARES DA MARCA (BENEFÍCIOS) -->
+    <!-- 2. PILARES DA MARCA (CREME) -->
     <section id="beneficios" class="bg-creme-fundo py-24 md:py-32 px-6 md:px-12 relative">
         <div class="max-w-7xl mx-auto">
             <div class="flex flex-col md:flex-row justify-between items-center md:items-end mb-20 reveal text-center md:text-left">
@@ -456,12 +408,11 @@
         </div>
     </section>
 
-    <!-- 3. MANIFESTO -->
+    <!-- 3. MANIFESTO (VERDE PROFUNDO) -->
     <section id="manifesto" class="bg-verde-profundo py-32 px-6 text-center text-creme-fundo relative overflow-hidden">
         <div class="absolute inset-0 opacity-10 bg-[url('https://www.transparenttextures.com/patterns/cubes.png')]"></div>
         <div class="max-w-4xl mx-auto reveal relative z-10">
             <span class="badge-pill badge-light mb-12">Manifesto Autoral</span>
-            
             <div class="space-y-10 font-serif text-2xl md:text-4xl leading-relaxed">
                 <p>"Meu corpo não é água mansa.<br>É rio quebra-mar.<br>É vertigem de asfalto.<br>É a água que desagua e flui."</p>
                 <div class="w-24 h-px bg-white/20 mx-auto"></div>
@@ -482,7 +433,6 @@
                     Meu manifesto é sem métrica, fluidez brutal que cria a própria força de existir.
                 </p>
             </div>
-
             <div class="mt-16">
                 <a href="#sobre" class="btn-primary border-creme-fundo !bg-transparent !text-creme-fundo hover:!bg-creme-fundo hover:!text-verde-profundo hover:!border-creme-fundo w-full md:w-auto">
                     Conheça a Criadora
@@ -491,8 +441,8 @@
         </div>
     </section>
 
-    <!-- 4. RESTO É RITO (CONCEITO RESTAURADO) -->
-    <section id="resto-rito" class="bg-creme-fundo py-24 md:py-40 px-6 md:px-12 relative border-t border-verde-profundo/10">
+    <!-- 4. RESTO É RITO (CONCEITO - AGORA CLARO: CREME) -->
+    <section id="resto-rito" class="bg-gradient-to-b from-creme-fundo to-white py-24 md:py-40 px-6 md:px-12 relative">
         <div class="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-16 md:gap-32 items-center reveal relative z-10">
             <div class="order-2 lg:order-1 text-center md:text-left">
                 <span class="badge-pill badge-dark mb-6 mx-auto md:mx-0">Conceito</span>
@@ -505,7 +455,6 @@
                     <p>Nesta coleção, proponho a alquimia: <strong>o resto vira rito</strong>. Cascas de cebola, caroços de abacate e urucum deixam de ser lixo para se tornarem pigmento vivo.</p>
                     <p>A moda se reconecta à terra. O que vestimos nutre o solo ao fim de seu ciclo. Nada se perde, tudo se transforma em memória e cor.</p>
                 </div>
-                
                 <div class="pt-8 flex justify-center md:justify-start">
                     <a href="#ciclo-rito" class="btn-editorial border-verde-profundo text-verde-profundo hover:border-terracota-suave hover:bg-terracota-suave hover:text-white w-full md:w-auto">
                         Ver o Ciclo
@@ -530,16 +479,17 @@
         </div>
     </section>
 
-    <!-- 5. CICLO DO RITO (ROADMAP DA PEÇA - CORRIGIDO) -->
-    <section id="ciclo-rito" class="bg-creme-fundo py-24 md:py-32 px-6 md:px-12 relative border-t border-verde-profundo/10">
+    <!-- 5. CICLO DO RITO (ROADMAP - AGORA ESCURO: VERDE PROFUNDO) -->
+    <section id="ciclo-rito" class="bg-verde-profundo py-24 md:py-32 px-6 md:px-12 relative text-creme-fundo border-t border-white/5">
         <div class="max-w-7xl mx-auto">
             <div class="flex flex-col md:flex-row justify-between items-center md:items-end mb-20 reveal text-center md:text-left">
                 <div class="mb-8 md:mb-0">
-                    <span class="badge-pill badge-dark mx-auto md:mx-0">Processos</span>
-                    <h2 class="font-serif text-5xl md:text-7xl leading-none text-verde-profundo">Ciclo do<br><span class="text-terracota-suave italic">Rito</span></h2>
+                    <span class="badge-pill badge-light mx-auto md:mx-0">Processos</span>
+                    <h2 class="font-serif text-5xl md:text-7xl leading-none">Ciclo do<br><span class="text-terracota-suave italic">Rito</span></h2>
                 </div>
                 <div class="max-w-sm text-center md:text-left">
-                    <p class="font-sans font-light text-texto/80 mb-6">Do resíduo à obra de arte. Conheça o caminho de regeneração que cada peça percorre.</p>
+                    <p class="font-sans font-light text-creme-fundo/80 mb-6">Do resíduo à obra de arte. Conheça o caminho de regeneração que cada peça percorre.</p>
+                    <a href="#produtos" class="btn-primary w-full md:w-auto border-white/20 bg-white/10 hover:bg-creme-fundo hover:text-verde-profundo">Explorar Coleção</a>
                 </div>
             </div>
             
@@ -550,7 +500,7 @@
         </div>
     </section>
 
-    <!-- 6. LOJA (COM ABAS E PRODUTOS CORRIGIDOS) -->
+    <!-- 6. LOJA (BRANCO/NEUTRO) -->
     <section id="produtos" class="bg-white py-24 md:py-32 px-6 md:px-12">
         <div class="max-w-7xl mx-auto">
             <div class="text-center mb-12 reveal">
@@ -578,7 +528,7 @@
         </div>
     </section>
 
-    <!-- 7. RESPONSABILIDADE SOCIAL (ÍCONES CORRIGIDOS) -->
+    <!-- 7. RESPONSABILIDADE SOCIAL (VERDE PROFUNDO) -->
     <section id="social" class="bg-verde-profundo py-24 md:py-32 px-6 md:px-12 relative overflow-hidden text-creme-fundo border-t border-white/5">
         <div class="max-w-7xl mx-auto relative z-10">
             <div class="mb-16 md:mb-24 text-center reveal">
@@ -616,8 +566,8 @@
         </div>
     </section>
 
-    <!-- 8. PORTFÓLIO (LAYOUT ASSIMÉTRICO) -->
-    <section id="portfolio" class="py-32 bg-creme-fundo relative">
+    <!-- 8. PORTFÓLIO (CREME COM GRADIENTE) -->
+    <section id="portfolio" class="bg-gradient-to-t from-creme-fundo to-white py-32 relative">
         <div class="max-w-7xl mx-auto px-6 md:px-12 relative z-10">
             <div class="flex flex-col md:flex-row justify-between items-center md:items-end mb-20 reveal text-center md:text-left">
                 <div class="mb-6 md:mb-0">
@@ -634,7 +584,7 @@
         </div>
     </section>
 
-    <!-- 9. BIO SYNGRED -->
+    <!-- 9. BIO SYNGRED (BRANCO) -->
     <section id="sobre" class="bg-white py-24 md:py-32 px-6 md:px-12">
         <div class="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-16 items-center reveal">
             <div class="lg:col-span-5 text-center lg:text-left">
@@ -682,7 +632,7 @@
         </div>
     </section>
 
-    <!-- 10. FAQ -->
+    <!-- 10. FAQ (CREME) -->
     <section id="faq" class="bg-creme-fundo py-24 md:py-32 px-6 md:px-12 relative border-t border-verde-musgo/10">
         <div class="max-w-3xl mx-auto">
             <div class="text-center mb-16 reveal">
@@ -695,7 +645,7 @@
         </div>
     </section>
 
-    <!-- 11. NEWSLETTER -->
+    <!-- 11. NEWSLETTER (TERRACOTA) -->
     <section id="newsletter" class="bg-terracota-news py-24 px-6 relative overflow-hidden">
         <div class="max-w-3xl mx-auto text-center reveal relative z-10">
             <span class="badge-pill badge-light border-white/40 mx-auto">Fique por dentro</span>
@@ -734,6 +684,7 @@
                         <li><a href="#home" class="hover:text-terracota-suave transition-colors">Início</a></li>
                         <li><a href="#beneficios" class="hover:text-terracota-suave transition-colors">Minha Essência</a></li>
                         <li><a href="#resto-rito" class="hover:text-terracota-suave transition-colors">Conceito</a></li>
+                        <li><a href="#ciclo-rito" class="hover:text-terracota-suave transition-colors">Ciclo do Rito</a></li>
                         <li><a href="#produtos" class="hover:text-terracota-suave transition-colors">Coleção Rito</a></li>
                         <li><a href="#social" class="hover:text-terracota-suave transition-colors">Responsabilidade</a></li>
                         <li><a href="#faq" class="hover:text-terracota-suave transition-colors">FAQ</a></li>
@@ -802,15 +753,15 @@
             { icon: "megaphone", title: "Ativismo", text: "Moda é ato político. Nossas tramas denunciam, educam e financiam a luta antirracista e ambiental." },
             { icon: "leaf", title: "100% Vegana", text: "Cruelty-free por essência. Não utilizamos nada de origem animal, priorizando biomateriais e o respeito à vida." }
         ],
-        // Roadmap (Timeline - Ícones Lucide Verificados)
+        // Roadmap (Timeline - Adaptado para fundo escuro)
         roadmap: [
             { icon: "trash-2", title: "Coleta de Resíduos", text: "Cascas de cebola, caroços e sobras orgânicas são resgatados de feiras e cozinhas locais." },
             { icon: "flask-conical", title: "Extração do Pigmento", text: "Através de fervura lenta e alquimia natural, extraímos cores vivas sem químicos tóxicos." },
             { icon: "droplets", title: "Tingimento Natural", text: "Fibras orgânicas são banhadas nos pigmentos, absorvendo tons únicos e irrepetíveis." },
-            { icon: "edit-3", title: "Trama & Crochê", text: "Cada peça é tecida manualmente, ponto a ponto, respeitando o tempo do fazer." }, // Icone corrigido
+            { icon: "edit-3", title: "Trama & Crochê", text: "Cada peça é tecida manualmente, ponto a ponto, respeitando o tempo do fazer." }, 
             { icon: "shirt", title: "Produto Final", text: "Uma obra de arte vestível, carregada de história, regeneração e propósito." }
         ],
-        // Produtos Expandidos para preencher abas
+        // Produtos Expandidos
         products: [
             { name: "Vestido Terra", cat: "Tingimento Natural", price: "R$ 420", img: "./assets/images/product-1.jpg", badge: "Novo" },
             { name: "Bolsa Trama", cat: "Upcycling", price: "R$ 280", img: "./assets/images/product-2.jpg", badge: "" },
@@ -904,18 +855,18 @@
                 </div>`;
         });
 
-        // Roadmap (Timeline - FIXED)
+        // Roadmap (Timeline - Adaptação para Fundo Escuro)
         const roadmapContainer = document.getElementById('roadmap-container');
         let roadmapHTML = '<div class="roadmap-line"></div>';
         SITE_CONTENT.roadmap.forEach((step, index) => {
             roadmapHTML += `
                 <div class="roadmap-step reveal flex items-start gap-6">
-                    <div class="roadmap-marker bg-white border-verde-profundo">
-                        <i data-lucide="${step.icon}" width="20" class="text-verde-profundo"></i>
+                    <div class="roadmap-marker bg-creme-fundo border-transparent text-verde-profundo">
+                        <i data-lucide="${step.icon}" width="20"></i>
                     </div>
                     <div class="pt-2 pb-8">
-                        <h3 class="font-serif text-2xl text-verde-profundo mb-2">${step.title}</h3>
-                        <p class="font-sans text-sm text-texto/80 leading-relaxed max-w-md">${step.text}</p>
+                        <h3 class="font-serif text-2xl text-creme-fundo mb-2">${step.title}</h3>
+                        <p class="font-sans text-sm text-creme-fundo/80 leading-relaxed max-w-md">${step.text}</p>
                     </div>
                 </div>
             `;
@@ -953,10 +904,10 @@
                         </a>
                     </div>`;
             });
-            lucide.createIcons(); // Re-init icons for new elements
+            lucide.createIcons(); 
         };
         
-        renderProducts(); // Initial Render
+        renderProducts(); 
 
         // Tab Logic
         const tabs = document.querySelectorAll('.tab-btn');
@@ -968,7 +919,7 @@
             });
         });
 
-         // ODS Grid (Updated Icons & Responsiveness)
+         // ODS Grid
         const odsContainer = document.getElementById('ods-grid');
         SITE_CONTENT.ods.forEach(item => {
             let logosHTML = '';
@@ -1005,7 +956,6 @@
             const safeDesc = item.desc.replace(/'/g, "\\'");
             const safeImg = item.img;
 
-            // Primeiro item = Destaque Grande (8 colunas)
             if(index === 0) {
                 portContainer.innerHTML += `
                 <div class="lg:col-span-8 relative h-[500px] md:h-[600px] rounded-card overflow-hidden group cursor-pointer portfolio-card" onclick="openProjectModal('${safeTitle}', '${safeDesc}', '${safeImg}')">
@@ -1021,7 +971,6 @@
                     </div>
                 </div>`;
             } else {
-                // Outros itens = Menores (4 colunas)
                 portContainer.innerHTML += `
                 <div class="lg:col-span-4 flex flex-col h-full bg-white p-6 rounded-card shadow-soft hover:shadow-xl transition-all cursor-pointer group" onclick="openProjectModal('${safeTitle}', '${safeDesc}', '${safeImg}')">
                     <div class="relative overflow-hidden rounded-suave aspect-square mb-6">
