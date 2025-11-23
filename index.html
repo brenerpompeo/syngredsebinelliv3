@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Syngred Sebinelli - Moda Autoral, Design Sustentável e Ativismo. Uma coleção onde o resto vira rito.">
+  <meta name="description" content="Syngred Sebinelli - Moda Autoral, Vegana, Ativista e Afrofuturista. Uma coleção onde o resto vira rito.">
   <meta name="theme-color" content="#505916">
   <title>Syngred Sebinelli | Design como Rito</title>
   
@@ -53,6 +53,20 @@
           },
           transitionTimingFunction: {
             'out-expo': 'cubic-bezier(0.16, 1, 0.3, 1)',
+          },
+          animation: {
+            'marquee': 'marquee 30s linear infinite',
+            'fade-in': 'fadeIn 0.5s ease-out forwards',
+          },
+          keyframes: {
+            marquee: {
+              '0%': { transform: 'translateX(0)' },
+              '100%': { transform: 'translateX(-50%)' }, // Move apenas metade (o conteúdo duplicado)
+            },
+            fadeIn: {
+                '0%': { opacity: '0', transform: 'translateY(10px)' },
+                '100%': { opacity: '1', transform: 'translateY(0)' },
+            }
           }
         },
       },
@@ -67,6 +81,7 @@
         background-color: #f5e2c5; 
         color: #1c1c1c; 
         -webkit-font-smoothing: antialiased;
+        padding-top: 2rem; /* Espaço para o Sticky Banner */
     }
 
     /* Trava de Scroll */
@@ -200,10 +215,6 @@
     /* Drop Cap */
     .drop-cap { float: left; font-family: 'Chewy', cursive; font-size: 5rem; line-height: 0.75; padding-right: 16px; padding-top: 4px; color: #c4a57b; }
 
-    /* Cards */
-    .benefit-card { position: relative; overflow: hidden; transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1); }
-    .benefit-card:hover { transform: translateY(-8px); }
-    
     /* Reveal */
     .reveal { opacity: 0; transform: translateY(30px); transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1); }
     .reveal.active { opacity: 1; transform: translateY(0); }
@@ -259,14 +270,66 @@
         color: white;
     }
 
+    /* Roadmap Styles (CORRIGIDO: CORES E ÍCONES) */
+    .roadmap-line {
+        position: absolute; left: 1.5rem; top: 0; bottom: 0; width: 2px; background: rgba(80, 89, 22, 0.2); z-index: 0;
+    }
+    .roadmap-step { position: relative; padding-left: 4.5rem; margin-bottom: 2.5rem; z-index: 1; }
+    .roadmap-step:last-child { margin-bottom: 0; }
+    .roadmap-marker {
+        position: absolute; left: 0; top: 0; width: 3rem; height: 3rem;
+        border-radius: 50%; background: #ffffff; border: 2px solid #505916; /* Fundo branco para contraste */
+        display: flex; align-items: center; justify-content: center;
+        z-index: 10; color: #505916; transition: all 0.3s ease;
+    }
+    .roadmap-step:hover .roadmap-marker {
+        background: #505916; color: #ffffff; transform: scale(1.1);
+    }
+
+    /* Collection Tabs */
+    .tab-btn {
+        border: 1px solid #505916; padding: 0.5rem 1.5rem; border-radius: 9999px;
+        font-family: 'Roboto Mono', monospace; font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.1em;
+        transition: all 0.3s ease; color: #505916; background: transparent; cursor: pointer;
+    }
+    .tab-btn.active, .tab-btn:hover {
+        background: #505916; color: #f5e2c5;
+    }
+
+    /* FAB (Atendimento Humano) */
+    .fab-container {
+        position: fixed; bottom: 2rem; right: 2rem; z-index: 50;
+        display: flex; align-items: center; gap: 0.75rem;
+        flex-direction: row-reverse; /* Texto à esquerda do botão */
+    }
+    .fab-btn {
+        width: 3.5rem; height: 3.5rem; background: #25D366; color: white;
+        border-radius: 50%; display: flex; align-items: center; justify-content: center;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.15); transition: transform 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    }
+    .fab-btn:hover { transform: scale(1.1); }
+    .fab-label {
+        background: white; color: #1c1c1c; padding: 0.5rem 1rem; border-radius: 0.5rem;
+        font-size: 0.75rem; font-weight: 500; box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+        opacity: 0; transform: translateX(10px); transition: all 0.3s ease;
+        pointer-events: none; white-space: nowrap;
+    }
+    .fab-container:hover .fab-label { opacity: 1; transform: translateX(0); }
+
   </style>
 </head>
 
 <body class="antialiased relative transition-colors duration-300">
   <div class="noise-overlay"></div>
 
+  <!-- STICKY LAUNCH BAR -->
+  <div id="launch-bar" class="fixed top-0 left-0 w-full z-[60] bg-terracota-news text-white text-center py-2 px-4 font-mono text-[10px] md:text-xs uppercase tracking-widest flex justify-center items-center gap-2 shadow-md">
+      <span>📦 Pedidos da semana encerram em:</span>
+      <span id="countdown" class="font-bold bg-white/20 px-2 py-0.5 rounded text-white">00:00:00</span>
+  </div>
+
   <!-- HEADER (RESPONSIVO 360º) -->
-  <div id="navbar-container" class="fixed top-0 left-0 w-full z-50 transition-all duration-500 pt-4 px-3 sm:px-4 flex justify-center pointer-events-none">
+  <div id="navbar-container" class="fixed top-0 left-0 w-full z-50 transition-all duration-500 pt-14 px-3 sm:px-4 flex justify-center pointer-events-none">
     <header id="navbar" class="pointer-events-auto relative w-full max-w-7xl bg-white/5 backdrop-blur-md border border-white/10 rounded-full px-3 py-2 sm:px-6 sm:py-3 transition-all duration-500 shadow-sm header-transparent">
       <div class="flex justify-between items-center">
         
@@ -275,7 +338,6 @@
           <div class="relative overflow-hidden rounded-full w-8 h-8 sm:w-10 sm:h-10 shadow-md bg-creme-fundo flex-shrink-0 border border-white/20">
               <img src="./assets/images/logo_syngred_sebinelli.png" alt="S" class="w-full h-full object-cover">
           </div>
-          <!-- Lettering com tamanho responsivo (text-sm mobile -> text-xl desktop) e sem quebra de linha -->
           <span class="font-serif text-sm sm:text-lg md:text-xl text-creme-fundo transition-colors duration-500 block tracking-wide whitespace-nowrap" id="logo-text">
             Syngred Sebinelli
           </span>
@@ -283,7 +345,6 @@
 
         <!-- Lado Direito: Loja + Menu -->
         <div class="flex items-center gap-2 sm:gap-6">
-            <!-- Botão Loja Visível Sempre (Flex) - Ajuste de fonte e padding para mobile -->
             <a href="https://www.nuvemshop.com.br/" target="_blank" class="flex items-center gap-1 sm:gap-2 btn-primary !py-1.5 !px-3 sm:!py-2 sm:!px-5 text-[8px] sm:text-[10px] btn-header-shop border-none shadow-md whitespace-nowrap">
                 <span>Loja Online</span>
                 <i data-lucide="arrow-up-right" class="w-2.5 h-2.5 sm:w-3 sm:h-3"></i>
@@ -318,7 +379,9 @@
         <nav class="w-full flex flex-col items-center justify-center flex-grow py-8">
             <div id="menu-list" class="flex flex-col text-center space-y-4 sm:space-y-6 mb-10">
                 <a href="#home" class="menu-link font-serif text-4xl sm:text-5xl md:text-6xl lg:text-7xl text-creme-fundo/90 hover:text-terracota-suave transition-colors">Início</a>
+                <a href="#beneficios" class="menu-link font-serif text-4xl sm:text-5xl md:text-6xl lg:text-7xl text-creme-fundo/90 hover:text-terracota-suave transition-colors">Pilares da Marca</a>
                 <a href="#manifesto" class="menu-link font-serif text-4xl sm:text-5xl md:text-6xl lg:text-7xl text-creme-fundo/90 hover:text-terracota-suave transition-colors">Manifesto</a>
+                <a href="#resto-rito" class="menu-link font-serif text-4xl sm:text-5xl md:text-6xl lg:text-7xl text-creme-fundo/90 hover:text-terracota-suave transition-colors">Ciclo do Rito</a>
                 <a href="#produtos" class="menu-link font-serif text-4xl sm:text-5xl md:text-6xl lg:text-7xl text-creme-fundo/90 hover:text-terracota-suave transition-colors">Coleção</a>
                 <a href="#social" class="menu-link font-serif text-4xl sm:text-5xl md:text-6xl lg:text-7xl text-creme-fundo/90 hover:text-terracota-suave transition-colors">Responsabilidade</a>
                 <a href="#portfolio" class="menu-link font-serif text-4xl sm:text-5xl md:text-6xl lg:text-7xl text-creme-fundo/90 hover:text-terracota-suave transition-colors">Portfólio</a>
@@ -348,8 +411,18 @@
   </div>
 
   <main>
+    <!-- MARQUEE INFINITO (CORRIGIDO: SEM SOBREPOSIÇÃO) -->
+    <div class="relative flex overflow-x-hidden bg-verde-profundo text-terracota-suave border-b border-white/5 py-2 w-full">
+        <div class="animate-marquee whitespace-nowrap font-mono text-xs tracking-[0.2em] uppercase flex">
+            <span class="mx-4">Vegana</span>•<span class="mx-4">Ativista</span>•<span class="mx-4">Afrofuturista</span>•<span class="mx-4">Autoral</span>•<span class="mx-4">Slow Fashion</span>•
+            <span class="mx-4">Vegana</span>•<span class="mx-4">Ativista</span>•<span class="mx-4">Afrofuturista</span>•<span class="mx-4">Autoral</span>•<span class="mx-4">Slow Fashion</span>•
+            <span class="mx-4">Vegana</span>•<span class="mx-4">Ativista</span>•<span class="mx-4">Afrofuturista</span>•<span class="mx-4">Autoral</span>•<span class="mx-4">Slow Fashion</span>•
+            <span class="mx-4">Vegana</span>•<span class="mx-4">Ativista</span>•<span class="mx-4">Afrofuturista</span>•<span class="mx-4">Autoral</span>•<span class="mx-4">Slow Fashion</span>•
+        </div>
+    </div>
+
     <!-- 1. HERO SECTION (NAVEGAÇÃO RESTAURADA) -->
-    <section id="home" class="relative h-[100svh] w-full overflow-hidden bg-verde-profundo">
+    <section id="home" class="relative h-[calc(100svh-4rem)] w-full overflow-hidden bg-verde-profundo">
       <div class="swiper main-carousel h-full w-full">
         <div class="swiper-wrapper" id="hero-wrapper">
           <!-- Slides via JS -->
@@ -364,17 +437,17 @@
       </div>
     </section>
 
-    <!-- 2. MINHA ESSÊNCIA -->
+    <!-- 2. PILARES DA MARCA (BENEFÍCIOS) -->
     <section id="beneficios" class="bg-creme-fundo py-24 md:py-32 px-6 md:px-12 relative">
         <div class="max-w-7xl mx-auto">
             <div class="flex flex-col md:flex-row justify-between items-center md:items-end mb-20 reveal text-center md:text-left">
                 <div class="mb-8 md:mb-0">
-                    <span class="badge-pill badge-dark mx-auto md:mx-0">Processos</span>
-                    <h2 class="font-serif text-5xl md:text-7xl text-verde-profundo leading-none">Minha<br><span class="text-terracota-suave italic">Essência</span></h2>
+                    <span class="badge-pill badge-dark mx-auto md:mx-0">Identidade</span>
+                    <h2 class="font-serif text-5xl md:text-7xl text-verde-profundo leading-none">Pilares da<br><span class="text-terracota-suave italic">Marca</span></h2>
                 </div>
                 <div class="max-w-sm text-center md:text-left">
-                    <p class="font-sans font-light text-texto/80 mb-6">Três pilares fundamentais que sustentam cada peça criada no ateliê.</p>
-                    <a href="#sobre" class="btn-primary w-full md:w-auto">Conheça os Processos</a>
+                    <p class="font-sans font-light text-texto/80 mb-6">Três fundamentos inegociáveis que guiam cada criação e decisão do ateliê.</p>
+                    <a href="#sobre" class="btn-primary w-full md:w-auto">Conheça a Designer</a>
                 </div>
             </div>
             <div class="grid grid-cols-1 md:grid-cols-3 gap-6 md:gap-8" id="benefits-grid">
@@ -418,24 +491,24 @@
         </div>
     </section>
 
-    <!-- 4. RESTO É RITO -->
-    <section id="resto-rito" class="bg-verde-profundo py-24 md:py-40 px-6 md:px-12 text-creme-fundo relative overflow-hidden border-t border-white/5">
+    <!-- 4. RESTO É RITO (CONCEITO RESTAURADO) -->
+    <section id="resto-rito" class="bg-creme-fundo py-24 md:py-40 px-6 md:px-12 relative border-t border-verde-profundo/10">
         <div class="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-2 gap-16 md:gap-32 items-center reveal relative z-10">
             <div class="order-2 lg:order-1 text-center md:text-left">
-                <span class="badge-pill badge-light mb-6 mx-auto md:mx-0">Conceito</span>
-                <h2 class="font-serif text-5xl md:text-7xl leading-[0.9] mb-8">
+                <span class="badge-pill badge-dark mb-6 mx-auto md:mx-0">Conceito</span>
+                <h2 class="font-serif text-5xl md:text-7xl leading-[0.9] mb-8 text-verde-profundo">
                     Resto é <br><span class="text-terracota-suave italic">Rito</span>.
                 </h2>
                 <div class="w-24 h-0.5 bg-terracota-suave mb-10 mx-auto md:mx-0"></div>
-                <div class="font-sans font-light text-lg text-creme-fundo/80 space-y-6 leading-relaxed text-justify">
+                <div class="font-sans font-light text-lg text-texto/80 space-y-6 leading-relaxed text-justify">
                     <p><span class="drop-cap">O</span> Brasil enfrenta um paradoxo: a fome convive com o desperdício. Toneladas de alimentos são descartadas enquanto a soberania alimentar fragiliza.</p>
                     <p>Nesta coleção, proponho a alquimia: <strong>o resto vira rito</strong>. Cascas de cebola, caroços de abacate e urucum deixam de ser lixo para se tornarem pigmento vivo.</p>
                     <p>A moda se reconecta à terra. O que vestimos nutre o solo ao fim de seu ciclo. Nada se perde, tudo se transforma em memória e cor.</p>
                 </div>
                 
                 <div class="pt-8 flex justify-center md:justify-start">
-                    <a href="#manifesto" class="btn-editorial text-white w-full md:w-auto">
-                        Entenda o Conceito
+                    <a href="#ciclo-rito" class="btn-editorial border-verde-profundo text-verde-profundo hover:border-terracota-suave hover:bg-terracota-suave hover:text-white w-full md:w-auto">
+                        Ver o Ciclo
                     </a>
                 </div>
             </div>
@@ -457,12 +530,40 @@
         </div>
     </section>
 
-    <!-- 5. LOJA -->
+    <!-- 5. CICLO DO RITO (ROADMAP DA PEÇA - CORRIGIDO) -->
+    <section id="ciclo-rito" class="bg-creme-fundo py-24 md:py-32 px-6 md:px-12 relative border-t border-verde-profundo/10">
+        <div class="max-w-7xl mx-auto">
+            <div class="flex flex-col md:flex-row justify-between items-center md:items-end mb-20 reveal text-center md:text-left">
+                <div class="mb-8 md:mb-0">
+                    <span class="badge-pill badge-dark mx-auto md:mx-0">Processos</span>
+                    <h2 class="font-serif text-5xl md:text-7xl leading-none text-verde-profundo">Ciclo do<br><span class="text-terracota-suave italic">Rito</span></h2>
+                </div>
+                <div class="max-w-sm text-center md:text-left">
+                    <p class="font-sans font-light text-texto/80 mb-6">Do resíduo à obra de arte. Conheça o caminho de regeneração que cada peça percorre.</p>
+                </div>
+            </div>
+            
+            <!-- Roadmap Container (Timeline Vertical) -->
+            <div class="relative max-w-3xl mx-auto pl-4 md:pl-0 pt-4" id="roadmap-container">
+                <!-- JS Injected Steps -->
+            </div>
+        </div>
+    </section>
+
+    <!-- 6. LOJA (COM ABAS E PRODUTOS CORRIGIDOS) -->
     <section id="produtos" class="bg-white py-24 md:py-32 px-6 md:px-12">
         <div class="max-w-7xl mx-auto">
-            <div class="text-center mb-24 reveal">
+            <div class="text-center mb-12 reveal">
                 <span class="badge-pill badge-dark mx-auto">Shop Online</span>
-                <h2 class="font-serif text-5xl md:text-7xl text-verde-profundo">Coleção Rito</h2>
+                <h2 class="font-serif text-5xl md:text-7xl text-verde-profundo mb-8">Coleção Rito</h2>
+                
+                <!-- ABAS DE FILTRO -->
+                <div class="flex flex-wrap justify-center gap-3 md:gap-4" id="collection-tabs">
+                    <button class="tab-btn active" data-filter="all">Todos</button>
+                    <button class="tab-btn" data-filter="Tingimento Natural">Tingimento Natural</button>
+                    <button class="tab-btn" data-filter="Biomateriais">Biomateriais</button>
+                    <button class="tab-btn" data-filter="Upcycling">Upcycling</button>
+                </div>
             </div>
             
             <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-x-8 gap-y-16" id="products-grid">
@@ -477,7 +578,7 @@
         </div>
     </section>
 
-    <!-- 6. RESPONSABILIDADE SOCIAL -->
+    <!-- 7. RESPONSABILIDADE SOCIAL (ÍCONES CORRIGIDOS) -->
     <section id="social" class="bg-verde-profundo py-24 md:py-32 px-6 md:px-12 relative overflow-hidden text-creme-fundo border-t border-white/5">
         <div class="max-w-7xl mx-auto relative z-10">
             <div class="mb-16 md:mb-24 text-center reveal">
@@ -515,7 +616,7 @@
         </div>
     </section>
 
-    <!-- 7. PORTFÓLIO REDESIGN (Colaborações) -->
+    <!-- 8. PORTFÓLIO (LAYOUT ASSIMÉTRICO) -->
     <section id="portfolio" class="py-32 bg-creme-fundo relative">
         <div class="max-w-7xl mx-auto px-6 md:px-12 relative z-10">
             <div class="flex flex-col md:flex-row justify-between items-center md:items-end mb-20 reveal text-center md:text-left">
@@ -528,12 +629,12 @@
 
             <!-- Grid Assimétrico -->
             <div class="grid grid-cols-1 lg:grid-cols-12 gap-8" id="portfolio-container">
-                <!-- Conteúdo injetado via JS com layout assimétrico -->
+                <!-- Conteúdo injetado via JS -->
             </div>
         </div>
     </section>
 
-    <!-- 8. BIO SYNGRED -->
+    <!-- 9. BIO SYNGRED -->
     <section id="sobre" class="bg-white py-24 md:py-32 px-6 md:px-12">
         <div class="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-12 gap-16 items-center reveal">
             <div class="lg:col-span-5 text-center lg:text-left">
@@ -581,7 +682,7 @@
         </div>
     </section>
 
-    <!-- 9. FAQ -->
+    <!-- 10. FAQ -->
     <section id="faq" class="bg-creme-fundo py-24 md:py-32 px-6 md:px-12 relative border-t border-verde-musgo/10">
         <div class="max-w-3xl mx-auto">
             <div class="text-center mb-16 reveal">
@@ -594,7 +695,7 @@
         </div>
     </section>
 
-    <!-- 10. NEWSLETTER -->
+    <!-- 11. NEWSLETTER -->
     <section id="newsletter" class="bg-terracota-news py-24 px-6 relative overflow-hidden">
         <div class="max-w-3xl mx-auto text-center reveal relative z-10">
             <span class="badge-pill badge-light border-white/40 mx-auto">Fique por dentro</span>
@@ -612,7 +713,7 @@
         </div>
     </section>
 
-    <!-- 11. FOOTER -->
+    <!-- 12. FOOTER -->
     <footer class="bg-verde-profundo text-creme-fundo pt-24 pb-10 px-6 md:px-12 border-t border-white/10">
         <div class="max-w-7xl mx-auto">
             <div class="grid grid-cols-1 md:grid-cols-4 gap-12 mb-20 text-center md:text-left">
@@ -658,13 +759,13 @@
         </div>
     </footer>
 
-    <!-- WHATSAPP & MODAL -->
-    <a href="https://wa.me/5519999999999" target="_blank" class="whatsapp-float group">
-        <div class="w-14 h-14 bg-[#25D366] rounded-full flex items-center justify-center shadow-lg text-white relative overflow-hidden">
-            <div class="absolute inset-0 bg-white/20 rounded-full animate-ping opacity-75"></div>
-            <svg viewBox="0 0 24 24" width="28" height="28" fill="currentColor" class="relative z-10"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
-        </div>
-    </a>
+    <!-- FAB: WHATSAPP COM TOOLTIP -->
+    <div class="fab-container group">
+        <a href="https://wa.me/5519999999999" target="_blank" class="fab-btn">
+            <i data-lucide="message-circle" width="24"></i>
+        </a>
+        <div class="fab-label">Fale com a Designer</div>
+    </div>
 
     <div id="project-modal" class="fixed inset-0 z-[100] hidden transition-opacity duration-500 opacity-0 bg-black/80 backdrop-blur-sm flex items-center justify-center p-4">
         <div class="bg-creme-fundo w-full max-w-5xl max-h-[90vh] overflow-y-auto rounded-card shadow-2xl relative flex flex-col md:flex-row overflow-hidden" id="modal-content">
@@ -690,46 +791,60 @@
   <script>
     const SITE_CONTENT = {
         hero: [
-            { image: "./assets/images/hero-1.jpg", tag: "Coleção 2025", title: "Tecer o Tempo.", desc: "Onde a técnica ancestral do crochê encontra o design contemporâneo.", btn: "Ver Coleção", link: "#produtos" },
-            { image: "./assets/images/hero-2.jpg", tag: "Processo", title: "A Cor da Terra.", desc: "Tingimento botânico extraído de resíduos. Uma paleta viva, única e livre.", btn: "Conhecer", link: "#beneficios" },
-            { image: "./assets/images/hero-3.jpg", tag: "Conceito", title: "Resto é Rito.", desc: "O desperdício se torna matéria-prima de renascimento. O resto vira arte.", btn: "Manifesto", link: "#manifesto" },
+            { image: "./assets/images/hero-1.jpg", tag: "Coleção 2025", title: "Tecer o Tempo.", desc: "Onde a técnica ancestral do crochê encontra o design contemporâneo. Uma ode ao Afrofuturismo e à regeneração.", btn: "Ver Coleção", link: "#produtos" },
+            { image: "./assets/images/hero-2.jpg", tag: "Processo", title: "A Cor da Terra.", desc: "Tingimento botânico extraído de resíduos. Uma paleta viva, única e livre de crueldade.", btn: "Conhecer", link: "#beneficios" },
+            { image: "./assets/images/hero-3.jpg", tag: "Conceito", title: "Resto é Rito.", desc: "O desperdício se torna matéria-prima de renascimento. Onde o que sobra vira arte.", btn: "Manifesto", link: "#manifesto" },
             { image: "./assets/images/hero-4.jpg", tag: "Autoral", title: "Vista Verdade.", desc: "Edições limitadas e peças únicas. Moda como ato político e poético.", btn: "Shop", link: "#produtos" }
         ],
+        // Pilares da Marca (Substituindo Benefits)
         benefits: [
-            { icon: "hand-heart", title: "Feito à Mão", text: "Cada ponto é uma assinatura. Produção 100% manual que garante unicidade e alma a cada peça.", bg: "bg-verde-profundo", textCol: "text-creme-fundo" },
-            { icon: "leaf", title: "Bio Cíclico", text: "Tingimento natural com resíduos orgânicos. A peça volta para a terra sem deixar rastros tóxicos.", bg: "bg-white", textCol: "text-verde-profundo" },
-            { icon: "fingerprint", title: "Design Único", text: "Modelagens que respeitam a fluidez do corpo. Arquitetura têxtil que une conforto e manifesto.", bg: "bg-terracota-suave", textCol: "text-white" }
+            { icon: "orbit", title: "Afrofuturismo", text: "Reconectando tecnologias ancestrais com futuros possíveis. Uma estética que celebra a diáspora e projeta novos mundos." },
+            { icon: "megaphone", title: "Ativismo", text: "Moda é ato político. Nossas tramas denunciam, educam e financiam a luta antirracista e ambiental." },
+            { icon: "leaf", title: "100% Vegana", text: "Cruelty-free por essência. Não utilizamos nada de origem animal, priorizando biomateriais e o respeito à vida." }
         ],
+        // Roadmap (Timeline - Ícones Lucide Verificados)
+        roadmap: [
+            { icon: "trash-2", title: "Coleta de Resíduos", text: "Cascas de cebola, caroços e sobras orgânicas são resgatados de feiras e cozinhas locais." },
+            { icon: "flask-conical", title: "Extração do Pigmento", text: "Através de fervura lenta e alquimia natural, extraímos cores vivas sem químicos tóxicos." },
+            { icon: "droplets", title: "Tingimento Natural", text: "Fibras orgânicas são banhadas nos pigmentos, absorvendo tons únicos e irrepetíveis." },
+            { icon: "edit-3", title: "Trama & Crochê", text: "Cada peça é tecida manualmente, ponto a ponto, respeitando o tempo do fazer." }, // Icone corrigido
+            { icon: "shirt", title: "Produto Final", text: "Uma obra de arte vestível, carregada de história, regeneração e propósito." }
+        ],
+        // Produtos Expandidos para preencher abas
         products: [
-            { name: "Vestido Terra", cat: "Algodão Orgânico", price: "R$ 420", img: "./assets/images/product-1.jpg", badge: "Novo" },
-            { name: "Bolsa Trama", cat: "Macramê", price: "R$ 280", img: "./assets/images/product-2.jpg", badge: "" },
-            { name: "Kimono Ocre", cat: "Linho Puro", price: "R$ 550", img: "./assets/images/product-3.jpg", badge: "" },
-            { name: "Top Raiz", cat: "Crochê Manual", price: "R$ 180", img: "./assets/images/product-4.jpg", badge: "" }
+            { name: "Vestido Terra", cat: "Tingimento Natural", price: "R$ 420", img: "./assets/images/product-1.jpg", badge: "Novo" },
+            { name: "Bolsa Trama", cat: "Upcycling", price: "R$ 280", img: "./assets/images/product-2.jpg", badge: "" },
+            { name: "Kimono Ocre", cat: "Tingimento Natural", price: "R$ 550", img: "./assets/images/product-3.jpg", badge: "" },
+            { name: "Top Raiz", cat: "Biomateriais", price: "R$ 180", img: "./assets/images/product-4.jpg", badge: "" },
+            { name: "Saia Casca", cat: "Tingimento Natural", price: "R$ 320", img: "https://images.unsplash.com/photo-1582142893718-4a3a5506116c?q=80&w=800", badge: "" },
+            { name: "Regata Bio", cat: "Biomateriais", price: "R$ 150", img: "https://images.unsplash.com/photo-1521577306548-dd2edb431121?q=80&w=800", badge: "Eco" },
+            { name: "Jaqueta Retalho", cat: "Upcycling", price: "R$ 680", img: "https://images.unsplash.com/photo-1551028919-ac66c5f8d6b0?q=80&w=800", badge: "Única" },
+            { name: "Lenço Urucum", cat: "Tingimento Natural", price: "R$ 90", img: "https://images.unsplash.com/photo-1584030134653-d22802e497d3?q=80&w=800", badge: "" }
         ],
         ods: [
             { 
-                icon: "✊", 
+                icon: "users", 
                 title: "Equidade Racial", 
                 codes: "ODS 5 • ODS 10 • ODS 18", 
                 logos: 3, 
                 text: "Atuação ativa no <strong>Comitê Racial Fashion Revolution</strong>. Descolonizando a moda e abrindo espaços de poder para criadores negros e indígenas." 
             },
             { 
-                icon: "♻️", 
+                icon: "recycle", 
                 title: "Circularidade", 
                 codes: "ODS 12 • ODS 13", 
                 logos: 2, 
                 text: "Lógica de <strong>lixo zero</strong>. Resíduos têxteis e alimentares (cascas, caroços) viram pigmentos e novos materiais. O que sobra, nutre a terra." 
             },
             { 
-                icon: "🤝", 
+                icon: "heart-handshake", 
                 title: "Comércio Justo", 
                 codes: "ODS 1 • ODS 8", 
                 logos: 2, 
                 text: "Economia regenerativa. Remuneração ética e fomento à autonomia financeira de mulheres artesãs e costureiras locais." 
             },
             { 
-                icon: "🌱", 
+                icon: "sprout", 
                 title: "Ética Viva", 
                 codes: "ODS 15", 
                 logos: 1, 
@@ -773,62 +888,105 @@
                 </div>`;
         });
 
-        // Benefits
+        // Pilares da Marca (Benefits)
         const benefitsContainer = document.getElementById('benefits-grid');
         SITE_CONTENT.benefits.forEach(item => {
             benefitsContainer.innerHTML += `
-                <div class="benefit-card ${item.bg} p-8 rounded-card shadow-card-float flex flex-col justify-between min-h-[320px] group cursor-default">
+                <div class="benefit-card bg-verde-profundo p-8 rounded-card shadow-card-float flex flex-col justify-between min-h-[320px] group cursor-default">
                     <div>
-                        <div class="w-12 h-12 rounded-full bg-black/5 flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-500">
-                            <i data-lucide="${item.icon}" class="${item.textCol} opacity-80" width="24"></i>
+                        <div class="w-12 h-12 rounded-full bg-black/10 flex items-center justify-center mb-6 group-hover:scale-110 transition-transform duration-500">
+                            <i data-lucide="${item.icon}" class="text-creme-fundo opacity-90" width="24"></i>
                         </div>
-                        <h3 class="font-serif text-3xl ${item.textCol} mb-4">${item.title}</h3>
-                        <p class="font-sans text-sm ${item.textCol} opacity-80 leading-relaxed">${item.text}</p>
+                        <h3 class="font-serif text-3xl text-creme-fundo mb-4">${item.title}</h3>
+                        <p class="font-sans text-sm text-creme-fundo/80 opacity-90 leading-relaxed">${item.text}</p>
                     </div>
-                    <div class="w-full h-px bg-current opacity-20 mt-8"></div>
+                    <div class="w-full h-px bg-creme-fundo opacity-20 mt-8"></div>
                 </div>`;
         });
 
-        // Products
+        // Roadmap (Timeline - FIXED)
+        const roadmapContainer = document.getElementById('roadmap-container');
+        let roadmapHTML = '<div class="roadmap-line"></div>';
+        SITE_CONTENT.roadmap.forEach((step, index) => {
+            roadmapHTML += `
+                <div class="roadmap-step reveal flex items-start gap-6">
+                    <div class="roadmap-marker bg-white border-verde-profundo">
+                        <i data-lucide="${step.icon}" width="20" class="text-verde-profundo"></i>
+                    </div>
+                    <div class="pt-2 pb-8">
+                        <h3 class="font-serif text-2xl text-verde-profundo mb-2">${step.title}</h3>
+                        <p class="font-sans text-sm text-texto/80 leading-relaxed max-w-md">${step.text}</p>
+                    </div>
+                </div>
+            `;
+        });
+        roadmapContainer.innerHTML = roadmapHTML;
+
+        // Products (Filtered Render)
         const prodContainer = document.getElementById('products-grid');
-        SITE_CONTENT.products.forEach(prod => {
-            const badge = prod.badge ? `<div class="absolute top-3 right-3 bg-white/90 backdrop-blur px-3 py-1 rounded-full text-[10px] font-mono uppercase tracking-widest text-verde-profundo shadow-sm border border-gray-100">${prod.badge}</div>` : '';
-            prodContainer.innerHTML += `
-                <div class="group reveal flex flex-col h-full">
-                    <div class="relative overflow-hidden rounded-suave aspect-[3/4] mb-6 bg-creme-fundo shadow-sm">
-                        <img src="${prod.img}" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105">
-                        ${badge}
-                    </div>
-                    <h3 class="font-serif text-2xl text-verde-profundo group-hover:text-terracota-suave transition-colors">${prod.name}</h3>
-                    <div class="flex justify-between items-center mt-2 border-t border-gray-100 pt-2 mb-6">
-                        <p class="font-sans text-xs text-gray-500 uppercase tracking-wide text-gray-400">${prod.cat}</p>
-                        <span class="font-mono text-sm text-verde-profundo font-bold">${prod.price}</span>
-                    </div>
-                    <a href="https://www.nuvemshop.com.br/" target="_blank" class="mt-auto btn-product-card">
-                        Ver na Loja
-                    </a>
-                </div>`;
+        const renderProducts = (filter = 'all') => {
+            prodContainer.innerHTML = '';
+            const filtered = filter === 'all' 
+                ? SITE_CONTENT.products 
+                : SITE_CONTENT.products.filter(p => p.cat === filter);
+                
+            if(filtered.length === 0) {
+                 prodContainer.innerHTML = `<p class="col-span-full text-center text-gray-500 py-10">Em breve novidades nesta categoria.</p>`;
+                 return;
+            }
+
+            filtered.forEach(prod => {
+                const badge = prod.badge ? `<div class="absolute top-3 right-3 bg-white/90 backdrop-blur px-3 py-1 rounded-full text-[10px] font-mono uppercase tracking-widest text-verde-profundo shadow-sm border border-gray-100">${prod.badge}</div>` : '';
+                prodContainer.innerHTML += `
+                    <div class="group reveal flex flex-col h-full animate-fade-in">
+                        <div class="relative overflow-hidden rounded-suave aspect-[3/4] mb-6 bg-creme-fundo shadow-sm">
+                            <img src="${prod.img}" class="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105">
+                            ${badge}
+                        </div>
+                        <h3 class="font-serif text-2xl text-verde-profundo group-hover:text-terracota-suave transition-colors">${prod.name}</h3>
+                        <div class="flex justify-between items-center mt-2 border-t border-gray-100 pt-2 mb-6">
+                            <p class="font-sans text-xs text-gray-500 uppercase tracking-wide text-gray-400">${prod.cat}</p>
+                            <span class="font-mono text-sm text-verde-profundo font-bold">${prod.price}</span>
+                        </div>
+                        <a href="https://www.nuvemshop.com.br/" target="_blank" class="mt-auto btn-product-card">
+                            Ver na Loja
+                        </a>
+                    </div>`;
+            });
+            lucide.createIcons(); // Re-init icons for new elements
+        };
+        
+        renderProducts(); // Initial Render
+
+        // Tab Logic
+        const tabs = document.querySelectorAll('.tab-btn');
+        tabs.forEach(tab => {
+            tab.addEventListener('click', () => {
+                tabs.forEach(t => t.classList.remove('active'));
+                tab.classList.add('active');
+                renderProducts(tab.dataset.filter);
+            });
         });
 
-         // ODS Grid (Merged Content)
+         // ODS Grid (Updated Icons & Responsiveness)
         const odsContainer = document.getElementById('ods-grid');
         SITE_CONTENT.ods.forEach(item => {
             let logosHTML = '';
             for(let i=0; i<item.logos; i++) {
-                logosHTML += `<div class="w-12 h-12 border border-white/20 rounded-md flex items-center justify-center bg-white/5 text-[8px] font-mono text-white/40 text-center p-1">Logo<br>ODS</div>`;
+                logosHTML += `<div class="w-12 h-12 border border-white/20 rounded-md flex items-center justify-center bg-white/5 text-[8px] font-mono text-white/40 text-center p-1 flex-shrink-0">Logo<br>ODS</div>`;
             }
 
             odsContainer.innerHTML += `
                 <div class="bg-white/5 p-8 md:p-10 rounded-card border border-white/10 hover:bg-white/10 transition-colors shadow-lg relative overflow-hidden group flex flex-col justify-between h-full reveal text-center md:text-left">
                     <div>
                         <div class="flex flex-col sm:flex-row justify-between items-center md:items-start mb-6 gap-4">
-                            <div class="flex items-center gap-4">
-                                <div class="w-12 h-12 bg-white/10 rounded-full flex items-center justify-center text-xl border border-white/5">
-                                    ${item.icon}
+                            <div class="flex items-center gap-4 flex-shrink-0">
+                                <div class="w-12 h-12 bg-white/10 rounded-full flex items-center justify-center text-xl border border-white/5 text-terracota-suave flex-shrink-0">
+                                    <i data-lucide="${item.icon}" width="24"></i>
                                 </div>
                                 <h3 class="font-serif text-3xl text-terracota-suave">${item.title}</h3>
                             </div>
-                            <div class="flex gap-3">
+                            <div class="flex gap-3 flex-wrap justify-center md:justify-end">
                                 ${logosHTML}
                             </div>
                         </div>
@@ -942,7 +1100,27 @@
             }
         });
 
-        // Menu Fullscreen Logic (REFINED with Stagger)
+        // Countdown Logic
+        const countdownEl = document.getElementById('countdown');
+        const updateCountdown = () => {
+            const now = new Date();
+            // Target: Next Sunday 23:59:59
+            const target = new Date(now);
+            target.setDate(now.getDate() + (7 - now.getDay()) % 7);
+            target.setHours(23, 59, 59, 999);
+            
+            const diff = target - now;
+            const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((diff % (1000 * 60)) / 1000);
+            
+            countdownEl.innerText = `${days}d ${String(hours).padStart(2,'0')}h ${String(minutes).padStart(2,'0')}m ${String(seconds).padStart(2,'0')}s`;
+        };
+        setInterval(updateCountdown, 1000);
+        updateCountdown();
+
+        // Menu Fullscreen Logic
         const menuOverlay = document.getElementById('menu-overlay');
         const openMenu = document.getElementById('menu-btn');
         const closeMenu = document.getElementById('close-menu');
@@ -951,13 +1129,13 @@
         function toggleMenu(show) {
             if(show) {
                 menuOverlay.classList.remove('pointer-events-none', 'opacity-0');
-                menuOverlay.classList.add('active'); // Trigger CSS Stagger
-                document.body.classList.add('menu-open'); // Lock Body
+                menuOverlay.classList.add('active');
+                document.body.classList.add('menu-open'); 
                 openMenu.setAttribute('aria-expanded', 'true');
             } else {
                 menuOverlay.classList.remove('active');
                 menuOverlay.classList.add('opacity-0', 'pointer-events-none');
-                document.body.classList.remove('menu-open'); // Unlock Body
+                document.body.classList.remove('menu-open');
                 openMenu.setAttribute('aria-expanded', 'false');
             }
         }
